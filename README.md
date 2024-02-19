@@ -11,7 +11,9 @@ This project is a website that has a few different mini-game like games. It save
 - react
 - react-bootstrap
 - react-dom
-
+- vite-express
+- pg
+- pg-hstore
 
 ## Instructions to run this project:
 1. Clone repository to a directory on your computer
