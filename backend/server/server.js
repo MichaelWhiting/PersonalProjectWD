@@ -22,7 +22,7 @@ app.use(
 );
 
 // Routes
-app.get("/", handlerFunctions.loadHomePage);
+// app.get("/", handlerFunctions.loadHomePage);
 
 
 
