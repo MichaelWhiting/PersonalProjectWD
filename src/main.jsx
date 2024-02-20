@@ -8,8 +8,9 @@ import App from './App.jsx'
 import Wordle from "./pages/Wordle.jsx";
 import Leaderboards from "./pages/Leaderboards.jsx";
 import AccountPage from "./pages/AccountPage.jsx";
-
+import { Provider } from "react-redux";
 import 'bootstrap/dist/css/bootstrap.css';
+import store from "./reducers/store.js";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,6 +24,8 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <Provider store={store}>
+      <RouterProvider router={router}/>
+    </Provider>
   </React.StrictMode>
 )

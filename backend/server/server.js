@@ -22,7 +22,8 @@ app.use(
 );
 
 // Routes
-// app.get("/", handlerFunctions.loadHomePage);
+app.get("/leaderboards/games", handlerFunctions.getAllGames);
+app.get("/leaderboard/:gameName", handlerFunctions.getScoresForGame);
 
 
 
