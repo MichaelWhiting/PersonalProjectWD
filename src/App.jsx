@@ -1,15 +1,15 @@
 import { Outlet } from 'react-router-dom';
 import React from 'react';
-import NavBarComponent from './NavBar.jsx';
+import NavigationBar from './NavBar.jsx';
 
 function App() {
 
   return (
     <>
-      <NavBarComponent/>
+      <NavigationBar/>
       <Outlet/>
     </>
   )
 }
 
-export default App
+export default App;

@@ -9,6 +9,8 @@ import Wordle from "./pages/Wordle.jsx";
 import Leaderboards from "./pages/Leaderboards.jsx";
 import AccountPage from "./pages/AccountPage.jsx";
 
+import 'bootstrap/dist/css/bootstrap.css';
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App/>}>

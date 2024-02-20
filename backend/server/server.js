@@ -26,5 +26,5 @@ app.use(
 
 
 
-const port = 8888
+const port = 9999;
 ViteExpress.listen(app, port, () => console.log(`Server started up at: http://localhost:${port}`));
