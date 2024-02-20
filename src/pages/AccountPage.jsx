@@ -1,10 +1,8 @@
-
+import { Container } from "react-bootstrap";
+import AccountInfoCell from "../components/AccountInfoCell.jsx";
 function AccountPage() {
     return (
-        <>
-            <h1>This is the account page!</h1>
-            
-        </>
+        <AccountInfoCell/>
     )
 }
 

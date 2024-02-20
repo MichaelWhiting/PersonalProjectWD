@@ -1,9 +1,0 @@
-
-
-function AccountEditCell() {
-    return (
-        
-    )
-}
-
-export default AccountEditCell;

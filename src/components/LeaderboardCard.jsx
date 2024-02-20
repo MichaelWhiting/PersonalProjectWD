@@ -3,6 +3,7 @@ import { Card } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import axios from "axios";
+import { FloatingLabel } from "react-bootstrap";
 
 function LeaderboardCard(props) {
     const { gameName, scoreIds } = props.game;
@@ -17,6 +18,8 @@ function LeaderboardCard(props) {
             type: "REQUEST_SCORES",
             payload: data.scores
         })
+
+        return data.scores;
     }
 
     
@@ -26,11 +29,19 @@ function LeaderboardCard(props) {
         // requestScores(dispatch, gameName)
     }, []);
 
+    // const scores1 = grabScores();
+    // console.log("scores1", scores1)
+    // const scoresList = scores1.map((score) => {
+    //     return (
+    //         <FloatingLabel>{score}</FloatingLabel>
+    //     )
+    // });
+
     return (
         <Card style={{width: 300}}>
             <Card.Body>
                 <Card.Title>{gameName}</Card.Title>
-                <Card.Text>Scores: {scoreIds}</Card.Text>
+                <Card.Text>score placeholder</Card.Text>
             </Card.Body>
         </Card>
     )
