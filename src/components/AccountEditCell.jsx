@@ -12,7 +12,7 @@ function AccountEditCell() {
                     <Form.Label>Password: </Form.Label>
                     <Form.Control type="password" placeholder="password"/>
 
-                    <Button variant="primary" type="submit">Change</Button>
+                    <Button variant="primary" type="submit" style={{margin: 10}}>Change</Button>
                 </Form.Group>  
             </Form>
         </Container>

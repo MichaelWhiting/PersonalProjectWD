@@ -5,9 +5,11 @@ import AccountScoresCell from "./AccountScoresCell.jsx";
 function AccountInfoCell() {
     
     return (
-        <Container className="min-vh-100 d-flex" style={{background: "green"}}>
-            <h1>Account Info:</h1>
-            <Container className="d-flex vh-20 justify-content-center align-items-center" style={{background: "red"}}>
+        <Container className="rounded align-items-center" style={{background: "#FAF9F6"}}>
+            <Container className="d-flex vh-80 justify-content-center">
+                <h1>Account Info:</h1>
+            </Container>
+            <Container className="d-flex vh-20 justify-content-center align-items-center">
                 <AccountEditCell/>
                 <AccountScoresCell/>
             </Container>
