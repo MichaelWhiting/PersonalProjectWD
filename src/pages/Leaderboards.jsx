@@ -6,9 +6,9 @@ import LeaderboardCard from "../components/LeaderboardCard";
 import axios from "axios";
 
 function Leaderboards() {
-    const loading = useSelector(state => state.leaderboards.loading);
-    const games = useSelector(state => state.leaderboards.games);
-    const dispatch = useDispatch();
+    // const loading = useSelector(state => state.leaderboards.loading);
+    // const games = useSelector(state => state.leaderboards.games);
+    // const dispatch = useDispatch();
 
     const getGames = async () => {
         await axios.get(`/leaderboards/games`)
@@ -21,7 +21,7 @@ function Leaderboards() {
                 payload: res.data.games
             })
         })
-        }
+    }
 
     useEffect(() => {
         getGames()

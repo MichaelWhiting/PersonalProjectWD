@@ -1,32 +1,31 @@
 
 class HangmanGame {
-    constructor(word, currentGuess = 0, maxGuesses = 5) {
+    constructor(word, currentGuess = 0, maxGuesses = 5, setWordStatus) {
         this.word = word;
         this.currentGuess = currentGuess
         this.maxGuesses = maxGuesses;
-        this.checkGuess = (letter) => {
-            // console.log(`Is ${letter} in ${this.word}`, this.word.includes(letter.toLowerCase()))
-
+        this.setWordStatus = setWordStatus;
+        this.checkGuess = (letter, wordStatus) => {
             if (this.word.includes(letter.toLowerCase())) {
-                console.log(`${letter} IS in the word`);
+                const letters = word.split("");
+                const status = wordStatus.split("");
+
+                for (let i = 0; i < letters.length; i++) {
+                    console.log(`Checking if ${letters[i]} = ${letter}`)
+                    if (letters[i] === letter) {
+                        status[i] = letter;
+                    }
+                }
+
+                return status.join("");
             } else {
-                console.log(`${letter} is NOT in the word`);
+               return wordStatus;
             }
 
             this.currentGuess += 1;
         }
         // this.timer = timer;
     }
-
-    // checkGuess(letter) {
-    //     if (this.word.includes(letter)) {
-    //         console.log(`${letter} is not in the word`);
-    //     } else {
-    //         console.log(`${letter} is not in the word`);
-    //     }
-
-    //     this.currentGuess += 1;
-    // }
 
     checkGameStatus() {
         if (this.currentGuess >= this.maxGuesses) {

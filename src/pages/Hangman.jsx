@@ -3,6 +3,8 @@ import Keyboard from "../components/gameComponents/hangmanComponents/Keyboard.js
 import { Container } from "react-bootstrap";
 import HangmanGame from "../gameLogic/wordle/hangmanModel.js";
 
+import { useState } from "react";
+
 const words = [
     "mystery", "journey", "wizard", "forest", "castle", "dragon", "puzzle", "secret",
     "mirror", "flower", "winter", "summer", "spring", "autumn", "island", "desert",
@@ -16,12 +18,17 @@ const words = [
 function Hangman() {
     // if this is generated, it means to start a new game
     const randomWord = words[Math.floor(Math.random() * words.length - 1)];
-    const newGame = new HangmanGame(randomWord, 0, 5);
+    const initialStatus = randomWord.split("").map((_) => "_").join("");
+    const [wordStatus, setWordStatus] = useState(initialStatus);
+    const [newGame, setNewGame] = useState(new HangmanGame(randomWord, 0, 5));
+
+    const updateWordStatus = (newStatus) => setWordStatus(newStatus);
 
     return (
         <Container fluid>
-            <WordSpaces word={newGame.word}/>
-            <Keyboard checkGuess={newGame.checkGuess}/>
+            <h1 style={{textAlign: "center"}}>Word is: "{newGame.word}"</h1>
+            <WordSpaces wordStatus={wordStatus}/>
+            <Keyboard wordStatus={wordStatus} checkGuess={newGame.checkGuess} updateWordStatus={updateWordStatus}/>
         </Container>
     )
 }

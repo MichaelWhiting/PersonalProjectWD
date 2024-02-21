@@ -3,7 +3,6 @@ import { Card } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import axios from "axios";
-import { FloatingLabel } from "react-bootstrap";
 
 function LeaderboardCard(props) {
     const { gameName, scoreIds } = props.game;

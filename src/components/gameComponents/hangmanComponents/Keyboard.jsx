@@ -2,7 +2,7 @@ import { Container } from "react-bootstrap";
 
 function Keyboard(props) {
     const alphabet = "abcdefghijklmnopqrstuvwxyz";
-    const { checkGuess } = props;
+    const { checkGuess, updateWordStatus, wordStatus } = props;
 
     const letterKeys = alphabet.split("").map((letter, i) => {
         return (
@@ -18,9 +18,9 @@ function Keyboard(props) {
                 }}
                 onClick={function(e) { 
                     e.currentTarget.disabled = true
-                    checkGuess(letter)
+                    const newWordStatus = checkGuess(letter, wordStatus);
+                    updateWordStatus(newWordStatus);
                 }}
-                disabled={false}
             >
                 {letter}
             </button>
