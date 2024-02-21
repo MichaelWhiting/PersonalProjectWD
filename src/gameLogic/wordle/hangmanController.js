@@ -12,7 +12,3 @@ const newWordleGame = () => {
     const newWord = words[Math.floor(Math.random() * words.length - 1)];
     console.log("Word:", newWord);
 }
-
-
-
-newWordleGame()
