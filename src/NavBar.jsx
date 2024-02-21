@@ -14,17 +14,17 @@ function NavigationBar() {
                     <Nav className="me-auto">
                         <Link className="nav-link" to="/game1">
                         <Icon.Wordpress style={{width: 30, height: 30, marginRight: 5}}/>
-                            Wordle
+                            Hangman
                         </Link>
                         <Link className="nav-link" to="/leaderboards">
-                            <Icon.TrophyFill style={{width: 25, height: 25, marginRight: 5}}/>
+                            <Icon.TrophyFill style={{width: 25, height: 25, marginRight: 10}}/>
                             Leaderboards
                         </Link>
                     </Nav>
                     <Nav className="ms-auto">
                         <Link className="nav-link" to="/account">
+                            <Icon.PersonCircle style={{width: 30, height: 30, marginRight: 5}}/>
                             Account
-                            <Icon.PersonCircle style={{width: 30, height: 30, marginLeft: 5}}/>
                         </Link>
                     </Nav>
                 </Navbar.Collapse>

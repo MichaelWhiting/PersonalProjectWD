@@ -5,7 +5,7 @@ import AccountScoresCell from "./AccountScoresCell.jsx";
 function AccountInfoCell() {
     
     return (
-        <Container className="rounded align-items-center" style={{background: "#FAF9F6"}}>
+        <Container className="vh-80 rounded" style={{background: "#FAF9F6", width: 800}}>
             <Container className="d-flex vh-80 justify-content-center">
                 <h1>Account Info:</h1>
             </Container>

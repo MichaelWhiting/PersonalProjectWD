@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 
 // Importing Components
-import Wordle from "./pages/Wordle.jsx";
+import Wordle from "./pages/Hangman.jsx";
 import Leaderboards from "./pages/Leaderboards.jsx";
 import AccountPage from "./pages/AccountPage.jsx";
 import { Provider } from "react-redux";

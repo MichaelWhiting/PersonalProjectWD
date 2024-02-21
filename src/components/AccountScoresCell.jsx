@@ -4,7 +4,7 @@ import { FloatingLabel } from "react-bootstrap";
 function AccountScoresCell() {
     // make a array of the scores of the user later
     return (
-        <Container>
+        <Container className="rounded" style={{background: "#AEC6CF"}}>
             <h3>Scores(placeholders)</h3>
             <p>Wordle: 4</p>
             <p>Wordle: 6</p>
@@ -13,4 +13,4 @@ function AccountScoresCell() {
     )
 }
 
-export default AccountScoresCell
+export default AccountScoresCell;
