@@ -18,8 +18,6 @@ const handlerFunctions = {
             }
         });
 
-        console.log(scores)
-
         // const scores = [];
 
         res.send({

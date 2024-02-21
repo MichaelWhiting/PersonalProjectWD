@@ -6,25 +6,26 @@ class HangmanGame {
         this.maxGuesses = maxGuesses;
         this.setWordStatus = setWordStatus;
         this.checkGuess = (letter, wordStatus) => {
+            this.currentGuess += 1;
             if (this.word.includes(letter.toLowerCase())) {
                 const letters = word.split("");
                 const status = wordStatus.split("");
 
                 for (let i = 0; i < letters.length; i++) {
-                    console.log(`Checking if ${letters[i]} = ${letter}`)
                     if (letters[i] === letter) {
                         status[i] = letter;
                     }
                 }
-
-                return status.join("");
+                
+                const returnStr = status.join("");
+                if(!returnStr.includes("_")) {
+                    console.log("Player has won!")
+                }
+                return returnStr;
             } else {
                return wordStatus;
             }
-
-            this.currentGuess += 1;
         }
-        // this.timer = timer;
     }
 
     checkGameStatus() {

@@ -1,31 +1,25 @@
 // import { requestGames } from "../reducers/leaderboardsReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useState } from "react";
 
 import LeaderboardCard from "../components/LeaderboardCard";
 import axios from "axios";
 
 function Leaderboards() {
-    // const loading = useSelector(state => state.leaderboards.loading);
-    // const games = useSelector(state => state.leaderboards.games);
-    // const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false);
+    const [games, setGames] = useState([]);
 
     const getGames = async () => {
-        await axios.get(`/leaderboards/games`)
-        .then(res => {
-
-            console.log(res.data.games)
-            
-            dispatch({
-                type: "REQUEST_GAMES",
-                payload: res.data.games
-            })
-        })
+        const { data } = await axios.get("/leaderboards/games");
+        setGames(data.games);
+        console.log(data.games);
+        setLoading(false);
     }
 
     useEffect(() => {
-        getGames()
-        // dispatch(requestGames);
+        setLoading(true);
+        getGames();
     }, []);
 
     const leaderboardCards = games.map((game) => {

@@ -1,46 +1,40 @@
-import { Card } from "react-bootstrap";
+import { Card, Container } from "react-bootstrap";
 // import { requestScores } from "../reducers/leaderboardReducer";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 function LeaderboardCard(props) {
     const { gameName, scoreIds } = props.game;
-    const loading = useSelector(state => state.leaderboard.loading);
-    const scores = useSelector(state => state.leaderboard.scores);
-    const dispatch = useDispatch();
 
-    const grabScores = async () => {
-        const { data } = await axios.get(`/leaderboard/${gameName}`)
-        console.log(data.scores)
-        dispatch({
-            type: "REQUEST_SCORES",
-            payload: data.scores
-        })
+    const [loading, setLoading] = useState(false);
+    const [scores, setScores] = useState([]);
 
-        return data.scores;
+    const getScores = async () => {
+        const { data } = await axios.get(`leaderboard/${gameName}`);
+        setScores(data.scores.sort((a, b) => a.score + b.score));
+        setLoading(false);
     }
 
+    const scoreLabels = scores.map((score, i) => {
+        return (
+            <Container key={i}>
+                <li>{score.score}</li>
+            </Container>
+        )
+    })
     
     useEffect(() => {
-        grabScores()
-        // dispatch(requestScores);
-        // requestScores(dispatch, gameName)
+        setLoading(true);
+        getScores();
     }, []);
-
-    // const scores1 = grabScores();
-    // console.log("scores1", scores1)
-    // const scoresList = scores1.map((score) => {
-    //     return (
-    //         <FloatingLabel>{score}</FloatingLabel>
-    //     )
-    // });
 
     return (
         <Card style={{width: 300}}>
             <Card.Body>
                 <Card.Title>{gameName}</Card.Title>
-                <Card.Text>score placeholder</Card.Text>
+                <ol>{scoreLabels}</ol>
             </Card.Body>
         </Card>
     )
