@@ -30,13 +30,15 @@ function LeaderboardCard(props) {
         getScores();
     }, []);
 
-    return (
+    return !loading ? (
         <Card style={{width: 300}}>
             <Card.Body>
                 <Card.Title>{gameName}</Card.Title>
-                <ol>{scoreLabels}</ol>
+                <ol style={{background: "#FAF9F6"}}>{scoreLabels}</ol>
             </Card.Body>
         </Card>
+    ) : (
+        <h1>Loading page</h1>
     )
 }
 

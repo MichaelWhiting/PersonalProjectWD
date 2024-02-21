@@ -21,8 +21,23 @@ const handlerFunctions = {
         // const scores = [];
 
         res.send({
-            message: "Retieved all scores from table",
+            message: "Retrieved all scores from table",
             scores
+        })
+    },
+
+    getUserFromScore: async (req, res) => {
+        const { userId } = body.params;
+        
+        const user = User.findAll({
+            where: {
+                userId: userId
+            }
+        })
+
+        res.send({
+            message: "Retrieved user from score",
+            user
         })
     }
 }

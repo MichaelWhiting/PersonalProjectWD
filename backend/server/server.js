@@ -22,9 +22,13 @@ app.use(
 );
 
 // Routes
+
+// GET
 app.get("/leaderboards/games", handlerFunctions.getAllGames);
 app.get("/leaderboard/:gameName", handlerFunctions.getScoresForGame);
+app.get("score/:userid", handlerFunctions.getUserFromScore);
 
+// POST
 
 
 const port = 9999;
