@@ -1,7 +1,19 @@
 import { Button, Container, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
 
 function CreateAccountPage() {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+
+    const createAccount = async (username, password) => {
+        const userData = { username, password }
+        console.log(userData)
+        const newUser = await axios.post("/user/createUser", userData);
+        console.log(`New user ${newUser.username} has been made!`);
+    }
+
     return (
         <Container
             className="d-flex flex-column justify-content-center align-items-center"
@@ -11,14 +23,28 @@ function CreateAccountPage() {
                 <Form.Group>
                     <h2>Create Account</h2>
                     <Form.FloatingLabel label="username" style={{ marginTop: 10, marginBottom: 10 }}>
-                        <Form.Control placeholder="username"/>
+                        <Form.Control placeholder="username"
+                                      value={username}
+                                      onChange={(e) => setUsername(e.target.value)}
+                        />
                     </Form.FloatingLabel>
 
                     <Form.FloatingLabel label="password" style={{ marginTop: 10, marginBottom: 10 }}>
-                        <Form.Control type="password" placeholder="password"/>
+                        <Form.Control type="password" 
+                                      placeholder="password" 
+                                      onChange={(e) => setPassword(e.target.value)}
+                                      value={password}
+                        />
                     </Form.FloatingLabel>
 
-                    <Button variant="success" type="submit" className="mx-auto" style={{width: "40%", overflowWrap: "unset"}}>Create</Button>
+                    <Button variant="success" 
+                            type="submit" 
+                            className="mx-auto" 
+                            style={{width: "40%", overflowWrap: "unset"}}
+                            onClick={() => createAccount(username, password)}
+                    >
+                    Create
+                    </Button>
                 </Form.Group>
             </Form>
             <Button variant="outline-success" style={{margin: 10}}>

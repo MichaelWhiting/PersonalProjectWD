@@ -30,10 +30,10 @@ export function checkIfLoggedIn(req) {
 // GET
 app.get("/leaderboards/games", handlerFunctions.getAllGames);
 app.get("/leaderboard/:gameName", handlerFunctions.getScoresForGame);
-app.get("score/:userid", handlerFunctions.getUserFromScore);
+app.get("/score/:userid", handlerFunctions.getUserFromScore);
 
 // POST
-
+app.post("/user/createUser", handlerFunctions.createUser);
 
 
 // Start up server

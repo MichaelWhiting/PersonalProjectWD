@@ -25,7 +25,6 @@ const handlerFunctions = {
             scores
         })
     },
-
     getUserFromScore: async (req, res) => {
         const { userId } = body.params;
         
@@ -40,13 +39,16 @@ const handlerFunctions = {
             user
         })
     },
-
+    loginUser: async (req, res) => {
+        const { username, password } = req.body;
+        // other stuff here
+    },
     createUser: async (req, res) => {
         const { username, password } = req.body;
 
-        const newUser = User.create({
+        const newUser = await User.create({
             username,
-            pass
+            password
         })
 
         res.send({
