@@ -3,9 +3,11 @@ import { User, Score, Game } from "../database/model.js";
 import { format } from "morgan";
 import session from "express-session";
 
+import { checkIfLoggedIn } from "./server.js";
+
 const handlerFunctions = {
     getAllGames: async (req, res) => {
-        const games = await Game.findAll()
+        const games = await Game.findAll();
         
         res.send({
             message: "Retreived games from table",
@@ -26,6 +28,8 @@ const handlerFunctions = {
         })
     },
     getUserFromScore: async (req, res) => {
+        const isLoggedIn = checkIfLoggedIn(req);
+
         const { userId } = body.params;
         
         const user = User.findAll({
@@ -36,6 +40,7 @@ const handlerFunctions = {
 
         res.send({
             message: "Retrieved user from score",
+            isLoggedIn,
             user
         })
     },
@@ -60,7 +65,7 @@ const handlerFunctions = {
 
         req.session.userId = user.userId;
         console.log(req.session.userId);
-        
+
         res.send({
             message: "User is logged in",
             user

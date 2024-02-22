@@ -21,8 +21,8 @@ app.use(
   })
 );
 
-export function checkIfLoggedIn(req) {
-  return req.session.userId;
+export function checkIfLoggedIn() {
+    return req.session.userId !== null;
 }
 
 // Routes
