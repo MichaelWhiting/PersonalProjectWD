@@ -1,6 +1,7 @@
 import { Sequelize } from "sequelize";
 import { User, Score, Game } from "../database/model.js";
 import { format } from "morgan";
+import session from "express-session";
 
 const handlerFunctions = {
     getAllGames: async (req, res) => {
@@ -57,6 +58,9 @@ const handlerFunctions = {
         
         console.log(`${user.username} has logged in!`);
 
+        req.session.userId = user.userId;
+        console.log(req.session.userId);
+        
         res.send({
             message: "User is logged in",
             user
