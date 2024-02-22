@@ -7,7 +7,7 @@ function Keyboard(props) {
     const letterKeys = alphabet.split("").map((letter, i) => {
         return (
             <button
-                className="square border border-primary rounded"
+                className="square border border-success rounded"
                 key={i}
                 style={{
                     background: "primary",

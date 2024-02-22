@@ -39,6 +39,20 @@ const handlerFunctions = {
             message: "Retrieved user from score",
             user
         })
+    },
+
+    createUser: async (req, res) => {
+        const { username, password } = req.body;
+
+        const newUser = User.create({
+            username,
+            pass
+        })
+
+        res.send({
+            message: "Created new user",
+            newUser
+        })
     }
 }
 

@@ -4,9 +4,9 @@ import * as Icon from "react-bootstrap-icons";
 
 function NavigationBar() {
     return (
-        <Navbar expand='md' bg='primary' data-bs-theme='dark'>
+        <Navbar expand='md' bg='success' data-bs-theme='dark'>
             <Container fluid className="d-flex">
-                <Navbar.Brand href="#home">
+                <Navbar.Brand href="/login">
                     <Icon.Dice5Fill style={{width: 50, height: 50}}/>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>

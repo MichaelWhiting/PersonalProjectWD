@@ -1,6 +1,5 @@
 import { Button, Container, Form } from "react-bootstrap";
 
-
 function AccountEditCell() {
     return (
         <Container className="d-flex min-vh-50 justify-content-center align-items-center rounded" style={{background: "#AEC6CF"}}>

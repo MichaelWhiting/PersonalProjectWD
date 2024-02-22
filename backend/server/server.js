@@ -21,6 +21,10 @@ app.use(
   })
 );
 
+export function checkIfLoggedIn(req) {
+  return req.session.userId;
+}
+
 // Routes
 
 // GET
@@ -31,5 +35,7 @@ app.get("score/:userid", handlerFunctions.getUserFromScore);
 // POST
 
 
+
+// Start up server
 const port = 9999;
 ViteExpress.listen(app, port, () => console.log(`Server started up at: http://localhost:${port}`));
