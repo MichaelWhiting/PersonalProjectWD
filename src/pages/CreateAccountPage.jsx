@@ -8,9 +8,7 @@ function CreateAccountPage() {
     const [password, setPassword] = useState("");
 
     const createAccount = async (username, password) => {
-        const userData = { username, password }
-        console.log(userData)
-        const newUser = await axios.post("/user/createUser", userData);
+        const newUser = await axios.post("/user/createUser", { username, password });
         console.log(`New user ${newUser.username} has been made!`);
     }
 

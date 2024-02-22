@@ -34,6 +34,7 @@ app.get("/score/:userid", handlerFunctions.getUserFromScore);
 
 // POST
 app.post("/user/createUser", handlerFunctions.createUser);
+app.post("/user/loginUser", handlerFunctions.loginUser);
 
 
 // Start up server
