@@ -2,16 +2,18 @@ import { Button, Container, Form } from "react-bootstrap";
 
 function AccountEditCell() {
     return (
-        <Container className="d-flex min-vh-50 justify-content-center align-items-center rounded" style={{background: "#AEC6CF"}}>
+        <Container className="d-flex min-vh-50 justify-content-center align-items-center border border-success rounded p-5">
             <Form>
                 <Form.Group>
-                    <Form.Label>Email: </Form.Label>
-                    <Form.Control type="text" placeholder="username"/>
+                    <Form.FloatingLabel label="username" style={{ marginTop: 10, marginBottom: 10 }}>
+                        <Form.Control placeholder="username"/>
+                    </Form.FloatingLabel>
 
-                    <Form.Label>Password: </Form.Label>
-                    <Form.Control type="password" placeholder="password"/>
+                    <Form.FloatingLabel label="password" style={{ marginTop: 10, marginBottom: 10 }}>
+                        <Form.Control placeholder="password"/>
+                    </Form.FloatingLabel>
 
-                    <Button variant="primary" type="submit" style={{marginTop: 10, marginBottom: 10}}>Change</Button>
+                    <Button variant="success" type="submit" style={{marginTop: 10, marginBottom: 10}}>Change</Button>
                 </Form.Group>  
             </Form>
         </Container>

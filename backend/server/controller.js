@@ -1,19 +1,21 @@
 import { Sequelize } from "sequelize";
 import { User, Score, Game } from "../database/model.js";
-import { format } from "morgan";
-import session from "express-session";
+import { useNavigate } from "react-router-dom";
 
-import { checkIfLoggedIn } from "./server.js";
+export const checkIfLoggedIn = (req) => {
+    return req.session.user === null;
+}
 
 const handlerFunctions = {
     getAllGames: async (req, res) => {
         const games = await Game.findAll();
-        
+
         res.send({
             message: "Retreived games from table",
             games
         })
     },
+
     getScoresForGame: async (req, res) => {
         const { gameName } = req.params;
         const scores = await Score.findAll({
@@ -27,11 +29,10 @@ const handlerFunctions = {
             scores
         })
     },
-    getUserFromScore: async (req, res) => {
-        const isLoggedIn = checkIfLoggedIn(req);
 
+    getUserFromScore: async (req, res) => {
         const { userId } = body.params;
-        
+
         const user = User.findAll({
             where: {
                 userId: userId
@@ -40,13 +41,13 @@ const handlerFunctions = {
 
         res.send({
             message: "Retrieved user from score",
-            isLoggedIn,
             user
         })
     },
+
     loginUser: async (req, res) => {
         const { username, password } = req.body;
-        
+
         const formattedUsername = username.toLowerCase(); // makes it lowercase to look in DB
 
         const user = await User.findOne({
@@ -57,25 +58,22 @@ const handlerFunctions = {
         });
 
         if (user === null) { // if user is null it means that it didnt find a user object with that same username and pass
-            console.log("Inccorect credentials");
+            console.log("Incorrect credentials");
             return;
+        } else { // means it found the user and we can now log them in.
+            req.session.user = user;
+            console.log("session user is now: ", req.session.user);
+            res.send({
+                message: "User is logged in",
+            });
         }
-        
-        console.log(`${user.username} has logged in!`);
-
-        req.session.userId = user.userId;
-        console.log(req.session.userId);
-
-        res.send({
-            message: "User is logged in",
-            user
-        });
     },
+
     createUser: async (req, res) => {
         const { username, password } = req.body;
 
-        if (!username || !password) { 
-            console.log("stuff is empty");
+        if (!username || !password) {
+            console.log("One of the fields are empty");
             return;
         }
 
@@ -84,14 +82,14 @@ const handlerFunctions = {
                 username: username
             }
         }))
-    
+
         if (userExists !== null) {
-            console.log("user already exists!")
+            console.log("User already exists!")
             return;
         }
 
         const formattedUsername = username.toLowerCase();
-        
+
         const newUser = await User.create({
             username: formattedUsername,
             password
@@ -101,6 +99,28 @@ const handlerFunctions = {
             message: "Created new user",
             newUser
         })
+    },
+
+    checkLoggedIn: async (req, res) => {
+        console.log(req.session.user);  
+
+        if (req.session.user === null) {
+            return;
+        }
+        res.send({
+            message: "Just checked if user was logged in"
+        })
+    },
+
+    getUser: async (req, res) => {
+        if (req.session.user !== null) {
+            res.send({
+                message: "Retrieved logged in user",
+                user: req.session.user
+            })
+        } else {
+            console.log("No one logged in");
+        }
     }
 }
 

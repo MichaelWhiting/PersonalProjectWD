@@ -4,6 +4,7 @@ import session from "express-session";
 import ViteExpress from "vite-express";
 
 import handlerFunctions from "./controller.js";
+import { useNavigate } from "react-router-dom";
 
 // Create express instance
 const app = express();
@@ -21,22 +22,20 @@ app.use(
   })
 );
 
-export function checkIfLoggedIn() {
-    return req.session.userId !== null;
-}
 
 // Routes
 
 // GET
+app.get("/checkIfLoggedIn", handlerFunctions.checkLoggedIn);
 app.get("/leaderboards/games", handlerFunctions.getAllGames);
 app.get("/leaderboard/:gameName", handlerFunctions.getScoresForGame);
 app.get("/score/:userid", handlerFunctions.getUserFromScore);
+app.get("/user/getUser", handlerFunctions.getUser);
 
 // POST
 app.post("/user/createUser", handlerFunctions.createUser);
 app.post("/user/loginUser", handlerFunctions.loginUser);
 
-
 // Start up server
-const port = 9999;
+const port = 9989;
 ViteExpress.listen(app, port, () => console.log(`Server started up at: http://localhost:${port}`));
