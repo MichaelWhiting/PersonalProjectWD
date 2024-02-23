@@ -2,10 +2,6 @@ import { Sequelize } from "sequelize";
 import { User, Score, Game } from "../database/model.js";
 import { useNavigate } from "react-router-dom";
 
-export const checkIfLoggedIn = (req) => {
-    return req.session.user === null;
-}
-
 const handlerFunctions = {
     getAllGames: async (req, res) => {
         const games = await Game.findAll();
@@ -31,7 +27,7 @@ const handlerFunctions = {
     },
 
     getUserFromScore: async (req, res) => {
-        const { userId } = body.params;
+        const { userId } = req.params;
 
         const user = User.findAll({
             where: {
@@ -45,28 +41,78 @@ const handlerFunctions = {
         })
     },
 
+    getScoresFromUser: async (req, res) => {
+        const { userId } = req.params;
+        console.log("User: ", userId);
+        const scores = Score.findAll({
+            where: {
+                userId: userId
+            }
+        })
+        console.log(scores);
+        res.send({
+            message: "Retrieved scores from userId",
+            scores
+        });
+    },
+
+    sessionCheck: async (req, res) => {
+        if (req.session.userId) {
+            res.send({
+                message: "userId exists on the session",
+                success: true,
+                userId: req.session.userId
+            });
+            return;
+        } else {
+            res.send({
+                message: "userId does NOT exist on the session",
+                success: false
+            });
+            return;
+        }
+    },
+
     loginUser: async (req, res) => {
         const { username, password } = req.body;
+        const formattedUsername = username.toLowerCase();
 
-        const formattedUsername = username.toLowerCase(); // makes it lowercase to look in DB
+        const user = await User.findOne({ where: { username: formattedUsername }});
 
-        const user = await User.findOne({
-            where: {
-                username: formattedUsername,
-                password: password
-            }
-        });
-
-        if (user === null) { // if user is null it means that it didnt find a user object with that same username and pass
-            console.log("Incorrect credentials");
-            return;
-        } else { // means it found the user and we can now log them in.
-            req.session.user = user;
-            console.log("session user is now: ", req.session.user);
+        if (!user) {
             res.send({
-                message: "User is logged in",
+                message: "User with username does NOT exist",
+                success: false
             });
+            return;
         }
+
+        if (user.password !== password) {
+            res.send({
+                message: "Password is incorrect",
+                success: false
+            });
+            return;
+        }
+
+        // if it made it past those 2 if statements, it means that the credentials are correct
+        req.session.userId = user.userId;
+
+        res.send({
+            message: "Successfully set the sessions userId",
+            success: true,
+            userId: req.session.userId
+        })
+    },
+
+    logoutUser: async (req, res) => {
+        req.session.destroy();
+
+        res.send({
+            message: "Destroyed the session's contents",
+            success: true
+        });
+        return;
     },
 
     createUser: async (req, res) => {
@@ -81,7 +127,7 @@ const handlerFunctions = {
             where: {
                 username: username
             }
-        }))
+        }));
 
         if (userExists !== null) {
             console.log("User already exists!")
@@ -93,35 +139,24 @@ const handlerFunctions = {
         const newUser = await User.create({
             username: formattedUsername,
             password
-        })
+        });
 
         res.send({
             message: "Created new user",
             newUser
-        })
+        });
     },
 
-    checkLoggedIn: async (req, res) => {
-        console.log(req.session.user);  
-
-        if (req.session.user === null) {
-            return;
-        }
-        res.send({
-            message: "Just checked if user was logged in"
-        })
-    },
-
-    getUser: async (req, res) => {
-        if (req.session.user !== null) {
-            res.send({
-                message: "Retrieved logged in user",
-                user: req.session.user
-            })
-        } else {
-            console.log("No one logged in");
-        }
-    }
+    // getUser: async (req, res) => {
+    //     if (req.session.user !== null) {
+    //         res.send({
+    //             message: "Retrieved logged in user",
+    //             user: req.session.user
+    //         })
+    //     } else {
+    //         console.log("No one logged in");
+    //     }
+    // }
 }
 
 export default handlerFunctions;

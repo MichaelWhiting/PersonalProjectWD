@@ -21,11 +21,11 @@ const router = createBrowserRouter(
       <Route path='/game1' element={<Wordle/>}/>
       <Route path='/leaderboards' element={<Leaderboards/>}/>
       <Route path='/account' element={<AccountPage/>}/>
-      <Route path='/login' element={<LoginPage/>}/>
       <Route path="/createAccount" element={<CreateAccountPage/>}/>
     </Route>
   )
 )
+//      <Route path='/login' element={<LoginPage/>}/>
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>    

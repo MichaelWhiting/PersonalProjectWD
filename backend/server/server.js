@@ -26,15 +26,14 @@ app.use(
 // Routes
 
 // GET
-app.get("/checkIfLoggedIn", handlerFunctions.checkLoggedIn);
 app.get("/leaderboards/games", handlerFunctions.getAllGames);
 app.get("/leaderboard/:gameName", handlerFunctions.getScoresForGame);
-app.get("/score/:userid", handlerFunctions.getUserFromScore);
-app.get("/user/getUser", handlerFunctions.getUser);
-
+app.get("/score/:userId", handlerFunctions.getUserFromScore);
+app.get("/scores/:userId", handlerFunctions.getScoresFromUser);
+app.get("/session-check", handlerFunctions.sessionCheck);
 // POST
 app.post("/user/createUser", handlerFunctions.createUser);
-app.post("/user/loginUser", handlerFunctions.loginUser);
+app.post("/login", handlerFunctions.loginUser);
 
 // Start up server
 const port = 9989;
