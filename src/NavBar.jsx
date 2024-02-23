@@ -13,7 +13,7 @@ function NavigationBar() {
                 <Navbar.Collapse>
                     <Nav className="me-auto">
                         <Link className="nav-link" to="/game1">
-                        <Icon.Wordpress style={{width: 30, height: 30, marginRight: 5}}/>
+                        <Icon.HSquareFill style={{width: 30, height: 30, marginRight: 5}}/>
                             Hangman
                         </Link>
                         <Link className="nav-link" to="/leaderboards">

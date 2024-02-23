@@ -1,10 +1,14 @@
 import { Button, Container, Form } from "react-bootstrap";
-import { useNavigate, Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
+// Components 
+import CreateAccountPage from "./CreateAccountPage.jsx";
+
 function LoginPage() {
+    const userId = useSelector(state => state.userId);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
@@ -40,7 +44,7 @@ function LoginPage() {
       }
 
     return (
-        <Container
+<Container
             className="d-flex flex-column justify-content-center align-items-center"
             style={{  width: "50%", }}
             >

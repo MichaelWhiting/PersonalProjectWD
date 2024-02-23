@@ -6,7 +6,7 @@ import { useState } from "react";
 import WordSpaces from "../components/gameComponents/hangmanComponents/WordSpaces.jsx";
 import Keyboard from "../components/gameComponents/hangmanComponents/Keyboard.jsx";
 
-const words = [
+const words1 = [
     "mystery", "journey", "wizard", "forest", "castle", "dragon", "puzzle", "secret",
     "mirror", "flower", "winter", "summer", "spring", "autumn", "island", "desert",
     "falcon", "eclipse", "galaxy", "nebula", "comet", "orbit", "photon", "quantum",
@@ -14,6 +14,11 @@ const words = [
     "jungle", "savanna", "cavern", "goblin", "unicorn", "phoenix", "vampire", "zombie",
     "robot", "cyborg", "portal", "sphere", "vector", "matrix", "quantum", "cosmos",
     "ocean", "eagle"
+];
+
+const words = [
+    "yoda", "vader", "maul", "kenobi", "rey", "finn", "lando", "chewbacca", "phasma", "hux",
+    "snoke", "grievous", "kylo", "mace", "jango", "boba", "dooku", "quigon", "padme"
 ];
 
 function Hangman() {
@@ -27,9 +32,9 @@ function Hangman() {
 
     return (
         <Container fluid>
-            <h1 style={{textAlign: "center"}}>Word is: "{newGame.word}"</h1>
-            <WordSpaces wordStatus={wordStatus}/>
-            <Keyboard wordStatus={wordStatus} checkGuess={newGame.checkGuess} updateWordStatus={updateWordStatus}/>
+            <h1 style={{ textAlign: "center" }}>Word is: "{newGame.word}"</h1>
+            <WordSpaces wordStatus={wordStatus} />
+            <Keyboard wordStatus={wordStatus} checkGuess={newGame.checkGuess} updateWordStatus={updateWordStatus} />
         </Container>
     )
 }

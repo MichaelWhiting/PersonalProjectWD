@@ -17,13 +17,18 @@ import store from "./reducers/store.js";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='/' element={<App/>}>
-      <Route path='/game1' element={<Wordle/>}/>
-      <Route path='/leaderboards' element={<Leaderboards/>}/>
-      <Route path='/account' element={<AccountPage/>}/>
-      <Route path="/createAccount" element={<CreateAccountPage/>}/>
-      {/* <Route path="/login" element={<LoginPage/>}/> */}
-    </Route>
+    <>
+      <Route path='/' element={<App/>}>
+        <Route path='/game1' element={<Wordle/>}/>
+        <Route path='/leaderboards' element={<Leaderboards/>}/>
+        <Route path='/account' element={<AccountPage/>}/>
+        <Route path="/createAccount" element={<CreateAccountPage/>}/>
+        {/* <Route path="/login" element={<LoginPage/>}/> */}
+      </Route>
+      <Route path="/" element>
+        
+      </Route>
+    </>
   )
 )
 //      <Route path='/login' element={<LoginPage/>}/>

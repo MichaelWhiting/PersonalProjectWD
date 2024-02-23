@@ -16,6 +16,7 @@ function AccountPage() {
     const getUserScores = async () => {
         const { data } = await axios.get(`/scores/${userId}`);
         setScores(data.scores);
+        console.log(scores);
     }
 
     const getUser = async () => {
