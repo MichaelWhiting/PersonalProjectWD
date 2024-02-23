@@ -1,20 +1,44 @@
-import { Container } from "react-bootstrap";
-import AccountEditCell from "../components/AccountEditCell.jsx";
-import AccountScoresCell from "../components/AccountScoresCell.jsx";
+import { Container, Button } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-function AccountPage() {
-    const [user, setUser] = useState({});
+// Components
+import AccountEditCell from "../components/AccountEditCell.jsx";
+import AccountScoresCell from "../components/AccountScoresCell.jsx";
 
-    const getUserInfo = async () => {
-        const { data } = await axios.get("/user/getUser");
+function AccountPage() {
+    const userId = useSelector(state => state.userId);
+    const [user, setUser] = useState({});
+    const [scores, setScores] = useState([]);
+    const dispatch = useDispatch();
+
+    const getUserScores = async () => {
+        const { data } = await axios.get(`/scores/${userId}`);
+        setScores(data.scores);
+        console.log("Scores: ", scores);
+    }
+
+    const getUser = async () => {
+        const { data } = await axios.get(`/score/${userId}`);
         setUser(data.user);
+        console.log("Users: ", user);
     }
 
     useEffect(() => {
-        getUserInfo();
+        getUserScores();
+        getUser();
     }, [])
+
+    const logout = async () => {
+        const { data } = await axios.get("/logout");
+        if (data.success) {
+            dispatch({
+                type: "LOGOUT"
+            })
+            console.log(data.message);
+        }
+    }
 
     return (
         <Container className="d-flex flex-column justify-content-center align-items-center border border-success rounded p-5" style={{ background: "#FAF9F6", width: 800 }}>
@@ -25,6 +49,7 @@ function AccountPage() {
                 <AccountEditCell />
                 <AccountScoresCell />
             </Container>
+            <Button variant="success" onClick={logout}>Logout</Button>
         </Container>
     )
 }

@@ -7,14 +7,11 @@ function AccountScoresCell() {
     const [scores, setScores] = useState([]);
 
     const getUsersScores = async () => {
-        const res = await axios.get("/user/getUser");
-        const userId = res.data.user.userId;
-        const res2 = await axios.get(`/scores/${userId}`);
-        return res2;
+
     }
 
-    useEffect(async () => {
-        const tempScores = await getUsersScores();
+    useEffect(() => {
+        const tempScores = getUsersScores();
         setScores(tempScores);
     }, [])
 

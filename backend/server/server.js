@@ -31,6 +31,8 @@ app.get("/leaderboard/:gameName", handlerFunctions.getScoresForGame);
 app.get("/score/:userId", handlerFunctions.getUserFromScore);
 app.get("/scores/:userId", handlerFunctions.getScoresFromUser);
 app.get("/session-check", handlerFunctions.sessionCheck);
+app.get("/logout", handlerFunctions.logoutUser);
+
 // POST
 app.post("/user/createUser", handlerFunctions.createUser);
 app.post("/login", handlerFunctions.loginUser);
