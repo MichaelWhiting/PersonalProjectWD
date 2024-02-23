@@ -16,13 +16,11 @@ function AccountPage() {
     const getUserScores = async () => {
         const { data } = await axios.get(`/scores/${userId}`);
         setScores(data.scores);
-        console.log("Scores: ", scores);
     }
 
     const getUser = async () => {
         const { data } = await axios.get(`/score/${userId}`);
         setUser(data.user);
-        console.log("Users: ", user);
     }
 
     useEffect(() => {
@@ -36,7 +34,6 @@ function AccountPage() {
             dispatch({
                 type: "LOGOUT"
             })
-            console.log(data.message);
         }
     }
 

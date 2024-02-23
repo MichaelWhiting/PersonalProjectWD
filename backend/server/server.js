@@ -4,13 +4,11 @@ import session from "express-session";
 import ViteExpress from "vite-express";
 
 import handlerFunctions from "./controller.js";
-import { useNavigate } from "react-router-dom";
 
 // Create express instance
 const app = express();
 
 // axios is Frontend ONLY, express is the server one.
-
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -24,7 +22,6 @@ app.use(
 
 
 // Routes
-
 // GET
 app.get("/leaderboards/games", handlerFunctions.getAllGames);
 app.get("/leaderboard/:gameName", handlerFunctions.getScoresForGame);
@@ -34,9 +31,9 @@ app.get("/session-check", handlerFunctions.sessionCheck);
 app.get("/logout", handlerFunctions.logoutUser);
 
 // POST
-app.post("/user/createUser", handlerFunctions.createUser);
+app.post("/createUser", handlerFunctions.createUser);
 app.post("/login", handlerFunctions.loginUser);
 
-// Start up server
+// Server Startup
 const port = 9989;
 ViteExpress.listen(app, port, () => console.log(`Server started up at: http://localhost:${port}`));

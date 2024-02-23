@@ -8,7 +8,7 @@ import App from './App.jsx'
 import Wordle from "./pages/Hangman.jsx";
 import Leaderboards from "./pages/Leaderboards.jsx";
 import AccountPage from "./pages/AccountPage.jsx";
-import LoginPage from "./pages/LoginPage.jsx";
+// import LoginPage from "./pages/LoginPage.jsx";
 import CreateAccountPage from "./pages/CreateAccountPage.jsx";
 
 import { Provider } from "react-redux";
@@ -22,6 +22,7 @@ const router = createBrowserRouter(
       <Route path='/leaderboards' element={<Leaderboards/>}/>
       <Route path='/account' element={<AccountPage/>}/>
       <Route path="/createAccount" element={<CreateAccountPage/>}/>
+      {/* <Route path="/login" element={<LoginPage/>}/> */}
     </Route>
   )
 )

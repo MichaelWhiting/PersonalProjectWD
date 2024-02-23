@@ -1,10 +1,8 @@
-// import { requestGames } from "../reducers/leaderboardsReducer";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { useState } from "react";
-
-import LeaderboardCard from "../components/LeaderboardCard";
+import { useEffect, useState } from "react";
 import axios from "axios";
+
+// Components
+import LeaderboardCard from "../components/LeaderboardCard";
 
 function Leaderboards() {
     const [loading, setLoading] = useState(false);

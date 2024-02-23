@@ -1,6 +1,4 @@
-import { Sequelize } from "sequelize";
 import { User, Score, Game } from "../database/model.js";
-import { useNavigate } from "react-router-dom";
 
 const handlerFunctions = {
     getAllGames: async (req, res) => {

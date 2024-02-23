@@ -1,9 +1,10 @@
+import HangmanGame from "../gameLogic/wordle/hangmanModel.js";
+import { Container } from "react-bootstrap";
+import { useState } from "react";
+
+// Components
 import WordSpaces from "../components/gameComponents/hangmanComponents/WordSpaces.jsx";
 import Keyboard from "../components/gameComponents/hangmanComponents/Keyboard.jsx";
-import { Container } from "react-bootstrap";
-import HangmanGame from "../gameLogic/wordle/hangmanModel.js";
-
-import { useState } from "react";
 
 const words = [
     "mystery", "journey", "wizard", "forest", "castle", "dragon", "puzzle", "secret",
