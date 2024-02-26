@@ -15,9 +15,12 @@ function AccountEditCell() {
     }
 
     return (
-        <Container className="d-flex min-vh-50 justify-content-center align-items-center border border-success rounded p-5">
+        <Container 
+            className="d-flex justify-content-center align-items-center border border-success rounded p-5 mx-3"
+            style={{height: "80%"}}
+            >
             <Form onSubmit={changeUsername}>
-                <h2>Edit Username</h2>
+                <h3>Edit Username</h3>
                 <Form.Group>
                     <Form.FloatingLabel label="username" style={{ marginTop: 10, marginBottom: 10 }}>
                         <Form.Control placeholder="username" onChange={(e) => setUsername(e.target.value)}/>
@@ -27,7 +30,7 @@ function AccountEditCell() {
                         <Form.Control placeholder="password"/>
                     </Form.FloatingLabel> */}
 
-                    <Button variant="success" type="submit" style={{marginTop: 10, marginBottom: 10}}>Change</Button>
+                    <Button variant="success" type="submit" style={{marginTop: 10, marginBottom: 10}}>Save</Button>
                 </Form.Group>  
             </Form>
         </Container>

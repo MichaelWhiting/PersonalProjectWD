@@ -25,6 +25,10 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    sessionCheck();
+  }, [])
+
   return (
     <>
       <NavigationBar/>

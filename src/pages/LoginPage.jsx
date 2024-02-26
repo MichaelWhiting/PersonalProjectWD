@@ -45,7 +45,7 @@ function LoginPage() {
 
     return (
     <Container
-            className="d-flex flex-column justify-content-center align-items-center"
+            className="d-flex flex-column justify-content-center align-items-center mt-5"
             style={{  width: "50%", }}
             >
             <Form 

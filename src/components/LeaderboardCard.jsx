@@ -24,7 +24,6 @@ function LeaderboardCard(props) {
         setScoresAndUsers(scoresObjArr);
     }
 
-
     const scoreLabels = scoresAndUsers.map((item, i) => {
         return (
             <p key={i}>
@@ -48,3 +47,28 @@ function LeaderboardCard(props) {
 }
 
 export default LeaderboardCard;
+
+
+// const scoresObjArr = [];
+// const { data } = await axios.get(`/leaderboard/${gameName}`);
+// const scoresArr = data.scores.sort((a, b) => b.score - a.score);
+// const promises = [];
+
+// let scoreObj = {};
+
+// for (const score of scoresArr) {
+//     const res = axios.get(`/score/${score.userId}`);
+//     promises.push(res);
+//     console.log(":",score)
+//     scoreObj = { score: score.score }
+// }
+
+// Promise.all(promises).then((responses) => {
+//     for (const res of responses) {
+//         const user = res.data.user;
+//         console.log(scoreObj)
+//         scoresObjArr.push({ score, user });
+//     }
+
+//     setScoresAndUsers(scoresObjArr);
+// })

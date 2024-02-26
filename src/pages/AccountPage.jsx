@@ -31,11 +31,13 @@ function AccountPage() {
     }
 
     return (
-        <Container className="d-flex flex-column justify-content-center align-items-center border border-success rounded p-5" style={{ background: "#FAF9F6", width: 800 }}>
+        <Container 
+            className="d-flex flex-column justify-content-center align-items-center border border-success rounded p-5 mt-5" 
+            style={{ background: "#FAF9F6", width: 800 }}>
             <Container className="d-flex vh-80 justify-content-center">
-                <h2 style={{ color: "#198754" }}>Hello, {user.username} temp! Here is your account info:</h2>
+                <h2 style={{ color: "#198754" }}>Hello, {user.username}! Here is your account info:</h2>
             </Container>
-            <Container className="d-flex vh-20 justify-content-center align-items-center">
+            <Container className="d-flex justify-content-center align-items-center" style={{height: 500}}>
                 <AccountEditCell />
                 <AccountScoresCell username={user.username}/>
             </Container>

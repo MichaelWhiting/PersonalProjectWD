@@ -19,17 +19,18 @@ class HangmanGame {
                 
                 const returnStr = status.join("");
                 if(!returnStr.includes("_")) {
-                    console.log("Player has won!")
+                    this.saveGame();
                 }
                 return returnStr;
             } else {
                return wordStatus;
             }
         }
-
-        this.saveGame = async (score) => {
-
-        }
+        this.saveGame = (time) => {
+            const score = (this.word.length - currentGuess) * 100 / time
+            console.log("score for this one is: ", score)
+            return score;
+        } 
     }
 }
 

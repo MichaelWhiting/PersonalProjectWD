@@ -20,7 +20,7 @@ function AccountScoresCell(props) {
     const scoreCards = scores.map((score, i) => <p key={i}>{score.gameName}: {score.score}</p>);
 
     return (
-        <Container className="border border-success rounded p-5 overflow-scroll">
+        <Container style={{height: "80%"}} className="border border-success rounded p-5 mx-3 overflow-scroll">
             <h3>{username}'s Scores:</h3>
             {scoreCards}
         </Container>

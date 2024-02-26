@@ -21,5 +21,18 @@ const score6 = await Score.create({ scoreId: 5, gameName: "Hangman", score: 7, u
 const score7 = await Score.create({ scoreId: 6, gameName: "MazeGame", score: 12, userId: 1})
 const score8 = await Score.create({ scoreId: 7, gameName: "Hangman", score: 1, userId: 0})
 
+let id = 8;
+
+for (let i = 0; i < 101; i++) {
+    await Score.create({ scoreId: id, gameName: "Hangman", score: Math.floor(Math.random() * 20), userId: 0});
+    id++;
+    await Score.create({ scoreId: id, gameName: "MazeGame", score: Math.floor(Math.random() * 20), userId: 0});
+    id++;
+    await Score.create({ scoreId: id, gameName: "Hangman", score: Math.floor(Math.random() * 20), userId: 1});
+    id++;
+    await Score.create({ scoreId: id, gameName: "MazeGame", score: Math.floor(Math.random() * 20), userId: 1});
+    id++;
+}
+
 await db.close()
 console.log("Finished seeding the database!")
