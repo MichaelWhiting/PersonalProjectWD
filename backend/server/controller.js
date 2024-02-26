@@ -40,18 +40,18 @@ const handlerFunctions = {
     },
 
     getScoresFromUser: async (req, res) => {
-        const { userId } = req.params;
-        console.log("User: ", userId);
-        const scores = Score.findAll({
-            where: {
-                userId: userId
-            }
-        })
-        console.log(scores);
-        res.send({
-            message: "Retrieved scores from userId",
-            scores
-        });
+        // const { userId } = req.params;
+        // console.log("User: ", userId);
+        // const scores = Score.findAll({
+        //     where: {
+        //         userId: userId
+        //     }
+        // })
+        // console.log(scores);
+        // res.send({
+        //     message: "Retrieved scores from userId",
+        //     scores
+        // });
     },
 
     sessionCheck: async (req, res) => {
@@ -143,18 +143,7 @@ const handlerFunctions = {
             message: "Created new user",
             newUser
         });
-    },
-
-    // getUser: async (req, res) => {
-    //     if (req.session.user !== null) {
-    //         res.send({
-    //             message: "Retrieved logged in user",
-    //             user: req.session.user
-    //         })
-    //     } else {
-    //         console.log("No one logged in");
-    //     }
-    // }
+    }
 }
 
 export default handlerFunctions;

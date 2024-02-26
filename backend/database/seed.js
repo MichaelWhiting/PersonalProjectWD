@@ -4,8 +4,8 @@ import { db } from './model.js';
 await db.sync({ force: true }); // I'm pretty sure this resets the database to nothing before seeding again.
 
 // Create a user, will be used for testing:
-const user1 = await User.create({ userId: 0, username: "Michael123", password: "test" });
-const user2 = await User.create({ userId: 1, username: "Michael456", password: "test" });
+const user1 = await User.create({ userId: 0, username: "mike123", password: "test" });
+const user2 = await User.create({ userId: 1, username: "michael456", password: "test" });
 
 // Create a game:
 const game1 = await Game.create({ gameName: "wordle", scoreIds: [1,2]})

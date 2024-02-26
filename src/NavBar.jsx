@@ -6,7 +6,7 @@ function NavigationBar() {
     return (
         <Navbar expand='md' bg='success' data-bs-theme='dark'>
             <Container fluid className="d-flex">
-                <Navbar.Brand>
+                <Navbar.Brand href="/logincreate/login">
                     <Icon.Dice5Fill style={{width: 50, height: 50}}/>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>

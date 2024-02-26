@@ -4,8 +4,10 @@ import { React, useEffect } from 'react';
 import axios from 'axios';
 
 // Components
-import LoginPage from './pages/LoginPage.jsx';
+// import LoginPage from './pages/LoginPage.jsx';
+import LoginLogoutPage from './pages/LoginCreatePage.jsx';
 import NavigationBar from './NavBar.jsx';
+import LoginCreatePage from './pages/LoginCreatePage.jsx';
 
 function App() {
   const userId = useSelector((state) => state.userId);
@@ -30,10 +32,10 @@ function App() {
     <>
       <NavigationBar/>
       { userId && 
-          <Outlet/>
+        <Outlet/>
       }
       { !userId && 
-          <LoginPage/>
+          <LoginCreatePage/>
       }
     </>
   )

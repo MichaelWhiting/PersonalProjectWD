@@ -3,13 +3,13 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
-
-// Importing Components
+// Components
 import Wordle from "./pages/Hangman.jsx";
 import Leaderboards from "./pages/Leaderboards.jsx";
 import AccountPage from "./pages/AccountPage.jsx";
-// import LoginPage from "./pages/LoginPage.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
 import CreateAccountPage from "./pages/CreateAccountPage.jsx";
+import LoginCreatePage from "./pages/LoginCreatePage.jsx";
 
 import { Provider } from "react-redux";
 import 'bootstrap/dist/css/bootstrap.css';
@@ -19,14 +19,13 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path='/' element={<App/>}>
-        <Route path='/game1' element={<Wordle/>}/>
-        <Route path='/leaderboards' element={<Leaderboards/>}/>
-        <Route path='/account' element={<AccountPage/>}/>
-        <Route path="/createAccount" element={<CreateAccountPage/>}/>
-        {/* <Route path="/login" element={<LoginPage/>}/> */}
-      </Route>
-      <Route path="/" element>
-        
+        <Route path='game1' element={<Wordle/>}/>
+        <Route path='leaderboards' element={<Leaderboards/>}/>
+        <Route path='account' element={<AccountPage/>}/>
+        <Route path='logincreate' element={<LoginCreatePage/>}>
+          <Route path="login" element={<LoginPage/>}/>
+          <Route path="createAccount" element={<CreateAccountPage/>}/>
+        </Route>
       </Route>
     </>
   )

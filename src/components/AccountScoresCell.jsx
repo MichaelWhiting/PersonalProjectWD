@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
-import axios from "axios";
+import axios from "axios";  
 
 function AccountScoresCell() {
     // make a array of the scores of the user later

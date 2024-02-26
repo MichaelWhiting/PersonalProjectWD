@@ -1,6 +1,6 @@
 import { Button, Container, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
@@ -44,7 +44,7 @@ function LoginPage() {
       }
 
     return (
-<Container
+    <Container
             className="d-flex flex-column justify-content-center align-items-center"
             style={{  width: "50%", }}
             >
@@ -83,7 +83,7 @@ function LoginPage() {
                 </Form.Group>
             </Form>
             <Button variant="outline-success" style={{margin: 10}}>
-                <Link className="nav-link" to="/createAccount">Create Account Here</Link>
+                <Link className="nav-link" to="/logincreate/createAccount">Create Account Here</Link>
             </Button>
         </Container>
     )

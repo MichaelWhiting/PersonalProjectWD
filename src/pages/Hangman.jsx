@@ -6,19 +6,14 @@ import { useState } from "react";
 import WordSpaces from "../components/gameComponents/hangmanComponents/WordSpaces.jsx";
 import Keyboard from "../components/gameComponents/hangmanComponents/Keyboard.jsx";
 
-const words1 = [
+const words = [
     "mystery", "journey", "wizard", "forest", "castle", "dragon", "puzzle", "secret",
     "mirror", "flower", "winter", "summer", "spring", "autumn", "island", "desert",
     "falcon", "eclipse", "galaxy", "nebula", "comet", "orbit", "photon", "quantum",
-    "sphinx", "pyramid", "temple", "canyon", "volcano", "fjord", "glacier", "tundra",
+    "sphinx", "pyramid", "temple", "canyon", "volcano", "glacier", "tundra",
     "jungle", "savanna", "cavern", "goblin", "unicorn", "phoenix", "vampire", "zombie",
     "robot", "cyborg", "portal", "sphere", "vector", "matrix", "quantum", "cosmos",
     "ocean", "eagle"
-];
-
-const words = [
-    "yoda", "vader", "maul", "kenobi", "rey", "finn", "lando", "chewbacca", "phasma", "hux",
-    "snoke", "grievous", "kylo", "mace", "jango", "boba", "dooku", "quigon", "padme"
 ];
 
 function Hangman() {

@@ -2,7 +2,7 @@ import { DataTypes, Model } from 'sequelize';
 import util from 'util';
 import connectToDB from './db.js'; // references the function that connects our db to the server
 
-export const db = await connectToDB('postgresql:///gamesDB'); // creates a DB instance from the function with a connection to the postgresql db
+export const db = await connectToDB('postgresql:///gamesdb'); // creates a DB instance from the function with a connection to the postgresql db
 
 class User extends Model { // extends model makes it so we can add the .hasMany & .belongsTo later on
     [util.inspect.custom]() { // this just organizes the json in the console, just to keep it organized
