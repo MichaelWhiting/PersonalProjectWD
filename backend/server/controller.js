@@ -158,6 +158,23 @@ const handlerFunctions = {
         } else {
             console.log(`User not found with id of ${userId}`);
         }
+    },
+
+    updateUsername: async (req, res) => {
+        const { username } = req.body;
+
+        const user = await User.update(
+            { username },
+            { where: {
+                userId: 0 // change this ti the req.session one later
+            }}
+        )
+
+        res.send({
+            message: "Updated username",
+            success: true,
+            user
+        })
     }
 }
 

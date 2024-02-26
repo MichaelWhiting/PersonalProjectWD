@@ -35,6 +35,9 @@ app.get("/getUser/:userId", handlerFunctions.getUserFromId);
 app.post("/createUser", handlerFunctions.createUser);
 app.post("/login", handlerFunctions.loginUser);
 
+// PUT
+app.put("/updateUsername", handlerFunctions.updateUsername);
+
 // Server Startup
 const port = 9989;
 ViteExpress.listen(app, port, () => console.log(`Server started up at: http://localhost:${port}`));
