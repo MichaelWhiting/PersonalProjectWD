@@ -2,7 +2,29 @@ import { Navbar, Nav, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import * as Icon from "react-bootstrap-icons";
 
+import { useDispatch, useSelector } from 'react-redux';
+import { React, useEffect } from 'react';
+import axios from "axios";
+
 function NavigationBar() {
+    const userId = useSelector((state) => state.userId);
+    const dispatch = useDispatch();
+  
+    const sessionCheck = async () => {
+      const res = await axios.get("/session-check")
+      console.log("This is the RES DATA:", res.data);
+      if (res.data.success) {
+        dispatch({
+          type: "USER_AUTH",
+          payload: res.data.userId
+        })
+      }
+    }
+    
+    useEffect(() => {
+      sessionCheck();
+    }, []);  
+    
     return (
         <Navbar expand='md' bg='success' data-bs-theme='dark'>
             <Container fluid className="d-flex">

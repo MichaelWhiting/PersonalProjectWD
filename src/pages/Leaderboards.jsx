@@ -1,22 +1,19 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Container } from "react-bootstrap";
 
 // Components
 import LeaderboardCard from "../components/LeaderboardCard";
 
 function Leaderboards() {
-    const [loading, setLoading] = useState(false);
     const [games, setGames] = useState([]);
 
     const getGames = async () => {
         const { data } = await axios.get("/leaderboards/games");
         setGames(data.games);
-        console.log(data.games);
-        setLoading(false);
     }
 
     useEffect(() => {
-        setLoading(true);
         getGames();
     }, []);
 
@@ -25,9 +22,9 @@ function Leaderboards() {
     });
     
     return (
-        <>
-            {loading ? <h1>Loading</h1> : <span>{leaderboardCards}</span>}
-        </>
+        <Container fluid className="d-flex min-vh-100 justify-content-center mt-5 col-md-12">
+            {leaderboardCards}
+        </Container>
     )
 }
 

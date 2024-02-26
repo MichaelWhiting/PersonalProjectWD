@@ -27,7 +27,7 @@ const handlerFunctions = {
     getUserFromScore: async (req, res) => {
         const { userId } = req.params;
 
-        const user = User.findAll({
+        const user = await User.findOne({
             where: {
                 userId: userId
             }
@@ -40,18 +40,18 @@ const handlerFunctions = {
     },
 
     getScoresFromUser: async (req, res) => {
-        // const { userId } = req.params;
-        // console.log("User: ", userId);
-        // const scores = Score.findAll({
-        //     where: {
-        //         userId: userId
-        //     }
-        // })
-        // console.log(scores);
-        // res.send({
-        //     message: "Retrieved scores from userId",
-        //     scores
-        // });
+        const { userId } = req.params;
+
+        const scores = await Score.findAll({
+            where: {
+                userId: userId
+            }
+        })
+
+        res.send({
+            message: "Retrieved scores from userId",
+            scores
+        });
     },
 
     sessionCheck: async (req, res) => {
@@ -143,6 +143,21 @@ const handlerFunctions = {
             message: "Created new user",
             newUser
         });
+    },
+
+    getUserFromId: async (req, res) => {
+        const { userId } = req.params;
+
+        const user = await User.findByPk(userId);
+
+        if (user) {
+            res.send({
+                message: "Got user object",
+                user
+            })
+        } else {
+            console.log(`User not found with id of ${userId}`);
+        }
     }
 }
 

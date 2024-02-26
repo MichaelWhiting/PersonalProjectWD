@@ -29,6 +29,7 @@ app.get("/score/:userId", handlerFunctions.getUserFromScore);
 app.get("/scores/:userId", handlerFunctions.getScoresFromUser);
 app.get("/session-check", handlerFunctions.sessionCheck);
 app.get("/logout", handlerFunctions.logoutUser);
+app.get("/getUser/:userId", handlerFunctions.getUserFromId);
 
 // POST
 app.post("/createUser", handlerFunctions.createUser);

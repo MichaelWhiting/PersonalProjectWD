@@ -26,18 +26,11 @@ class HangmanGame {
                return wordStatus;
             }
         }
-    }
 
-    checkGameStatus() {
-        if (this.currentGuess >= this.maxGuesses) {
-            this.endGame();
-        } else {
-            console.log("Player still has more guesses, continuing")
+        this.saveGame = async (score) => {
+
         }
     }
-
-    endGame() {
-        console.log("Game over!")
-    }
 }
+
 export default HangmanGame;

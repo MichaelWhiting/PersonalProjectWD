@@ -1,26 +1,28 @@
 import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";  
 
-function AccountScoresCell() {
-    // make a array of the scores of the user later
+function AccountScoresCell(props) {
+    const username = props.username;
     const [scores, setScores] = useState([]);
+    const dispatch = useDispatch();
 
-    const getUsersScores = async () => {
-
+    const getUserScores = async () => {
+        const { data } = await axios.get(`/scores/${0}`); // 0 should be userId
+        setScores(data.scores.sort((a, b) => b.score - a.score));
     }
 
     useEffect(() => {
-        const tempScores = getUsersScores();
-        setScores(tempScores);
+        getUserScores();
     }, [])
+    
+    const scoreCards = scores.map((score) => <p>{score.gameName}: {score.score}</p>);
 
     return (
         <Container className="border border-success rounded p-5">
-            <h3>Scores(placeholders)</h3>
-            <p>Wordle: 4</p>
-            <p>Wordle: 6</p>
-            <p>MazeGame: 100</p>
+            <h3>{username}'s Scores:</h3>
+            {scoreCards}
         </Container>
     )
 }

@@ -6,39 +6,44 @@ import { useState } from "react";
 import axios from "axios";
 
 function LeaderboardCard(props) {
-    const { gameName, scoreIds } = props.game;
+    const { gameName } = props.game;
+    const [scoresAndUsers, setScoresAndUsers] = useState([]);
 
-    const [loading, setLoading] = useState(false);
-    const [scores, setScores] = useState([]);
+    const getScoresAndUsers = async () => {
+        const scoresObjArr = [];
+        const { data } = await axios.get(`/leaderboard/${gameName}`);
+        const scoresArr = data.scores.sort((a, b) => b.score - a.score);
+        console.log(scoresArr)
+        for (const score of scoresArr) {
+            const res = await axios.get(`/score/${score.userId}`);
+            const user = res.data.user;
+            scoresObjArr.push({ score, user });
+        }
 
-    const getScores = async () => {
-        const { data } = await axios.get(`leaderboard/${gameName}`);
-        setScores(data.scores.sort((a, b) => a.score + b.score));
-        setLoading(false);
+        // console.log(scoresObjArr)
+        setScoresAndUsers(scoresObjArr);
     }
 
-    const scoreLabels = scores.map((score, i) => {
+
+    const scoreLabels = scoresAndUsers.map((item, i) => {
         return (
-            <Container key={i}>
-                <li>{score.score}</li>
-            </Container>
+            <p key={i}>
+                {item.user.username}: {item.score.score}
+            </p>
         )
     })
     
     useEffect(() => {
-        setLoading(true);
-        getScores();
+        getScoresAndUsers();
     }, []);
 
-    return !loading ? (
-        <Card style={{width: 300}}>
+    return (
+        <Card className="mx-5 mt-5 border border-success overflow-scroll" style={{ width: "20%", height: 400, background: "#FAF9F6"}}>
             <Card.Body>
                 <Card.Title>{gameName}</Card.Title>
-                <ol style={{background: "#FAF9F6"}}>{scoreLabels}</ol>
+                {scoreLabels}
             </Card.Body>
         </Card>
-    ) : (
-        <h1>Loading page</h1>
     )
 }
 

@@ -8,24 +8,16 @@ import AccountEditCell from "../components/AccountEditCell.jsx";
 import AccountScoresCell from "../components/AccountScoresCell.jsx";
 
 function AccountPage() {
-    const userId = useSelector(state => state.userId);
+    const userId = useSelector(state => state.userId); // setting this to 0 for now
     const [user, setUser] = useState({});
-    const [scores, setScores] = useState([]);
     const dispatch = useDispatch();
 
-    const getUserScores = async () => {
-        const { data } = await axios.get(`/scores/${userId}`);
-        setScores(data.scores);
-        console.log(scores);
-    }
-
     const getUser = async () => {
-        const { data } = await axios.get(`/score/${userId}`);
+        const { data } = await axios.get(`/getUser/${0}`); // 0 should be userId
         setUser(data.user);
     }
 
     useEffect(() => {
-        getUserScores();
         getUser();
     }, [])
 
@@ -41,11 +33,11 @@ function AccountPage() {
     return (
         <Container className="d-flex flex-column justify-content-center align-items-center border border-success rounded p-5" style={{ background: "#FAF9F6", width: 800 }}>
             <Container className="d-flex vh-80 justify-content-center">
-                <h2 style={{ color: "#198754" }}>Hello, {user.username}! Here is your account info:</h2>
+                <h2 style={{ color: "#198754" }}>Hello, {user.username} temp! Here is your account info:</h2>
             </Container>
             <Container className="d-flex vh-20 justify-content-center align-items-center">
                 <AccountEditCell />
-                <AccountScoresCell />
+                <AccountScoresCell username={user.username}/>
             </Container>
             <Button variant="success" onClick={logout}>Logout</Button>
         </Container>

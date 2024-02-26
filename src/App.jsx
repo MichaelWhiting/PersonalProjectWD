@@ -15,24 +15,21 @@ function App() {
 
   const sessionCheck = async () => {
     const res = await axios.get("/session-check")
-
-    if (res.data.success) {
+    // console.log("This is the RES DATA:", res.data);
+    // console.log(userId)
+    if (res.data.success) { // THIS IS NOT GETTING HIT
       dispatch({
         type: "USER_AUTH",
         payload: res.data.userId
       })
     }
   }
-  
-  useEffect(() => {
-    sessionCheck();
-  }, []);
 
   return (
     <>
       <NavigationBar/>
       { userId && 
-        <Outlet/>
+          <Outlet/>
       }
       { !userId && 
           <LoginCreatePage/>
