@@ -1,16 +1,22 @@
 import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import axios from "axios";  
 
 function AccountScoresCell(props) {
+    const userId = useSelector(state => state.userId);
     const username = props.username;
     const [scores, setScores] = useState([]);
-    const dispatch = useDispatch();
 
     const getUserScores = async () => {
-        const { data } = await axios.get(`/scores/${0}`); // 0 should be userId
-        setScores(data.scores.sort((a, b) => b.score - a.score));
+        if (userId) {
+            const { data } = await axios.get(`/scores/${userId}`);
+            console.log(data.success);
+
+            if (data.success) {
+                setScores(data.scores.sort((a, b) => b.score - a.score));
+            }
+        }
     }
 
     useEffect(() => {

@@ -1,14 +1,10 @@
 import { Button, Container, Form } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
-// Components 
-import CreateAccountPage from "./CreateAccountPage.jsx";
-
 function LoginPage() {
-    const userId = useSelector(state => state.userId);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
@@ -16,9 +12,10 @@ function LoginPage() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const res = await axios.post("/login", { username, password });
 
-        console.log(res.data)
+        const res = await axios.post("/login", { username, password });
+        console.log(res.data.message);
+
         if (res.data.success) {
             dispatch({
                 type: "USER_AUTH",
@@ -33,19 +30,8 @@ function LoginPage() {
         
     }
 
-    const sessionCheck = async () => {
-        const res = await axios.get("/session-check")
-    
-        if (res.data.success) {
-          dispatch({
-            type: "USER_AUTH",
-            payload: res.data.userId
-          })
-        }
-      }
-
     return (
-    <Container
+        <Container
             className="d-flex flex-column justify-content-center align-items-center mt-5"
             style={{  width: "50%", }}
             >
@@ -84,7 +70,7 @@ function LoginPage() {
                 </Form.Group>
             </Form>
             <Button variant="outline-success" style={{margin: 10}}>
-                <Link className="nav-link" to="/logincreate/createAccount">Create Account Here</Link>
+                <Link className="nav-link" to="/authentication/createAccount">Create Account Here</Link>
             </Button>
         </Container>
     )

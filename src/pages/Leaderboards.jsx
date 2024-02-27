@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { Container } from "react-bootstrap";
+import axios from "axios";
 
 // Components
 import LeaderboardCard from "../components/LeaderboardCard";

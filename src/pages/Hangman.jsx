@@ -1,4 +1,4 @@
-import HangmanGame from "../gameLogic/wordle/hangmanModel.js";
+import HangmanGame from "../gameLogic/wordle/hangmanModel.js"; // logic for the game
 import { Container, Button } from "react-bootstrap";
 import { useEffect, useState } from "react";
 
@@ -33,8 +33,8 @@ function Hangman() {
         console.log(word)
     }, [key])
 
-    useEffect(() => {
-        if (!wordStatus.includes("_")) {
+    useEffect(() => { // whenever the wordStatus changes, it checks to see if the player has guessed the word and see 
+        if (!wordStatus.includes("_")) {                                                        // if to end the game
             setGameOver(true);
         }
     }, [wordStatus])

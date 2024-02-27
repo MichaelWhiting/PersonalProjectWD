@@ -1,15 +1,16 @@
 import { Button, Container, Form } from "react-bootstrap";
-import axios from "axios";
 import { useState } from "react";
+import axios from "axios";
 
 function AccountEditCell() {
     const [username, setUsername] = useState("");
 
     const changeUsername = async (e) => {
+        e.preventDefault();
         const { data } = await axios.put("/updateUsername", { username });
-        console.log("Should've changed username", data.success);
-
+        
         if (data.success) {
+            console.log(data.message);
             setUsername("");
         }
     }

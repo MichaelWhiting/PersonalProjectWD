@@ -1,7 +1,7 @@
+import ViteExpress from "vite-express";
+import session from "express-session";
 import express from "express";
 import morgan from "morgan";
-import session from "express-session";
-import ViteExpress from "vite-express";
 
 import handlerFunctions from "./controller.js";
 
@@ -20,16 +20,15 @@ app.use(
   })
 );
 
-
 // Routes
 // GET
 app.get("/leaderboards/games", handlerFunctions.getAllGames);
 app.get("/leaderboard/:gameName", handlerFunctions.getScoresForGame);
 app.get("/score/:userId", handlerFunctions.getUserFromScore);
 app.get("/scores/:userId", handlerFunctions.getScoresFromUser);
+app.get("/getUser/:userId", handlerFunctions.getUserFromId);
 app.get("/session-check", handlerFunctions.sessionCheck);
 app.get("/logout", handlerFunctions.logoutUser);
-app.get("/getUser/:userId", handlerFunctions.getUserFromId);
 
 // POST
 app.post("/createUser", handlerFunctions.createUser);
@@ -37,6 +36,8 @@ app.post("/login", handlerFunctions.loginUser);
 
 // PUT
 app.put("/updateUsername", handlerFunctions.updateUsername);
+
+// DELETE
 
 // Server Startup
 const port = 9989;

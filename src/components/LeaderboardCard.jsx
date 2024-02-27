@@ -6,29 +6,26 @@ import { useState } from "react";
 import axios from "axios";
 
 function LeaderboardCard(props) {
-    const { gameName } = props.game;
     const [scoresAndUsers, setScoresAndUsers] = useState([]);
-
-    const getScoresAndUsers = async () => {
+    const { gameName } = props.game;
+    
+    const getScoresAndUsers = async () => { // optimize this function later if have time
         const scoresObjArr = [];
         const { data } = await axios.get(`/leaderboard/${gameName}`);
         const scoresArr = data.scores.sort((a, b) => b.score - a.score);
-        // console.log(scoresArr)
+
         for (const score of scoresArr) {
             const res = await axios.get(`/score/${score.userId}`);
             const user = res.data.user;
             scoresObjArr.push({ score, user });
         }
 
-        // console.log(scoresObjArr)
         setScoresAndUsers(scoresObjArr);
     }
 
     const scoreLabels = scoresAndUsers.map((item, i) => {
         return (
-            <li key={i}>
-                {item.user.username}: {item.score.score}
-            </li>
+            <li key={i}>{item.user.username}: {item.score.score}</li>
         )
     })
     

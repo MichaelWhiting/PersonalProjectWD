@@ -5,42 +5,36 @@ import axios from 'axios';
 
 // Components
 // import LoginPage from './pages/LoginPage.jsx';
-import LoginLogoutPage from './pages/LoginCreatePage.jsx';
 import NavigationBar from './NavBar.jsx';
-import LoginCreatePage from './pages/LoginCreatePage.jsx';
+import AuthenticationPage from './pages/AuthenticationPage.jsx';
 
 function App() {
   const userId = useSelector((state) => state.userId);
   const dispatch = useDispatch();
 
-  console.log(userId)
-
   const sessionCheck = async () => {
-    const res = await axios.get("/session-check")
-    console.log("This is the RES DATA:", res.data);
-    // console.log(userId)
-    if (res.data.success) { // THIS IS NOT GETTING HIT
+    const res = await axios.get("/session-check");
+
+    if (res.data.success) {
       dispatch({
         type: "USER_AUTH",
         payload: res.data.userId
-      })
+      });
     }
   }
 
   useEffect(() => {
     sessionCheck();
-  }, [])
+  }, []);
 
   return (
     <>
-        <NavigationBar/>
+      <NavigationBar/>
       { userId && 
-      <>
-          <Outlet/>
-          </>
+        <Outlet/>
       } 
       { !userId && 
-          <LoginCreatePage/>
+        <AuthenticationPage/>
       }
     </>
   )

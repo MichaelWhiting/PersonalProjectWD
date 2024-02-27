@@ -7,9 +7,7 @@ function CreateAccountPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    const createAccount = async () => {
-        await axios.post("/createUser", { username, password });
-    }
+    const createAccount = async () => await axios.post("/createUser", { username, password });
 
     return (
         <Container
@@ -48,7 +46,7 @@ function CreateAccountPage() {
                 </Form.Group>
             </Form>
             <Button variant="outline-success" style={{margin: 10}}>
-                <Link className="nav-link" to="/logincreate/login">Login Here</Link>
+                <Link className="nav-link" to="/authentication/login">Login Here</Link>
             </Button>
         </Container>
     )
