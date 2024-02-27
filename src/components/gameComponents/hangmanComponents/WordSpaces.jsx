@@ -6,7 +6,7 @@ function WordSpaces(props) {
     });
 
     return (
-        <div className="word-spaces d-flex justify-content-center">
+        <div className="word-spaces d-flex justify-content-center fade-in">
             {wordSpaces}
         </div>
     )

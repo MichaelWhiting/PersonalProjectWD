@@ -32,7 +32,7 @@ function LoginPage() {
 
     return (
         <Container
-            className="d-flex flex-column justify-content-center align-items-center mt-5"
+            className="d-flex flex-column justify-content-center align-items-center mt-5 fade-in"
             style={{  width: "50%", }}
             >
             <Form 

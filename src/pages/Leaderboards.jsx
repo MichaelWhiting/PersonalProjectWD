@@ -22,7 +22,7 @@ function Leaderboards() {
     });
     
     return (
-        <Container fluid className="d-flex justify-content-center mt-5 col-md-12">
+        <Container fluid className="d-flex justify-content-center mt-5 col-md-12 fade-in">
             {leaderboardCards}
         </Container>
     )

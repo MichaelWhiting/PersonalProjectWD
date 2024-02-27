@@ -13,6 +13,8 @@ import CreateAccountPage from "./pages/CreateAccountPage.jsx";
 import AuthenticationPage from "./pages/AuthenticationPage.jsx";
 
 import 'bootstrap/dist/css/bootstrap.css'; // this is the import for bootstrap css
+import './index.css';
+
 import store from "./reducers/store.js";
 
 const router = createBrowserRouter(

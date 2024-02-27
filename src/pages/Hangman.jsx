@@ -40,7 +40,7 @@ function Hangman() {
     }, [wordStatus])
 
     return !gameOver ? (
-        <Container fluid className="mt-5" key={key}>
+        <Container fluid className="mt-5 fade-in" key={key}>
             <WordSpaces wordStatus={wordStatus}/>
             <Keyboard 
                 wordStatus={wordStatus} 

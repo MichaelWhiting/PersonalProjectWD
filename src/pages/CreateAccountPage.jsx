@@ -11,7 +11,7 @@ function CreateAccountPage() {
 
     return (
         <Container
-            className="d-flex flex-column justify-content-center align-items-center mt-5"
+            className="d-flex flex-column justify-content-center align-items-center mt-5 fade-in"
             style={{  width: "50%", }}
             >
             <Form className="my-auto border border-success rounded p-5" style={{width: "70%", background: "#FAF9F6"}}>
