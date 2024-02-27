@@ -13,7 +13,7 @@ function LeaderboardCard(props) {
         const scoresObjArr = [];
         const { data } = await axios.get(`/leaderboard/${gameName}`);
         const scoresArr = data.scores.sort((a, b) => b.score - a.score);
-        console.log(scoresArr)
+        // console.log(scoresArr)
         for (const score of scoresArr) {
             const res = await axios.get(`/score/${score.userId}`);
             const user = res.data.user;
@@ -26,9 +26,9 @@ function LeaderboardCard(props) {
 
     const scoreLabels = scoresAndUsers.map((item, i) => {
         return (
-            <p key={i}>
+            <li key={i}>
                 {item.user.username}: {item.score.score}
-            </p>
+            </li>
         )
     })
     
@@ -37,10 +37,12 @@ function LeaderboardCard(props) {
     }, []);
 
     return (
-        <Card className="mx-5 mt-5 border border-success overflow-scroll" style={{ width: "20%", height: 400, background: "#FAF9F6"}}>
-            <Card.Body>
+        <Card className="mx-5 mt-5 border border-success" style={{ width: "20%", height: 400, background: "#FAF9F6"}}>
+            <Card.Header>
                 <Card.Title>{gameName}</Card.Title>
-                {scoreLabels}
+            </Card.Header>
+            <Card.Body className="overflow-scroll">
+                <ol>{scoreLabels}</ol>
             </Card.Body>
         </Card>
     )

@@ -18,6 +18,7 @@ function LoginPage() {
         e.preventDefault();
         const res = await axios.post("/login", { username, password });
 
+        console.log(res.data)
         if (res.data.success) {
             dispatch({
                 type: "USER_AUTH",

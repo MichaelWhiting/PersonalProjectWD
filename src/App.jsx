@@ -13,9 +13,11 @@ function App() {
   const userId = useSelector((state) => state.userId);
   const dispatch = useDispatch();
 
+  console.log(userId)
+
   const sessionCheck = async () => {
     const res = await axios.get("/session-check")
-    // console.log("This is the RES DATA:", res.data);
+    console.log("This is the RES DATA:", res.data);
     // console.log(userId)
     if (res.data.success) { // THIS IS NOT GETTING HIT
       dispatch({
@@ -31,10 +33,12 @@ function App() {
 
   return (
     <>
-      <NavigationBar/>
+        <NavigationBar/>
       { userId && 
+      <>
           <Outlet/>
-      }
+          </>
+      } 
       { !userId && 
           <LoginCreatePage/>
       }

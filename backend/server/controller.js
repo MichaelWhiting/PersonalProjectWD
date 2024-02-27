@@ -11,11 +11,13 @@ const handlerFunctions = {
     },
 
     getScoresForGame: async (req, res) => {
+        
         const { gameName } = req.params;
         const scores = await Score.findAll({
             where: {
-                gameName: gameName
-            }
+                gameName: gameName,
+            },
+            limit: 10
         });
 
         res.send({
@@ -25,6 +27,7 @@ const handlerFunctions = {
     },
 
     getUserFromScore: async (req, res) => {
+        console.log(req.session)
         const { userId } = req.params;
 
         const user = await User.findOne({
@@ -95,12 +98,13 @@ const handlerFunctions = {
 
         // if it made it past those 2 if statements, it means that the credentials are correct
         req.session.userId = user.userId;
-
+        console.log(req.session)
         res.send({
             message: "Successfully set the sessions userId",
             success: true,
             userId: req.session.userId
         })
+        return
     },
 
     logoutUser: async (req, res) => {

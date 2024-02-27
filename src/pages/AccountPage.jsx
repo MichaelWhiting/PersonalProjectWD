@@ -6,15 +6,21 @@ import axios from "axios";
 // Components
 import AccountEditCell from "../components/AccountEditCell.jsx";
 import AccountScoresCell from "../components/AccountScoresCell.jsx";
+import { useNavigate } from "react-router-dom";
 
 function AccountPage() {
     const userId = useSelector(state => state.userId); // setting this to 0 for now
     const [user, setUser] = useState({});
     const dispatch = useDispatch();
+    const navigate = useNavigate()
 
     const getUser = async () => {
-        const { data } = await axios.get(`/getUser/${0}`); // 0 should be userId
-        setUser(data.user);
+        if (userId) {
+            const { data } = await axios.get(`/getUser/${userId}`); // 0 should be userId
+            setUser(data.user);
+        } else {
+            navigate("/logincreate/login")
+        }
     }
 
     useEffect(() => {

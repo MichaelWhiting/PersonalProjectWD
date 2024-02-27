@@ -21,16 +21,22 @@ class HangmanGame {
                 if(!returnStr.includes("_")) {
                     this.saveGame();
                 }
+
                 return returnStr;
             } else {
-               return wordStatus;
+                return wordStatus;
             }
         }
-        this.saveGame = (time) => {
-            const score = (this.word.length - currentGuess) * 100 / time
-            console.log("score for this one is: ", score)
-            return score;
-        } 
+    }
+
+    // checkGuess(letter, wordStatus) {
+        
+    // }
+
+    saveGame(time) {
+        const score = (this.word.length - this.currentGuess) * 100 / time
+        console.log("score for this one is: ", score)
+        return score;
     }
 }
 
