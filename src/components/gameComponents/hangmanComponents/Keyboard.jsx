@@ -30,6 +30,7 @@ function Keyboard(props) {
     return (
         <Container style={{ width: "80%", textAlign: "center" }}>
             {letterKeys}
+            
         </Container>
     );
 }

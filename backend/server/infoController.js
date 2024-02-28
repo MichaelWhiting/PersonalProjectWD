@@ -1,6 +1,6 @@
 import { User, Score, Game } from "../database/model.js";
 
-const handlerFunctions = {
+const infoHandler = {
     // User Handler Functions
     sessionCheck: async (req, res) => {
         if (req.session.userId) { // if the user is logged in, this sets the redux store userId var to be the same as the session
@@ -23,7 +23,7 @@ const handlerFunctions = {
         const { username, password } = req.body;
         const formattedUsername = username.toLowerCase(); // makes it lowercase so it doesn't matter how user enters it
 
-        const user = await User.findOne({ where: { username: formattedUsername }}); // finds the user object with that username
+        const user = await User.findOne({ where: { username: formattedUsername } }); // finds the user object with that username
 
         if (!user) { // if user === null, then it means there is no user that exists with that username
             res.send({
@@ -105,12 +105,34 @@ const handlerFunctions = {
     updateUsername: async (req, res) => {
         const { username } = req.body;
 
+        const userWithName = await User.findOne({
+            where: {
+                username: username
+            }
+        });
+
+        if (userWithName) { // checks if the username is already taken by someone else
+            res.send({
+                message: "Username taken",
+                success: false
+            });
+            return;
+        }
+
+        if (username === "") { // makes sure username isn't empty
+            res.send({
+                message: "Username cannot be blank",
+                success: false
+            });
+            return;
+        }
+
         const user = await User.update( // finds the user with logged in userId and updates their username.
             { username },
             { where: {
                 userId: req.session.userId // change this ti the req.session one later
-            }}
-        );
+            }
+        });
 
         res.send({ // sends back the newly updated user object.
             message: "Updated username",
@@ -125,7 +147,7 @@ const handlerFunctions = {
         if (+userId === req.session.userId) { // means the user is trying to delete their own account
             const userToDestroy = await User.findByPk(userId);
             await userToDestroy.destroy();
-    
+
             res.send({
                 message: "Destroyed user",
                 success: true
@@ -212,4 +234,4 @@ const handlerFunctions = {
     }
 }
 
-export default handlerFunctions;
+export default infoHandler;

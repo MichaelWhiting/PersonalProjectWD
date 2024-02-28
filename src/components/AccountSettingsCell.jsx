@@ -15,10 +15,11 @@ function AccountSettingsCell() {
         e.preventDefault();
         const { data } = await axios.put("/updateUsername", { username });
         
+        console.log(data.message);
+
         if (data.success) {
-            console.log(data.message);
+            setUsername("");
         }
-        setUsername("");
     }
 
     const deleteAccount = async (e) => {

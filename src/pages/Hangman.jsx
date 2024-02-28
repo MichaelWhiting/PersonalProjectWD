@@ -1,6 +1,8 @@
-import HangmanGame from "../gameLogic/wordle/hangmanModel.js"; // logic for the game
+import HangmanGame from "../gameLogic/hangmanModel.js"; // logic for the game
 import { Container, Button } from "react-bootstrap";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 // Components
 import WordSpaces from "../components/gameComponents/hangmanComponents/WordSpaces.jsx";
@@ -18,24 +20,40 @@ const words = [
 ];
 
 function Hangman() {
-    const [wordStatus, setWordStatus] = useState("_");
+    const userId = useSelector(state => state.userId);
     const [currentGame, setCurrentGame] = useState(new HangmanGame("_"));
-    const [key, setKey] = useState(false)
+    const [wordStatus, setWordStatus] = useState("_");
     const [gameOver, setGameOver] = useState(false);
+    const [key, setKey] = useState(false)
 
     const updateWordStatus = (newStatus) => setWordStatus(newStatus);
 
     useEffect(() => {
-        const word = words[Math.floor(Math.random() * words.length - 1)]
+        const word = words[Math.floor(Math.random() * words.length - 1)];
         const initialStatus = word.split("").map((_) => "_").join("");
-        setWordStatus(initialStatus)
-        setCurrentGame(new HangmanGame(word))
-        console.log(word)
-    }, [key])
+
+        setWordStatus(initialStatus);
+        setCurrentGame(new HangmanGame(word));
+        console.log(word);
+    }, [key]);
+
+    const saveScore = async () => {
+        if (userId) { // makes sure there is a user to save it to before continuing.
+            console.log("user:", userId, "won the game!", "Saving score now...");
+            console.log("Score is:", currentGame.getScore());
+            const scoreObj = { gameName: "Hangman", score: currentGame.getScore(), userId };
+            const res = await axios.post("/saveScore", scoreObj);
+
+            if (res.data.success) {
+                console.log("Saved the score!");
+            }
+        }
+    }
 
     useEffect(() => { // whenever the wordStatus changes, it checks to see if the player has guessed the word and see 
         if (!wordStatus.includes("_")) {                                                        // if to end the game
             setGameOver(true);
+            saveScore();
         }
     }, [wordStatus])
 
@@ -56,14 +74,14 @@ function Hangman() {
             </Button>
         </Container>
     ) : (
-        <Container className="mt-5">
+        <Container className="mt-5 fade-in">
             <h1 style={{textAlign: "center"}}>You win!</h1>
             <h3 style={{textAlign: "center"}}>Word: {wordStatus}</h3>
             <Button 
                 style={{display: "block", margin: "auto"}}
                 variant="outline-success"
                 onClick={() => {
-                    setKey(!key)
+                    setKey(!key);
                     setGameOver(false);
                 }}
                 >

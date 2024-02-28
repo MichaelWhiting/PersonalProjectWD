@@ -5,6 +5,8 @@ import axios from "axios";
 // Components
 import LeaderboardCard from "../components/LeaderboardCard";
 
+const animStr = (i) => `fadeInAnimation ${1000}ms ease-out ${500 * (i + 1)}ms forwards`;
+
 function Leaderboards() {
     const [games, setGames] = useState([]);
 
@@ -17,8 +19,8 @@ function Leaderboards() {
         getGames();
     }, []);
 
-    const leaderboardCards = games.map((game) => {
-        return <LeaderboardCard key={game.gameName} game={game} />
+    const leaderboardCards = games.map((game, i) => {
+        return <LeaderboardCard key={game.gameName} game={game} style={{animation: animStr(i)}}/>
     });
     
     return (

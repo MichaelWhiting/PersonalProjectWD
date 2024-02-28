@@ -1,10 +1,11 @@
 
 class HangmanGame {
-    constructor(word, currentGuess = 0, maxGuesses = 5, setWordStatus) {
+    constructor(word, setWordStatus, currentGuess = 1, maxGuesses = 5, score = 0) {
         this.word = word;
+        this.setWordStatus = setWordStatus;
         this.currentGuess = currentGuess
         this.maxGuesses = maxGuesses;
-        this.setWordStatus = setWordStatus;
+        this.score = score;
         this.checkGuess = (letter, wordStatus) => {
             this.currentGuess += 1;
             if (this.word.includes(letter.toLowerCase())) {
@@ -19,7 +20,7 @@ class HangmanGame {
                 
                 const returnStr = status.join("");
                 if(!returnStr.includes("_")) {
-                    this.saveGame();
+                    this.getScore();
                 }
 
                 return returnStr;
@@ -29,14 +30,10 @@ class HangmanGame {
         }
     }
 
-    // checkGuess(letter, wordStatus) {
-        
-    // }
-
-    saveGame(time) {
-        const score = (this.word.length - this.currentGuess) * 100 / time
-        console.log("score for this one is: ", score)
-        return score;
+    getScore(time = 1) {
+        const gameScore = Math.floor((10 - (this.currentGuess / 100)) / time);
+        this.score = gameScore;
+        return gameScore;
     }
 }
 

@@ -3,7 +3,8 @@ import session from "express-session";
 import express from "express";
 import morgan from "morgan";
 
-import handlerFunctions from "./controller.js";
+import infoHandler from "./infoController.js";
+import gameHandler from "./gamesController.js";
 
 // Create express instance
 const app = express();
@@ -22,23 +23,27 @@ app.use(
 
 // Routes
 // GET
-app.get("/leaderboards/games", handlerFunctions.getAllGames);
-app.get("/leaderboard/:gameName", handlerFunctions.getScoresForGame);
-app.get("/score/:userId", handlerFunctions.getUserFromScore);
-app.get("/scores/:userId", handlerFunctions.getScoresFromUser);
-app.get("/getUser/:userId", handlerFunctions.getUserFromId);
-app.get("/session-check", handlerFunctions.sessionCheck);
-app.get("/logout", handlerFunctions.logoutUser);
+app.get("/leaderboards/games", infoHandler.getAllGames);
+app.get("/leaderboard/:gameName", infoHandler.getScoresForGame);
+app.get("/score/:userId", infoHandler.getUserFromScore);
+app.get("/scores/:userId", infoHandler.getScoresFromUser);
+app.get("/getUser/:userId", infoHandler.getUserFromId);
+app.get("/session-check", infoHandler.sessionCheck);
+app.get("/logout", infoHandler.logoutUser);
 
 // POST
-app.post("/createUser", handlerFunctions.createUser);
-app.post("/login", handlerFunctions.loginUser);
+// Info POSTS
+app.post("/createUser", infoHandler.createUser);
+app.post("/login", infoHandler.loginUser);
+
+// Game POSTS
+app.post("/saveScore", gameHandler.saveScore);
 
 // PUT
-app.put("/updateUsername", handlerFunctions.updateUsername);
+app.put("/updateUsername", infoHandler.updateUsername);
 
 // DELETE
-app.delete("/deleteUser/:userId", handlerFunctions.deleteUser)
+app.delete("/deleteUser/:userId", infoHandler.deleteUser)
 
 // Server Startup
 const port = 9989;
