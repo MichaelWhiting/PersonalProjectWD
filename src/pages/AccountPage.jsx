@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 // Components
-import AccountEditCell from "../components/AccountEditCell.jsx";
+import AccountSettingsCell from "../components/AccountSettingsCell.jsx";
 import AccountScoresCell from "../components/AccountScoresCell.jsx";
 import { useNavigate } from "react-router-dom";
 
@@ -45,7 +45,7 @@ function AccountPage() {
                 <h2 style={{ color: "#198754" }}>Hello, {user.username}! Here is your account info:</h2>
             </Container>
             <Container className="d-flex justify-content-center align-items-center" style={{height: 500}}>
-                <AccountEditCell />
+                <AccountSettingsCell/>
                 <AccountScoresCell username={user.username}/>
             </Container>
             <Button variant="success" onClick={logout}>Logout</Button>

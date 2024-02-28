@@ -69,9 +69,9 @@ function LoginPage() {
                     </Button>
                 </Form.Group>
             </Form>
-            <Button variant="outline-success" style={{margin: 10}}>
-                <Link className="nav-link" to="/authentication/createAccount">Create Account Here</Link>
-            </Button>
+            <Link className="nav-link" to="/authentication/createAccount">
+                <Button variant="outline-success" style={{margin: 10}}>Create Account Here</Button>
+            </Link>
         </Container>
     )
 }

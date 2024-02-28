@@ -38,6 +38,7 @@ app.post("/login", handlerFunctions.loginUser);
 app.put("/updateUsername", handlerFunctions.updateUsername);
 
 // DELETE
+app.delete("/deleteUser/:userId", handlerFunctions.deleteUser)
 
 // Server Startup
 const port = 9989;

@@ -1,10 +1,13 @@
 import { Button, Container, Form } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import { useState } from "react";
 import axios from "axios";
 
-function AccountEditCell() {
+function AccountSettingsCell() {
+    const userId = useSelector(state => state.userId);
     const [username, setUsername] = useState("");
     const [showSure, setShowSure] = useState(false);
+
     const changeUsername = async (e) => {
         e.preventDefault();
         const { data } = await axios.put("/updateUsername", { username });
@@ -17,9 +20,12 @@ function AccountEditCell() {
 
     const deleteAccount = async (e) => {
         e.preventDefault();
-        // delete user
 
-        // logout
+        if (userId) { // means someone is logged in
+            const res = await axios.delete(`/deleteUser/${userId}`);
+            console.log(res.message);
+        }
+        setUsername(""); // this is just to refresh the page, and take them back to login
     }
 
     return (
@@ -61,4 +67,4 @@ function AccountEditCell() {
     )
 }
 
-export default AccountEditCell;
+export default AccountSettingsCell;

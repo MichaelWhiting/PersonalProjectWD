@@ -110,8 +110,27 @@ const handlerFunctions = {
             success: true,
             user
         });
-    },     
+    },
+
+    deleteUser: async (req, res) => {
+        const { userId } = req.params;
+
+        if (+userId === req.session.userId) { // means the user is trying to delete their own account
+            const userToDestroy = await User.findByPk(userId);
+            await userToDestroy.destroy();
     
+            res.send({
+                message: "Destroyed user",
+                success: true
+            });
+        } else { // means that someone is attempting to delete an account that isn't the same as theirs.
+            res.send({
+                message: "Didn't destroy user, userId isn't same as req.session.userId",
+                success: false
+            });
+        }
+    },
+
     getUserFromId: async (req, res) => {
         const { userId } = req.params;
 

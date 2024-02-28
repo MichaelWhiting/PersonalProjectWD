@@ -1,13 +1,17 @@
 import { Button, Container, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
 function CreateAccountPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
-    const createAccount = async () => await axios.post("/createUser", { username, password });
+    const createAccount = async () => {
+        await axios.post("/createUser", { username, password });
+        navigate("/authentication/login");
+    };
 
     return (
         <Container
@@ -39,15 +43,15 @@ function CreateAccountPage() {
                         type="submit" 
                         className="mx-auto" 
                         style={{width: "40%", overflowWrap: "unset"}}
-                        onClick={() => createAccount()}
+                        onClick={() => {createAccount()}}
                         >
                         Create
                     </Button>
                 </Form.Group>
             </Form>
-            <Button variant="outline-success" style={{margin: 10}}>
-                <Link className="nav-link" to="/authentication/login">Login Here</Link>
-            </Button>
+            <Link className="nav-link" to="/authentication/login">
+                <Button variant="outline-success" style={{margin: 10}}>Login Here</Button>
+            </Link>
         </Container>
     )
 }
