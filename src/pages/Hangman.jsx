@@ -7,7 +7,6 @@ import axios from "axios";
 // Components
 import WordSpaces from "../components/gameComponents/hangmanComponents/WordSpaces.jsx";
 import Keyboard from "../components/gameComponents/hangmanComponents/Keyboard.jsx";
-import Timer from "../components/gameComponents/hangmanComponents/Timer.jsx";
 
 const words = [
     "mystery", "journey", "wizard", "forest", "castle", "dragon", "puzzle", "secret",
@@ -25,11 +24,14 @@ function Hangman() {
     const [wordStatus, setWordStatus] = useState("_");
     const [gameOver, setGameOver] = useState(false);
     const [key, setKey] = useState(false)
+    const [time, setTime] = useState(0);
 
     const updateWordStatus = (newStatus) => setWordStatus(newStatus);
+    const updateTime = (newTime) => setTime(newTime);
 
     useEffect(() => {
-        const word = words[Math.floor(Math.random() * words.length - 1)];
+        const randomNum = Math.floor(Math.random() * words.length);
+        const word = words[randomNum];// gotta find out why this sometime is undefined
         const initialStatus = word.split("").map((_) => "_").join("");
 
         setWordStatus(initialStatus);
@@ -39,9 +41,8 @@ function Hangman() {
 
     const saveScore = async () => {
         if (userId) { // makes sure there is a user to save it to before continuing.
-            console.log("user:", userId, "won the game!", "Saving score now...");
-            console.log("Score is:", currentGame.getScore());
-            const scoreObj = { gameName: "Hangman", score: currentGame.getScore(), userId };
+            console.log("The time passed up is :", time);
+            const scoreObj = { gameName: "Hangman", score: currentGame.getScore(time), userId };
             const res = await axios.post("/saveScore", scoreObj);
 
             if (res.data.success) {
@@ -63,8 +64,10 @@ function Hangman() {
             <Keyboard 
                 wordStatus={wordStatus} 
                 checkGuess={currentGame.checkGuess} 
-                updateWordStatus={updateWordStatus}/>
-            <Timer/>
+                updateWordStatus={updateWordStatus}
+                updateTime={updateTime}
+                />
+            {/* <Timer/> */}
             <Button 
                 style={{display: "block", margin: "auto"}}
                 variant="outline-success"

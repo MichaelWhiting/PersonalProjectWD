@@ -1,8 +1,11 @@
 import { Container } from "react-bootstrap";
+import Timer from "./Timer";
+import { useState } from "react";
 
 function Keyboard(props) {
     const alphabet = "abcdefghijklmnopqrstuvwxyz";
-    const { checkGuess, updateWordStatus, wordStatus } = props;
+    const { checkGuess, updateWordStatus, wordStatus, updateTime } = props;
+    const [getTime, setGetTimer] = useState(false);
 
     const letterKeys = alphabet.split("").map((letter, i) => {
         return (
@@ -13,12 +16,16 @@ function Keyboard(props) {
                     background: "primary",
                     display: "inline",
                     height: 50,
-                    width: "6%",
+                    width: "8%",
                     margin: "1%",
                 }}
                 onClick={function(e) { 
                     e.currentTarget.disabled = true
                     const newWordStatus = checkGuess(letter, wordStatus);
+                    if (!newWordStatus.includes("_")) {
+                        setGetTimer(!getTime);
+                        console.log("getTime: ", getTime);
+                    }
                     updateWordStatus(newWordStatus);
                 }}
             >
@@ -28,9 +35,9 @@ function Keyboard(props) {
     });
 
     return (
-        <Container style={{ width: "80%", textAlign: "center" }}>
+        <Container style={{ width: "70%", textAlign: "center" }}>
             {letterKeys}
-            
+            <Timer getTime={getTime} updateTime={updateTime}/>
         </Container>
     );
 }

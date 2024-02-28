@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 
-function Timer() {
+function Timer(props) {
+    const { getTime, updateTime } = props; 
     const [time, setTime] = useState(0);
 
     useEffect(() => {
+        updateTime(time);
         const interval = setInterval(() => {
             setTime(time + 1)
         }, 1000);

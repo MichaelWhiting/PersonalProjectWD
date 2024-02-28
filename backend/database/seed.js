@@ -13,7 +13,7 @@ const game2 = await Game.create({ gameName: "MazeGame", scoreIds: [3]})
 
 // Create some scores:
 
-for (let i = 1; i < 20; i++) {
+for (let i = 1; i < 5; i++) {
     await Score.create({ gameName: "Hangman", score: Math.floor(Math.random() * 20), userId: 1});
     await Score.create({ gameName: "MazeGame", score: Math.floor(Math.random() * 20), userId: 1});
     await Score.create({ gameName: "Hangman", score: Math.floor(Math.random() * 20), userId: 2});
