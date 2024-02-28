@@ -8,6 +8,12 @@
     animation-fill-mode: forwards;
 }
 
+.fade-in-slow {
+    animation: fadeInAnimation ease 0.75s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
 @keyframes fadeInAnimation {
     0% {
         opacity: 0;

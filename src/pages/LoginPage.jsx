@@ -5,6 +5,8 @@ import { useState } from "react";
 import axios from "axios";
 
 function LoginPage() {
+    const [showError, setShowError] = useState(false);
+    const [errorMsg, setErrorMsg] = useState(false);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
@@ -17,6 +19,7 @@ function LoginPage() {
         console.log(res.data.message);
 
         if (res.data.success) {
+            setShowError(false);
             dispatch({
                 type: "USER_AUTH",
                 payload: res.data.userId
@@ -26,8 +29,10 @@ function LoginPage() {
             setPassword("");
         
             navigate("/leaderboards");
+        } else { // if did not login, change set
+            setShowError(true);
+            setErrorMsg(res.data.message);
         }
-        
     }
 
     return (
@@ -68,6 +73,9 @@ function LoginPage() {
                     Login
                     </Button>
                 </Form.Group>
+                { showError && 
+                    <h5 className="mt-5 fade-in-slow" style={{textAlign: "center", color: "red"}}>{errorMsg}</h5>
+                }
             </Form>
             <Link className="nav-link" to="/authentication/createAccount">
                 <Button variant="outline-success" style={{margin: 10}}>Create Account Here</Button>

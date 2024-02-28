@@ -1,5 +1,6 @@
 import { Button, Container, Form } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import axios from "axios";
 
@@ -7,6 +8,8 @@ function AccountSettingsCell() {
     const userId = useSelector(state => state.userId);
     const [username, setUsername] = useState("");
     const [showSure, setShowSure] = useState(false);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const changeUsername = async (e) => {
         e.preventDefault();
@@ -24,8 +27,11 @@ function AccountSettingsCell() {
         if (userId) { // means someone is logged in
             const res = await axios.delete(`/deleteUser/${userId}`);
             console.log(res.message);
+
+            dispatch({ // this should change userId to null and take them back to login screen
+                type: "LOGOUT"
+            });
         }
-        setUsername(""); // this is just to refresh the page, and take them back to login
     }
 
     return (

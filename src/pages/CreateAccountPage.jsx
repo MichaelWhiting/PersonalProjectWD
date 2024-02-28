@@ -4,13 +4,23 @@ import { useState } from "react";
 import axios from "axios";
 
 function CreateAccountPage() {
+    const [showError, setShowError] = useState(false);
+    const [errorMsg, setErrorMsg] = useState(false);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
-    const createAccount = async () => {
-        await axios.post("/createUser", { username, password });
-        navigate("/authentication/login");
+    const createAccount = async (e) => {
+        e.preventDefault();
+        const res = await axios.post("/createUser", { username, password });
+
+        if (res.data.success) {
+            setShowError(false);
+            navigate("/authentication/login");
+        } else {
+            setShowError(true);
+            setErrorMsg(res.data.message);
+        }
     };
 
     return (
@@ -18,7 +28,11 @@ function CreateAccountPage() {
             className="d-flex flex-column justify-content-center align-items-center mt-5 fade-in"
             style={{  width: "50%", }}
             >
-            <Form className="my-auto border border-success rounded p-5" style={{width: "70%", background: "#FAF9F6"}}>
+            <Form 
+                className="my-auto border border-success rounded p-5" 
+                style={{width: "70%", background: "#FAF9F6"}}
+                onSubmit={createAccount}
+                >
                 <Form.Group>
                     <h2>Create Account</h2>
                     <Form.FloatingLabel label="username" style={{ marginTop: 10, marginBottom: 10 }}>
@@ -43,11 +57,13 @@ function CreateAccountPage() {
                         type="submit" 
                         className="mx-auto" 
                         style={{width: "40%", overflowWrap: "unset"}}
-                        onClick={() => {createAccount()}}
                         >
                         Create
                     </Button>
                 </Form.Group>
+                { showError && 
+                    <h5 className="mt-5 fade-in-slow" style={{textAlign: "center", color: "red"}}>{errorMsg}</h5>
+                }
             </Form>
             <Link className="nav-link" to="/authentication/login">
                 <Button variant="outline-success" style={{margin: 10}}>Login Here</Button>

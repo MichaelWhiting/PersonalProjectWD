@@ -27,7 +27,7 @@ const handlerFunctions = {
 
         if (!user) { // if user === null, then it means there is no user that exists with that username
             res.send({
-                message: "User with username does NOT exist",
+                message: "Account with username does not exist",
                 success: false
             });
             return;
@@ -67,7 +67,10 @@ const handlerFunctions = {
         const { username, password } = req.body;
 
         if (!username || !password) { // makes sure both of the text fields have a value
-            console.log("One of the fields are empty");
+            res.send({
+                message: "One of the fields are empty",
+                success: false
+            });
             return;
         }
 
@@ -78,7 +81,10 @@ const handlerFunctions = {
         }));
 
         if (userExists !== null) { // will return if it does find a user with that username already
-            console.log("User already exists!")
+            res.send({
+                message: "User with username already exists",
+                success: false
+            });
             return;
         }
 
@@ -91,6 +97,7 @@ const handlerFunctions = {
 
         res.send({ // sends back the newly created user object.
             message: "Created new user",
+            success: true,
             newUser
         });
     },
