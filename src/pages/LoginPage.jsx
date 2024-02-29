@@ -32,6 +32,9 @@ function LoginPage() {
         } else { // if did not login, change set
             setShowError(true);
             setErrorMsg(res.data.message);
+            setInterval(() => {
+                setShowError(false);
+            }, 10000);
         }
     }
 

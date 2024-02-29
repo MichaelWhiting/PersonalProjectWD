@@ -38,7 +38,7 @@ function AccountSettingsCell() {
     return (
         <Container 
             className=" border border-success rounded p-5 mx-3"
-            style={{height: "90%"}}
+            style={{height: "90%", background: "#FFFFFF"}}
             >
             <Form onSubmit={changeUsername}>
                 <h4>Edit Username</h4>

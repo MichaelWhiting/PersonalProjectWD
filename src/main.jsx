@@ -6,6 +6,7 @@ import React from 'react';
 // Components
 import App from './App.jsx';
 import Hangman from "./pages/Hangman.jsx";
+import Categories from "./pages/Categories.jsx";
 import Leaderboards from "./pages/Leaderboards.jsx";
 import AccountPage from "./pages/AccountPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
@@ -20,7 +21,8 @@ import store from "./reducers/store.js";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App/>}>
-      <Route path='game1' element={<Hangman/>} />
+      <Route path='hangman' element={<Hangman/>} />
+      <Route path="categories" element={<Categories/>}/>
       <Route path='leaderboards' element={<Leaderboards/>} />
       <Route path='account' element={<AccountPage/>} />
       <Route path='authentication' element={<AuthenticationPage/>}>
