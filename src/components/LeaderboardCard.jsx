@@ -1,4 +1,6 @@
-import { Card, Container } from "react-bootstrap";
+import { Card, Container} from "react-bootstrap";
+import { Link } from "react-router-dom";
+import * as Icon from "react-bootstrap-icons";
 // import { requestScores } from "../reducers/leaderboardReducer";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
@@ -36,7 +38,12 @@ function LeaderboardCard(props) {
     return (
         <Card className="mx-5 mt-5 border border-success" style={{ width: "20%", height: 400, background: "#FAF9F6"}}>
             <Card.Header>
-                <Card.Title>{gameName}</Card.Title>
+                <Card.Title>
+                    <Link className="nav-link" to={"/" + gameName.toLowerCase()}>
+                        <Icon.Controller style={{width: 30, height: 30, marginRight: 5}}/>
+                        {gameName}
+                    </Link>
+                </Card.Title>
             </Card.Header>
             <Card.Body className="overflow-scroll">
                 <ol>{scoreLabels}</ol>

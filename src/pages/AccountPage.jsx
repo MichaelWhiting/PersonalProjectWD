@@ -44,7 +44,7 @@ function AccountPage() {
             <Container className="d-flex vh-80 justify-content-center">
                 <h2 style={{ color: "#198754" }}>Hello, {user.username}! Here is your account info:</h2>
             </Container>
-            <Container className="d-flex justify-content-center align-items-center" style={{height: 500}}>
+            <Container className="d-flex justify-content-center align-items-center fade-in" style={{height: 500}}>
                 <AccountSettingsCell/>
                 <AccountScoresCell username={user.username}/>
             </Container>

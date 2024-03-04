@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";  
 
 // import animStr from "../animations.js";
-const animStr = (i) => `fadeInAnimation ${1000}ms ease-out ${100 * (i + 1)}ms forwards`;
+// const animStr = (i) => `fadeInAnimation ${1000}ms ease-out ${100 * (i + 1)}ms forwards`;
 
 function AccountScoresCell(props) {
     const userId = useSelector(state => state.userId);
@@ -37,8 +37,8 @@ function AccountScoresCell(props) {
         )}
     );
 
-    return (
-        <Container style={{height: "90%", background: "#FFFFFF", animation: animStr(1)}} className="border border-success rounded p-5 mx-3 overflow-scroll">
+    return (//animation: animStr(1)
+        <Container style={{height: "90%", background: "#FFFFFF"}} className="border border-success rounded p-5 mx-3 overflow-scroll">
             <h3>{username}'s Scores:</h3>
             {scoreCards}    
         </Container>

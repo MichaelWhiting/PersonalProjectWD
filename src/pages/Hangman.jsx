@@ -1,12 +1,13 @@
 import HangmanGame from "../gameLogic/hangmanModel.js"; // logic for the game
 import { Container, Button } from "react-bootstrap";
+import * as Icon from "react-bootstrap-icons";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-
 // Components
 import WordSpaces from "../components/gameComponents/hangmanComponents/WordSpaces.jsx";
 import Keyboard from "../components/gameComponents/hangmanComponents/Keyboard.jsx";
+import Number from "../components/Number.jsx";
 
 const words = [
     "mystery", "journey", "wizard", "forest", "castle", "dragon", "puzzle", "secret",
@@ -75,11 +76,21 @@ function Hangman() {
                 >
                 Restart Game
             </Button>
+            <label 
+                style={{ fontWeight: 100, fontSize: 20, color: "#198754", textAlign: "center", width: "100%" }}
+                className="my-3"
+                >
+                <Icon.InfoCircle className="mx-1"/>
+                Scores will only save if you are logged in.
+            </label>
         </Container>
     ) : (
         <Container className="mt-5 fade-in">
             <h1 style={{textAlign: "center"}}>You win!</h1>
             <h3 style={{textAlign: "center"}}>Word: {wordStatus}</h3>
+            <label style={{fontWeight: 100, fontSize: 50, color: "#198754", textAlign: "center", width: "100%"}}>Score: 
+                <Number n={currentGame.getScore(time)}/>
+            </label>
             <Button 
                 style={{display: "block", margin: "auto"}}
                 variant="outline-success"

@@ -31,8 +31,9 @@ class HangmanGame {
     }
 
     getScore(time = 1) {
-        const gameScore = Math.floor((10 - (this.currentGuess / 100)) / time);
+        const gameScore = Math.floor((1000 / time));
         this.score = gameScore;
+        console.log("Score is:", gameScore);
         return gameScore;
     }
 }

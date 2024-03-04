@@ -16,12 +16,22 @@ class CategoriesGame {
 
   checkGuess(input) {
     const formattedInput = input.toLowerCase().split("").filter((letter) => letter !== " ").join("");
+    return fruits.includes(formattedInput);
+  }
 
-    if (fruits.includes(formattedInput)) {
-      console.log(formattedInput, "is in fruits!");
-    } else {
-      console.log(formattedInput, "is NOT in fruits!");
-    }
+  getScore(guessedWords) {
+    const set = new Set(guessedWords);
+    let score = 0;
+
+    set.forEach((word) => {
+      const formattedWord = word.toLowerCase();
+
+      if (fruits.includes(formattedWord)) {
+        score += (word.length * 10) + 100;
+      }
+    });
+
+    return score;
   }
 }
 

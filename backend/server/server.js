@@ -35,7 +35,6 @@ app.get("/logout", infoHandler.logoutUser);
 // Info POSTS
 app.post("/createUser", infoHandler.createUser);
 app.post("/login", infoHandler.loginUser);
-
 // Game POSTS
 app.post("/saveScore", gameHandler.saveScore);
 

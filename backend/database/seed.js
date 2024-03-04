@@ -9,16 +9,16 @@ const user2 = await User.create({ username: "michael456", password: "test" });
 
 // Create a game:
 const game1 = await Game.create({ gameName: "Hangman", scoreIds: [1,2]})
-const game2 = await Game.create({ gameName: "MazeGame", scoreIds: [3]})
+const game2 = await Game.create({ gameName: "Categories", scoreIds: [3]})
 
 // Create some scores:
 
-for (let i = 1; i < 5; i++) {
-    await Score.create({ gameName: "Hangman", score: Math.floor(Math.random() * 20), userId: 1});
-    await Score.create({ gameName: "MazeGame", score: Math.floor(Math.random() * 20), userId: 1});
-    await Score.create({ gameName: "Hangman", score: Math.floor(Math.random() * 20), userId: 2});
-    await Score.create({ gameName: "MazeGame", score: Math.floor(Math.random() * 20), userId: 2});
-}
+// for (let i = 1; i < 5; i++) {
+//     await Score.create({ gameName: "Hangman", score: Math.floor(Math.random() * 20), userId: 1});
+//     await Score.create({ gameName: "Categories", score: Math.floor(Math.random() * 20), userId: 1});
+//     await Score.create({ gameName: "Hangman", score: Math.floor(Math.random() * 20), userId: 2});
+//     await Score.create({ gameName: "Categories", score: Math.floor(Math.random() * 20), userId: 2});
+// }
 
 await db.close()
 console.log("Finished seeding the database!")

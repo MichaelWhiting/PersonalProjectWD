@@ -6,7 +6,8 @@ const gameHandler = {
         const { gameName, score, userId } = req.body;
 
         const newScore = await Score.create({ gameName, score, userId });
-
+        console.log("Score: ", newScore);
+        
         if (newScore) {
             res.send({
                 message: "Created new score",

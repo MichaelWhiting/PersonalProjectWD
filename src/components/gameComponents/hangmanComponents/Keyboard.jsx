@@ -5,7 +5,7 @@ import { useState } from "react";
 function Keyboard(props) {
     const alphabet = "abcdefghijklmnopqrstuvwxyz";
     const { checkGuess, updateWordStatus, wordStatus, updateTime } = props;
-    const [getTime, setGetTimer] = useState(false);
+    const [getTime, setGetTime] = useState(false);
 
     const letterKeys = alphabet.split("").map((letter, i) => {
         return (
@@ -23,7 +23,7 @@ function Keyboard(props) {
                     e.currentTarget.disabled = true
                     const newWordStatus = checkGuess(letter, wordStatus);
                     if (!newWordStatus.includes("_")) {
-                        setGetTimer(!getTime);
+                        setGetTime(!getTime);
                         console.log("getTime: ", getTime);
                     }
                     updateWordStatus(newWordStatus);
