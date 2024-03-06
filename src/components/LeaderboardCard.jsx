@@ -25,18 +25,60 @@ function LeaderboardCard(props) {
         setScoresAndUsers(scoresObjArr);
     }
 
-    const scoreLabels = scoresAndUsers.map((item, i) => {
+    const scoreLabels = scoresAndUsers.slice(3).map((item, i) => {
         return (
-            <label key={i} style={{width: "100%"}}>{item.user.username}: {item.score.score}</label>
+            <div 
+                key={i} 
+                className="rounded border border-success my-2"
+                style={{background: "#FFFFFF"}}
+                >
+                <label style={{width: "15%%", padding: 10}}>
+                    {i + 4}.
+                </label>
+                <label style={{width: "70%", padding: 10}}>
+                    {item.user.username}
+                </label>
+                <label style={{ width: "15%", textAlign: "right"}}>
+                    {item.score.score}
+                </label>
+            </div>
         )
-    })
+    });
+
+    const podium = scoresAndUsers.splice(0,3).map((item, i) => {
+        if (i === 0) {
+            return (
+                <div key={i} pos={2} className="first rise-up" style={{background: "gold", width: "30%", height: 100, overflow: "hidden"}}>
+                    <label className="my-1" style={{textAlign: "center", width: "100%"}}>{item.user.username}</label>
+                    <label style={{textAlign: "center", width: "100%"}}>{item.score.score}</label>
+                </div>
+            )
+        } else if (i === 1) {
+            return (
+                <div key={i} pos={1} className="second rise-up" style={{background: "silver", width: "30%", height: 75, overflow: "hidden"}}>
+                    <label className="my-1" style={{textAlign: "center", width: "100%"}}>{item.user.username}</label>
+                    <label style={{textAlign: "center", width: "100%"}}>{item.score.score}</label>
+                </div>
+            )
+        } else {
+            return (
+                <div key={i} pos={3} className="third rise-up" style={{background: "burlywood", width: "30%", height: 50, overflow: "hidden"}}>
+                    <label style={{textAlign: "center", width: "100%"}}>{item.user.username}</label>
+                    <label className="mb-1" style={{textAlign: "center", width: "100%"}}>{item.score.score}</label>
+                </div>
+            )
+        }
+    }).sort((a, b) => {
+        console.log(a.props.pos, b.props.pos)
+        return a.props.pos - b.props.pos
+    });
     
     useEffect(() => {
         getScoresAndUsers();
     }, []);
 
     return (
-        <Card className="mx-5 mt-5 border border-success" style={{ width: "25%", height: 400, background: "#FAF9F6"}}>
+        <Card className="mx-5 my-4 border border-success" style={{ width: 400, height: 400, background: "#FAF9F6"}}>
             <Card.Header>
                 <Card.Title>
                     <Link className="nav-link" to={"/" + gameName.toLowerCase()}>
@@ -47,18 +89,10 @@ function LeaderboardCard(props) {
             </Card.Header>
             <Card.Body className="overflow-scroll">
                 <Container 
-                    className="d-flex justify-content-center align-items-end mt-1 col-md-12 fade-in"
+                    className="d-flex justify-content-center align-items-end my-3 mx-1 fade-in"
                     style={{height: 100}}
                     >
-                    <div className="second rise-up" style={{background: "silver", width: "30%", height: 50}}>
-                        <label className="mt-1" style={{textAlign: "center", width: "100%"}}>2nd</label>
-                    </div>
-                    <div className="first rise-up" style={{background: "gold", width: "30%", height: 80}}>
-                        <label className="mt-1" style={{textAlign: "center", width: "100%"}}>1st</label>
-                    </div>
-                    <div className="third rise-up" style={{background: "burlywood", width: "30%", height: 30}}>
-                        <label className="mt-1" style={{textAlign: "center", width: "100%"}}>3rd</label>
-                    </div>
+                    {podium}
                 </Container>
                 {scoreLabels}
             </Card.Body>
@@ -67,28 +101,3 @@ function LeaderboardCard(props) {
 }
 
 export default LeaderboardCard;
-
-
-// const scoresObjArr = [];
-// const { data } = await axios.get(`/leaderboard/${gameName}`);
-// const scoresArr = data.scores.sort((a, b) => b.score - a.score);
-// const promises = [];
-
-// let scoreObj = {};
-
-// for (const score of scoresArr) {
-//     const res = axios.get(`/score/${score.userId}`);
-//     promises.push(res);
-//     console.log(":",score)
-//     scoreObj = { score: score.score }
-// }
-
-// Promise.all(promises).then((responses) => {
-//     for (const res of responses) {
-//         const user = res.data.user;
-//         console.log(scoreObj)
-//         scoresObjArr.push({ score, user });
-//     }
-
-//     setScoresAndUsers(scoresObjArr);
-// })

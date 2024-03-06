@@ -48,7 +48,7 @@ function GameOver(props) {
         // Make the key of the object a string`
 
         const question = `
-        Create a list of the top 100 most popular ${category}. Make all of the strings lowercase and remove any - and replace it with a space.
+        Create a list of the top 75 most popular ${category}. Make all of the strings lowercase and remove any - and replace it with a space. Keep spaces if they are already there.
         Do not include any explanations or backticks around the response, only provide a RFC8259 compliant JSON response following this format without deviation.
         Make 100% sure that every string item in the array is fully lowercased.
         {

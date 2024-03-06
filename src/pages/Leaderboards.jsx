@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Container, Row } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import axios from "axios";
 
 // Components
@@ -28,7 +28,9 @@ function Leaderboards() {
             <h1 style={{textAlign: "center", marginTop: 50}}>Leaderboards:</h1>
             <Container fluid className="d-flex justify-content-center mt-1 fade-in">
                 <Row>
-                {leaderboardCards}
+                    <Col>
+                        {leaderboardCards}
+                    </Col>
                 </Row>
             </Container>
         </>
