@@ -1,3 +1,4 @@
+import { Sequelize } from "sequelize";
 import { User, Score, Game } from "../database/model.js";
 
 const infoHandler = {
@@ -192,7 +193,8 @@ const infoHandler = {
             where: {
                 gameName: gameName,
             },
-            limit: 10
+            order: [['score', 'DESC']],
+            limit: 25,
         });
 
         res.send({

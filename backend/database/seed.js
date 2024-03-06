@@ -10,6 +10,8 @@ const user2 = await User.create({ username: "michael456", password: "test" });
 // Create a game:
 const game1 = await Game.create({ gameName: "Hangman", scoreIds: [1,2]})
 const game2 = await Game.create({ gameName: "Categories", scoreIds: [3]})
+const game3 = await Game.create({ gameName: "Game 3", scoreIds: [3]})
+const game4 = await Game.create({ gameName: "Game 4", scoreIds: [3]})
 
 // Create some scores:
 

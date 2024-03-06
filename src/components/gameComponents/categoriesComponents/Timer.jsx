@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 function Timer(props) {
     const { updateGameOver } = props
-    const [time, setTime] = useState(10); // this is how long the game is
+    const [time, setTime] = useState(30); // this is how long the game is
 
     useEffect(() => {
         const interval = setInterval(() => {

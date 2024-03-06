@@ -11,10 +11,11 @@ import Input from "../components/gameComponents/categoriesComponents/Input.jsx";
 import Timer from "../components/gameComponents/categoriesComponents/Timer.jsx";
 import GameOver from "../components/gameComponents/categoriesComponents/GameOver.jsx";
 
+
 function Categories() {
     const [currentGame, setCurrentGame] = useState(new CategoriesGame());
     const [guessedWords, setGuessedWords] = useState([]);
-    const [gameOver, setGameOver] = useState(false);
+    const [gameOver, setGameOver] = useState(true);
 
     const userId = useSelector(state => state.userId);
 
@@ -38,8 +39,10 @@ function Categories() {
     };
 
 
-    const startNewGame = () => {
-        setCurrentGame(new CategoriesGame());
+    const startNewGame = (gameInfo) => {
+        console.log("staring game", gameInfo)
+        setCurrentGame(new CategoriesGame(gameInfo));
+        console.log("after:", currentGame.gameInfo)
         setGuessedWords([]);
         setGameOver(false);
     }
@@ -48,7 +51,7 @@ function Categories() {
         <>
             { !gameOver && 
                 <Container className="mt-4 rounded border border-success fade-in" style={{background: "#FAF9F6"}}>
-                    <h1 style={{textAlign: "center"}}>Category is: {currentGame.category}</h1>
+                    <h1 style={{textAlign: "center"}}>Category is: {Object.keys(currentGame.gameInfo)[0]}</h1>
                     <Timer updateGameOver={updateGameOver}/>
                     { guessedWords.length !== 0 &&
                     <GuessedWords guessedWords={guessedWords}/>

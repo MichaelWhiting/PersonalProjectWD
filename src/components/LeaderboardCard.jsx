@@ -27,7 +27,7 @@ function LeaderboardCard(props) {
 
     const scoreLabels = scoresAndUsers.map((item, i) => {
         return (
-            <li key={i}>{item.user.username}: {item.score.score}</li>
+            <label key={i} style={{width: "100%"}}>{item.user.username}: {item.score.score}</label>
         )
     })
     
@@ -36,7 +36,7 @@ function LeaderboardCard(props) {
     }, []);
 
     return (
-        <Card className="mx-5 mt-5 border border-success" style={{ width: "20%", height: 400, background: "#FAF9F6"}}>
+        <Card className="mx-5 mt-5 border border-success" style={{ width: "25%", height: 400, background: "#FAF9F6"}}>
             <Card.Header>
                 <Card.Title>
                     <Link className="nav-link" to={"/" + gameName.toLowerCase()}>
@@ -46,7 +46,21 @@ function LeaderboardCard(props) {
                 </Card.Title>
             </Card.Header>
             <Card.Body className="overflow-scroll">
-                <ol>{scoreLabels}</ol>
+                <Container 
+                    className="d-flex justify-content-center align-items-end mt-1 col-md-12 fade-in"
+                    style={{height: 100}}
+                    >
+                    <div className="second rise-up" style={{background: "silver", width: "30%", height: 50}}>
+                        <label className="mt-1" style={{textAlign: "center", width: "100%"}}>2nd</label>
+                    </div>
+                    <div className="first rise-up" style={{background: "gold", width: "30%", height: 80}}>
+                        <label className="mt-1" style={{textAlign: "center", width: "100%"}}>1st</label>
+                    </div>
+                    <div className="third rise-up" style={{background: "burlywood", width: "30%", height: 30}}>
+                        <label className="mt-1" style={{textAlign: "center", width: "100%"}}>3rd</label>
+                    </div>
+                </Container>
+                {scoreLabels}
             </Card.Body>
         </Card>
     )
