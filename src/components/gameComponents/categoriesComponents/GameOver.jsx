@@ -35,7 +35,7 @@ function GameOver(props) {
         };
 
         setLoading(true);
-        const openai = new OpenAI({ apiKey: "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", dangerouslyAllowBrowser: true });
+        const openai = new OpenAI({ apiKey: "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", dangerouslyAllowBrowser: true });
 
         // const question = `Generate me a string that would be able to be parsed into JavaScript. 
         // Make the string itself be an object, where the key is the name of the category as a string, 
@@ -48,9 +48,11 @@ function GameOver(props) {
         // Make the key of the object a string`
 
         const question = `
-        Create a list of the top 75 most popular ${category}. Make all of the strings lowercase and remove any - and replace it with a space. Keep spaces if they are already there.
+        Create a list of the top 75 most popular ${category}. Make all of the strings lowercase and remove any - and replace it with a space. 
+        Keep spaces if they are already there. Make 100% sure that every string item in the array is fully lowercased. 
+        Make sure that everything in the array is NOT plural, make them singular. Make sure that everything in the array is NOT plural, make them singular. 
+        Do not repeat things in the array.
         Do not include any explanations or backticks around the response, only provide a RFC8259 compliant JSON response following this format without deviation.
-        Make 100% sure that every string item in the array is fully lowercased.
         {
             'CategoryName': ['item1', 'item2', item3']
         }

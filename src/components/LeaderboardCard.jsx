@@ -1,11 +1,10 @@
 import { Card, Container} from "react-bootstrap";
-import { Link } from "react-router-dom";
 import * as Icon from "react-bootstrap-icons";
-// import { requestScores } from "../reducers/leaderboardReducer";
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
+
+const animStr = (i) => `fadeInAnimation ${750}ms ease-out ${90 * (i + 2)}ms forwards`;
 
 function LeaderboardCard(props) {
     const [scoresAndUsers, setScoresAndUsers] = useState([]);
@@ -30,7 +29,7 @@ function LeaderboardCard(props) {
             <div 
                 key={i} 
                 className="rounded border border-success my-2"
-                style={{background: "#FFFFFF"}}
+                style={{background: "#FFFFFF", animation: animStr(i), opacity: 0}}
                 >
                 <label style={{width: "15%%", padding: 10}}>
                     {i + 4}.
@@ -45,32 +44,31 @@ function LeaderboardCard(props) {
         )
     });
 
-    const podium = scoresAndUsers.splice(0,3).map((item, i) => {
+    const podium = [...scoresAndUsers].splice(0,3).map((item, i) => {
         if (i === 0) {
             return (
-                <div key={i} pos={2} className="first rise-up" style={{background: "gold", width: "30%", height: 100, overflow: "hidden"}}>
+                <div key={i} pos={2} className="first rise-up border border-dark mx-1" style={{background: "gold", width: "30%", height: 100, overflow: "hidden"}}>
                     <label className="my-1" style={{textAlign: "center", width: "100%"}}>{item.user.username}</label>
                     <label style={{textAlign: "center", width: "100%"}}>{item.score.score}</label>
                 </div>
             )
         } else if (i === 1) {
             return (
-                <div key={i} pos={1} className="second rise-up" style={{background: "silver", width: "30%", height: 75, overflow: "hidden"}}>
+                <div key={i} pos={1} className="second rise-up border border-dark" style={{background: "silver", width: "30%", height: 75, overflow: "hidden"}}>
                     <label className="my-1" style={{textAlign: "center", width: "100%"}}>{item.user.username}</label>
                     <label style={{textAlign: "center", width: "100%"}}>{item.score.score}</label>
                 </div>
             )
         } else {
             return (
-                <div key={i} pos={3} className="third rise-up" style={{background: "burlywood", width: "30%", height: 50, overflow: "hidden"}}>
+                <div key={i} pos={3} className="third rise-up border border-dark" style={{background: "burlywood", width: "30%", height: 50, overflow: "hidden"}}>
                     <label style={{textAlign: "center", width: "100%"}}>{item.user.username}</label>
                     <label className="mb-1" style={{textAlign: "center", width: "100%"}}>{item.score.score}</label>
                 </div>
             )
         }
     }).sort((a, b) => {
-        console.log(a.props.pos, b.props.pos)
-        return a.props.pos - b.props.pos
+        return a.props.pos - b.props.pos;
     });
     
     useEffect(() => {
@@ -78,7 +76,7 @@ function LeaderboardCard(props) {
     }, []);
 
     return (
-        <Card className="mx-5 my-4 border border-success" style={{ width: 400, height: 400, background: "#FAF9F6"}}>
+        <Card className="mx-5 my-4 border border-success fade-in-slow" style={{ width: 400, height: 500, background: "#FAF9F6"}}>
             <Card.Header>
                 <Card.Title>
                     <Link className="nav-link" to={"/" + gameName.toLowerCase()}>
@@ -89,7 +87,7 @@ function LeaderboardCard(props) {
             </Card.Header>
             <Card.Body className="overflow-scroll">
                 <Container 
-                    className="d-flex justify-content-center align-items-end my-3 mx-1 fade-in"
+                    className="d-flex justify-content-center align-items-end my-3 ms-1 fade-in"
                     style={{height: 100}}
                     >
                     {podium}

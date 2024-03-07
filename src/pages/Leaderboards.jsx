@@ -24,16 +24,14 @@ function Leaderboards() {
     });
     
     return (
-        <>
+        <div className="fade-in">
             <h1 style={{textAlign: "center", marginTop: 50}}>Leaderboards:</h1>
-            <Container fluid className="d-flex justify-content-center mt-1 fade-in">
-                <Row>
-                    <Col>
+            <Container fluid className="d-flex mt-1">
+                <Row className="d-flex justify-content-center align-content-center">
                         {leaderboardCards}
-                    </Col>
                 </Row>
             </Container>
-        </>
+        </div>
     )
 }
 
