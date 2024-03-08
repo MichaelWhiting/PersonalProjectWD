@@ -7,6 +7,7 @@ import React from 'react';
 import App from './App.jsx';
 import Hangman from "./pages/Hangman.jsx";
 import Categories from "./pages/Categories.jsx";
+import Scramble from "./pages/Scramble.jsx";
 import Leaderboards from "./pages/Leaderboards.jsx";
 import AccountPage from "./pages/AccountPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
     <Route path='/' element={<App/>}>
       <Route path='hangman' element={<Hangman/>} />
       <Route path="categories" element={<Categories/>}/>
+      <Route path="scramble" element={<Scramble/>}/>
       <Route path='leaderboards' element={<Leaderboards/>} />
       <Route path='account' element={<AccountPage/>} />
       <Route path='authentication' element={<AuthenticationPage/>}>

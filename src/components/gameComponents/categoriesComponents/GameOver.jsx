@@ -64,7 +64,7 @@ function GameOver(props) {
     }
 
     return (
-        <Container className="my-4 fade-in`">
+        <Container className="my-4 fade-in">
             {wordCards.length !== 0 &&
                 <>
                     <label className="title-center">Game Over!</label>

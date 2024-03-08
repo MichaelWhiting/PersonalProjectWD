@@ -15,12 +15,16 @@ function NavigationBar() {
                 <Navbar.Collapse>
                     <Nav className="me-auto">
                         <Link className="nav-link" to="hangman">
-                        <Icon.HSquareFill style={{width: 30, height: 30, marginRight: 5}}/>
+                            <Icon.HSquareFill style={{width: 30, height: 30, marginRight: 5}}/>
                             Hangman
                         </Link>
                         <Link className="nav-link" to="categories">
-                        <Icon.ListOl style={{width: 30, height: 30, marginRight: 5}}/>
+                            <Icon.ListOl style={{width: 30, height: 30, marginRight: 5}}/>
                             Categories
+                        </Link>
+                        <Link className="nav-link" to="scramble">
+                            <Icon.Shuffle style={{width: 30, height: 30, marginRight: 5}}/>
+                            Scramble
                         </Link>
                     </Nav>
                     <Nav className="ms-auto">

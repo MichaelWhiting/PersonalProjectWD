@@ -32,7 +32,7 @@ function Hangman() {
 
     useEffect(() => {
         const randomNum = Math.floor(Math.random() * words.length);
-        const word = words[randomNum];// gotta find out why this sometime is undefined
+        const word = words[randomNum];
         const initialStatus = word.split("").map((_) => "_").join("");
 
         setWordStatus(initialStatus);
