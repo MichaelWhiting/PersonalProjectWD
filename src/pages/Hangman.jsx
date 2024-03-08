@@ -4,6 +4,7 @@ import * as Icon from "react-bootstrap-icons";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
+
 // Components
 import WordSpaces from "../components/gameComponents/hangmanComponents/WordSpaces.jsx";
 import Keyboard from "../components/gameComponents/hangmanComponents/Keyboard.jsx";

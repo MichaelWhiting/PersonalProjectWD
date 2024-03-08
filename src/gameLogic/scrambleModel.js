@@ -1,20 +1,12 @@
 
 
 class ScrambleGame {
-    constructor(word, currentOrder) {
+    constructor(word = "default") {
         this.word = word;
-        this.currentOrder = currentOrder;
     }
 
-    checkOrder() {
-        if (this.word === this.currentOrder) {
-            console.log("Word is in correct order!");
-            return true;
-        }
-    }
-
-    endGame() {
-
+    getScore() {
+        return 100;
     }
 }
 
