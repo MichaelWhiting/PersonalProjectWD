@@ -76,10 +76,7 @@ function Hangman() {
                 >
                 Restart Game
             </Button>
-            <label 
-                style={{ fontWeight: 100, fontSize: 20, color: "#198754", textAlign: "center", width: "100%" }}
-                className="my-3"
-                >
+            <label className="info-label my-3">
                 <Icon.InfoCircle className="mx-1"/>
                 Scores will only save if you are logged in.
             </label>
@@ -88,7 +85,7 @@ function Hangman() {
         <Container className="mt-5 fade-in">
             <h1 style={{textAlign: "center"}}>You win!</h1>
             <h3 style={{textAlign: "center"}}>Word: {wordStatus}</h3>
-            <label style={{fontWeight: 100, fontSize: 50, color: "#198754", textAlign: "center", width: "100%"}}>Score: 
+            <label className="score-label">Score: 
                 <Number n={currentGame.getScore(time)}/>
             </label>
             <Button 

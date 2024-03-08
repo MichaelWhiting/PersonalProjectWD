@@ -1,7 +1,7 @@
 import { Container } from "react-bootstrap";
 import Timer from "./Timer";
 import { useState } from "react";
-
+import c from "../../../classStrings.js";
 function Keyboard(props) {
     const alphabet = "abcdefghijklmnopqrstuvwxyz";
     const { checkGuess, updateWordStatus, wordStatus, updateTime } = props;
@@ -10,15 +10,8 @@ function Keyboard(props) {
     const letterKeys = alphabet.split("").map((letter, i) => {
         return (
             <button
-                className="square border border-success rounded"
+                className={`${c.roundedBorder} letter-key`}
                 key={i}
-                style={{
-                    background: "primary",
-                    display: "inline",
-                    height: 50,
-                    width: "8%",
-                    margin: "1%",
-                }}
                 onClick={function(e) { 
                     e.currentTarget.disabled = true
                     const newWordStatus = checkGuess(letter, wordStatus);

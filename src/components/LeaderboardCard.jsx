@@ -2,6 +2,7 @@ import { Card, Container} from "react-bootstrap";
 import * as Icon from "react-bootstrap-icons";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import c from "../classStrings.js";
 import axios from "axios";
 
 const animStr = (i) => `fadeInAnimation ${750}ms ease-out ${90 * (i + 2)}ms forwards`;
@@ -28,18 +29,12 @@ function LeaderboardCard(props) {
         return (
             <div 
                 key={i} 
-                className="rounded border border-success my-2"
+                className={`${c.roundedBorder} my-2`}
                 style={{background: "#FFFFFF", animation: animStr(i), opacity: 0}}
-                >
-                <label style={{width: "15%%", padding: 10}}>
-                    {i + 4}.
-                </label>
-                <label style={{width: "70%", padding: 10}}>
-                    {item.user.username}
-                </label>
-                <label style={{ width: "15%", textAlign: "right"}}>
-                    {item.score.score}
-                </label>
+            >
+                <label style={{width: "15%%", padding: 10}}>{i + 4}.</label>
+                <label style={{width: "70%", padding: 10}}>{item.user.username}</label>
+                <label style={{ width: "15%", textAlign: "right"}}>{item.score.score}</label>
             </div>
         )
     });
@@ -47,23 +42,23 @@ function LeaderboardCard(props) {
     const podium = [...scoresAndUsers].splice(0,3).map((item, i) => {
         if (i === 0) {
             return (
-                <div key={i} pos={2} className="first rise-up border border-dark mx-1" style={{background: "gold", width: "30%", height: 100, overflow: "hidden"}}>
-                    <label className="my-1" style={{textAlign: "center", width: "100%"}}>{item.user.username}</label>
-                    <label style={{textAlign: "center", width: "100%"}}>{item.score.score}</label>
+                <div key={i} pos={2} className={`${c.podium} mx-1 w30`} style={{background: "gold", height: 100}}>
+                    <label className="center my-1">{item.user.username}</label>
+                    <label className="center">{item.score.score}</label>
                 </div>
             )
         } else if (i === 1) {
             return (
-                <div key={i} pos={1} className="second rise-up border border-dark" style={{background: "silver", width: "30%", height: 75, overflow: "hidden"}}>
-                    <label className="my-1" style={{textAlign: "center", width: "100%"}}>{item.user.username}</label>
-                    <label style={{textAlign: "center", width: "100%"}}>{item.score.score}</label>
+                <div key={i} pos={1} className={`${c.podium} w30`} style={{background: "silver", height: 75}}>
+                    <label className="center my-1">{item.user.username}</label>
+                    <label className="center">{item.score.score}</label>
                 </div>
             )
         } else {
             return (
-                <div key={i} pos={3} className="third rise-up border border-dark" style={{background: "burlywood", width: "30%", height: 50, overflow: "hidden"}}>
-                    <label style={{textAlign: "center", width: "100%"}}>{item.user.username}</label>
-                    <label className="mb-1" style={{textAlign: "center", width: "100%"}}>{item.score.score}</label>
+                <div key={i} pos={3} className={`${c.podium} w30`} style={{background: "burlywood", height: 50}}>
+                    <label className="center">{item.user.username}</label>
+                    <label className="center">{item.score.score}</label>
                 </div>
             )
         }
@@ -76,7 +71,7 @@ function LeaderboardCard(props) {
     }, []);
 
     return (
-        <Card className="mx-5 my-4 border border-success fade-in-slow" style={{ width: 400, height: 500, background: "#FAF9F6"}}>
+        <Card className="card border border-success mx-5 my-4 fade-in-slow">
             <Card.Header>
                 <Card.Title>
                     <Link className="nav-link" to={"/" + gameName.toLowerCase()}>
@@ -86,10 +81,7 @@ function LeaderboardCard(props) {
                 </Card.Title>
             </Card.Header>
             <Card.Body className="overflow-scroll">
-                <Container 
-                    className="d-flex justify-content-center align-items-end my-3 ms-1 fade-in"
-                    style={{height: 100}}
-                    >
+                <Container className={`${c.containerEnd} my-3 ms-1 fade-in`} style={{height: 100}}>
                     {podium}
                 </Container>
                 {scoreLabels}

@@ -2,19 +2,18 @@ import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import axios from "axios";  
+import c from "../classStrings.js";
 
-// import animStr from "../animations.js";
-// const animStr = (i) => `fadeInAnimation ${1000}ms ease-out ${100 * (i + 1)}ms forwards`;
+const animStr = (i) => `fadeInAnimation ${750}ms ease-out ${90 * (i + 2)}ms forwards`;
 
 function AccountScoresCell(props) {
     const userId = useSelector(state => state.userId);
-    const username = props.username;
     const [scores, setScores] = useState([]);
+    const { username } = props;
 
     const getUserScores = async () => {
         if (userId) {
             const { data } = await axios.get(`/scores/${userId}`);
-            console.log(data.success);
 
             if (data.success) {
                 setScores(data.scores.sort((a, b) => b.score - a.score));
@@ -28,18 +27,22 @@ function AccountScoresCell(props) {
     
     const scoreCards = scores.map((score, i) => {
         return (
-            <p
+            <div 
                 key={i} 
-                // style={{animation: animStr(i)}}
+                className={`${c.roundedBorder} my-2`}
+                style={{background: "#FFFFFF", animation: animStr(i), opacity: 0}}
             >
-            {score.gameName}: {score.score}
-            </p>
+                <label style={{width: "10%", padding: 10}}>{i + 4}.</label>
+                <label style={{width: "80%", padding: 10}}>{score.gameName}</label>
+                <label style={{width: "5%", padding: 10}}>{score.score}</label>
+            </div>
         )}
     );
 
     return (//animation: animStr(1)
-        <Container style={{height: "90%", background: "#FFFFFF"}} className="border border-success rounded p-5 mx-3 overflow-scroll">
+        <Container className={`${c.roundedBorder} p-5 mx-3 overflow-scroll`} style={{height: "90%", background: "#FFFFFF"}}>
             <h3>{username}'s Scores:</h3>
+            <hr/>
             {scoreCards}    
         </Container>
     )

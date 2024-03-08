@@ -2,6 +2,97 @@
     background: #4C53E6;
 }
 
+
+/* Classes */
+.title-left {
+    font-size: 40px;
+    font-weight: 250;
+    color: #000000;
+    text-align: left;
+    width: 100%;
+}
+
+.subtitle-left {
+    color: #000000;
+    font-weight: 200;
+    font-size: 30px;
+    text-align: left;
+    width: 100%;
+}
+
+.title-center {
+    font-size: 40px;
+    color: #000000;
+    text-align: center;
+    width: 100%;
+}
+
+.title-right {
+    font-size: 40px;
+    color: #000000;
+    text-align: center;
+    width: 100%;
+}
+
+.subtitle-center {
+    color: #000000;
+    font-size: 30px;
+    text-align: center;
+    width: 100%;
+}
+
+.offwhite {
+    background: #FAF9F6;
+}
+
+.error {
+    text-align: center;
+    color: red;
+}
+
+.info-label {
+    font-weight: 100;
+    font-size: 20;
+    color: #198754;
+    text-align: center;
+    width: 100%;
+}
+
+.score-label {
+    font-weight: 100;
+    font-size: 40px;
+    color: #198754;
+    text-align: center;
+    width: 100%;
+}
+
+.center {
+    text-align: center;
+    width: 100%;
+}
+
+.w30 {
+    width: 30%;
+    overflow: hidden;
+}
+
+.letter-key {
+    background: "primary";
+    display: inline;
+    height: 50px;
+    width: 8%;
+    margin: 1%;
+}
+
+.card {
+    width: 400px;
+    height: 500px;
+    background: #FAF9F6;
+}
+
+
+
+/* Animations */
 .fade-in {
     animation: fadeInAnimation ease 0.5s;
     animation-iteration-count: 1;

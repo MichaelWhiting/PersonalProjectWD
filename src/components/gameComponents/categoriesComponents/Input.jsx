@@ -19,11 +19,13 @@ function Input(props) {
                 onChange={(e) => setGuess(e.target.value)}
                 onKeyDown={(e) => {
                     if (e.key === "Enter") { submitGuess() }
-                }}/>
+                }}
+            />
             <Button 
                 className="mx-2" 
                 variant="success" 
-                onClick={submitGuess}>
+                onClick={submitGuess}
+            >
                 Guess
             </Button>
         </Container>

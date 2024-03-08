@@ -1,6 +1,7 @@
 import { Container, Button, Row, Col, Spinner } from "react-bootstrap";
 import { useState } from "react";
 import OpenAI from "openai";
+import c from "../../../classStrings.js";
 
 // Components
 import Number from "../../Number.jsx";
@@ -17,7 +18,8 @@ function GameOver(props) {
         const isCorrect = currentGame.checkGuess(word);
 
         return (
-            <Col xs={3}
+            <Col 
+                xs={3}
                 key={i}
                 md="auto"
                 className="rounded border px-2 py-2 mx-3 my-3"
@@ -37,16 +39,6 @@ function GameOver(props) {
         setLoading(true);
         const openai = new OpenAI({ apiKey: "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", dangerouslyAllowBrowser: true });
 
-        // const question = `Generate me a string that would be able to be parsed into JavaScript. 
-        // Make the string itself be an object, where the key is the name of the category as a string, 
-        // and the value is an array of values. Make the value an array of the top 75 most popular ${category}.
-        // Make all of the strings in the array lowercased, remove any - from them and replace it with a space. 
-        // Do not have any backticks in the response, I am looking for a string only response. 
-        // Do not respond trying to display as code, I only want a string. 
-        // Here is an example of the response I'm looking for: {'fruits': ['apple', 'banana']}. 
-        // Don't enclose the outer object in single (') or double quotes("), provide it as it is. 
-        // Make the key of the object a string`
-
         const question = `
         Create a list of the top 75 most popular ${category}. Make all of the strings lowercase and remove any - and replace it with a space. 
         Keep spaces if they are already there. Make 100% sure that every string item in the array is fully lowercased. 
@@ -64,23 +56,23 @@ function GameOver(props) {
             messages: [{ role: "user", content: question }]
         }).then((res) => {
             const message = res.choices[0].message.content;
-            console.log(res.choices[0].message)
-            const gameInfo = JSON.parse(message)
+            console.log(res.choices[0].message);
+            const gameInfo = JSON.parse(message);
             setLoading(false);
-            startNewGame(gameInfo)
+            startNewGame(gameInfo);
         })
     }
 
     return (
-        <Container className="my-4 rounded border border-success fade-in" style={{background: "#FAF9F6"}}>
+        <Container className="my-4 fade-in`">
             {wordCards.length !== 0 &&
                 <>
-                    <h1 className="mt-5" style={{ textAlign: "center" }}>Game Over!</h1>
-                            <label style={{ fontWeight: 100, fontSize: 50, color: "#198754", textAlign: "center", width: "100%" }}>
-                                <Number n={currentGame.getScore(guessedWords)} />
+                    <label className="title-center">Game Over!</label>
+                            <label className="score-label">
+                                <Number n={currentGame.getScore(guessedWords)}/>
                             </label>
                     <Container
-                        className="d-flex justify-content-center align-items-center rounded border border-success fade-in"
+                        className={`${c.containerCenter} ${c.roundedBorder}`}
                         style={{ width: "70%" }}
                     >
                         <Row className="my-1" style={{ width: "100%" }}>
@@ -89,7 +81,7 @@ function GameOver(props) {
                     </Container>
                 </>
             }
-            <h1 className="mt-5" style={{ textAlign: "center" }}>Game Settings:</h1>
+            <label className="title-center my-3">Game Settings:</label>
             <input
                 value={category}
                 type="text"

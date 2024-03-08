@@ -50,14 +50,14 @@ function Categories() {
     return (
         <>
             { !gameOver && 
-                <Container className="mt-4 rounded border border-success fade-in" style={{background: "#FAF9F6"}}>
+                <Container className="mt-4 fade-in">
                     <h1 style={{textAlign: "center"}}>Category is: {Object.keys(currentGame.gameInfo)[0]}</h1>
                     <Timer updateGameOver={updateGameOver}/>
                     { guessedWords.length !== 0 &&
                     <GuessedWords guessedWords={guessedWords}/>
                     }
                     <Input guessedWords={guessedWords} updateGuessedWords={updateGuessedWords}/>
-                    <label style={{ fontWeight: 100, fontSize: 20, color: "#198754", textAlign: "center", width: "100%" }}>
+                    <label className="info-label my-3">
                         <Icon.InfoCircle className="mx-1 my-2"/>
                         Scores will only save if you are logged in.
                     </label>

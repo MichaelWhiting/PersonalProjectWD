@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 function Timer(props) {
     const { updateGameOver } = props
-    const [time, setTime] = useState(30); // this is how long the game is
+    const [time, setTime] = useState(5); // this is how long the game is
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -14,7 +14,7 @@ function Timer(props) {
         return () => clearInterval(interval);
     }, [time]);
 
-    return <h1 className="mt-3" style={{ textAlign: "center" }}>{time}</h1>;
+    return <h1 className="mt-3 center">{time}</h1>;
 }
 
 export default Timer;

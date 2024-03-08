@@ -1,7 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Container, Button } from "react-bootstrap";
+import { Container, Row, Button } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import axios from "axios";
+
+import c from "../classStrings.js";
 
 // Components
 import AccountSettingsCell from "../components/AccountSettingsCell.jsx";
@@ -38,17 +40,20 @@ function AccountPage() {
     }
 
     return (
-        <Container 
-            className="d-flex flex-column justify-content-center align-items-center border border-success rounded p-5 mt-5 fade-in" 
-            style={{ background: "#FAF9F6", width: 800 }}>
-            <Container className="d-flex vh-80 justify-content-center">
-                <h2 style={{ color: "#198754" }}>Hello, {user.username}! Here is your account info:</h2>
+        <Container className={`${c.containerColCenter} p-5`} style={{width: 800}}>
+            <Container>
+                <label className={`title-left`}>Account Info:
+                <hr/>
+                </label>
+                <label className="subtitle-left" style={{width: "85%"}}>
+                    {user.username}
+                </label>
+                <Button variant="success" style={{width: "15%"}}onClick={logout}>Logout</Button>
             </Container>
-            <Container className="d-flex justify-content-center align-items-center fade-in" style={{height: 500}}>
+            <Container className={""}>
                 <AccountSettingsCell/>
                 <AccountScoresCell username={user.username}/>
             </Container>
-            <Button variant="success" onClick={logout}>Logout</Button>
         </Container>
     )
 }

@@ -3,12 +3,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
+import c from "../classStrings.js";
+
 function CreateAccountPage() {
     const [showError, setShowError] = useState(false);
     const [errorMsg, setErrorMsg] = useState(false);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
+    
 
     const createAccount = async (e) => {
         e.preventDefault();
@@ -24,18 +27,11 @@ function CreateAccountPage() {
     };
 
     return (
-        <Container
-            className="d-flex flex-column justify-content-center align-items-center mt-5 fade-in"
-            style={{  width: "50%", }}
-            >
-            <Form 
-                className="my-auto border border-success rounded p-5" 
-                style={{width: "70%", background: "#FAF9F6"}}
-                onSubmit={createAccount}
-                >
+        <Container className={c.containerColCenter} style={{width: "50%"}}>
+            <Form className={`${c.roundedBorder} p-5`} style={{width: "70%"}} onSubmit={createAccount}>
                 <Form.Group>
                     <h2>Create Account</h2>
-                    <Form.FloatingLabel label="username" style={{ marginTop: 10, marginBottom: 10 }}>
+                    <Form.FloatingLabel label="username" className="my-3">
                         <Form.Control 
                             placeholder="username"
                             value={username}
@@ -43,7 +39,7 @@ function CreateAccountPage() {
                         />
                     </Form.FloatingLabel>
 
-                    <Form.FloatingLabel label="password" style={{ marginTop: 10, marginBottom: 10 }}>
+                    <Form.FloatingLabel label="password" className="my-3">
                         <Form.Control 
                             type="password" 
                             placeholder="password" 
@@ -52,21 +48,14 @@ function CreateAccountPage() {
                         />
                     </Form.FloatingLabel>
 
-                    <Button 
-                        variant="success" 
-                        type="submit" 
-                        className="mx-auto" 
-                        style={{width: "40%", overflowWrap: "unset"}}
-                        >
-                        Create
-                    </Button>
+                    <Button variant="success" type="submit" style={{width: "40%"}}>Create</Button>
                 </Form.Group>
                 { showError && 
-                    <h5 className="mt-5 fade-in-slow" style={{textAlign: "center", color: "red"}}>{errorMsg}</h5>
+                    <h5 className={c.error}>{errorMsg}</h5>
                 }
             </Form>
             <Link className="nav-link" to="/authentication/login">
-                <Button variant="outline-success" style={{margin: 10}}>Login Here</Button>
+                <Button variant="outline-success" className="my-3">Login Here</Button>
             </Link>
         </Container>
     )

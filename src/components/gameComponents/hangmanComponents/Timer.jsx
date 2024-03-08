@@ -13,7 +13,7 @@ function Timer(props) {
     }, [time]);
 
     return (
-        <h1 className="mt-5" style={{ textAlign: "center" }}>{time}</h1>
+        <h1 className="mt-5 center">{time}</h1>
     )
 }
 
