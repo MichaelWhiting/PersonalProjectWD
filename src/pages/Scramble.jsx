@@ -8,13 +8,9 @@ import c from "../classStrings.js";
 import Number from "../components/Number.jsx";
 
 const words = [
-    "mystery", "journey", "wizard", "forest", "castle", "dragon", "puzzle", "secret",
-    "mirror", "flower", "winter", "summer", "spring", "autumn", "island", "desert",
-    "falcon", "eclipse", "galaxy", "nebula", "comet", "orbit", "photon", "quantum",
-    "sphinx", "pyramid", "temple", "canyon", "volcano", "glacier", "tundra",
-    "jungle", "savanna", "cavern", "goblin", "unicorn", "phoenix", "vampire", "zombie",
-    "robot", "cyborg", "portal", "sphere", "vector", "matrix", "quantum", "cosmos",
-    "ocean", "eagle"
+    'about', 'after', 'basic', 'clear', 'drink', 'earth', 'fruit', 'great', 
+    'house', 'input', 'joker', 'knife', 'learn', 'money', 'night', 'ocean', 
+    'plant', 'quiet', 'sound', 'train', 'under', 'value', 'water'
 ];
 
 function Scramble() {
@@ -52,14 +48,19 @@ function Scramble() {
 
 
     useEffect(() => {
+        console.log("Key use effect ran")
         startNewGame();
     }, [key]);
     
+
     useEffect(() => {
         if (letters.join("") === currentGame.word) {
-            setInterval(() => {
+            console.log("letters joined:", letters.join(""), "currentWord:", currentGame.word);
+            const interval = setInterval(() => {
+                console.log("1 sec delay use effect ran")
                 setGameOver(true);
             }, 1000);
+            return () => clearInterval(interval);
         }
     }, [letters]);
 

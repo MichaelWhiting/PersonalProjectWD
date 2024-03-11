@@ -7,6 +7,7 @@ import c from "../../../classStrings.js";
 import Number from "../../Number.jsx";
 
 const animStr = (i) => `fadeInAnimation ${350}ms ease-out ${75 * (i + 1)}ms forwards`;
+const API_KEY = "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";
 
 function GameOver(props) {
     const { startNewGame, guessedWords, currentGame } = props;
@@ -37,7 +38,7 @@ function GameOver(props) {
         };
 
         setLoading(true);
-        const openai = new OpenAI({ apiKey: "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", dangerouslyAllowBrowser: true });
+        const openai = new OpenAI({ apiKey: API_KEY, dangerouslyAllowBrowser: true });
 
         const question = `
         Create a list of the top 75 most popular ${category}. Make all of the strings lowercase and remove any - and replace it with a space. 

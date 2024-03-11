@@ -11,7 +11,6 @@ import Input from "../components/gameComponents/categoriesComponents/Input.jsx";
 import Timer from "../components/gameComponents/categoriesComponents/Timer.jsx";
 import GameOver from "../components/gameComponents/categoriesComponents/GameOver.jsx";
 
-
 function Categories() {
     const [currentGame, setCurrentGame] = useState(new CategoriesGame());
     const [guessedWords, setGuessedWords] = useState([]);
