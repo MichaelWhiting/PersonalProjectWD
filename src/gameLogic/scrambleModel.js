@@ -5,8 +5,11 @@ class ScrambleGame {
         this.word = word;
     }
 
-    getScore() { // finish scoring logic later
-        return 100;
+    getScore(time) { // finish scoring logic later
+        console.log(time)
+        const score = Math.floor((1000 *  (1 - (time * 0.021))));       
+        console.log(score)
+        return score;
     }
 }
 

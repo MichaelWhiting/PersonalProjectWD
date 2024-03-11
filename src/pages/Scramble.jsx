@@ -1,24 +1,30 @@
 import ScrambleGame from "../gameLogic/scrambleModel.js";
 import { Container, Button } from "react-bootstrap";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Reorder } from "framer-motion"
 import c from "../classStrings.js";
+import axios from "axios";
 
 // Components
 import Number from "../components/Number.jsx";
+import Timer from "../components/gameComponents/scrambleComponents/Timer.jsx";
 
 const words = [
     'about', 'after', 'basic', 'clear', 'drink', 'earth', 'fruit', 'great', 
     'house', 'input', 'joker', 'knife', 'learn', 'money', 'night', 'ocean', 
-    'plant', 'quiet', 'sound', 'train', 'under', 'value', 'water'
+    'plant', 'quiet', 'sound', 'train', 'under', 'value', 'water' , 'heart'
 ];
 
 function Scramble() {
+    const userId = useSelector(state => state.userId);
     const [currentGame, setCurrentGame] = useState(new ScrambleGame()); // current instance of ScrambleGame()
     const [letters, setLetters] = useState([]); // current state/order of the letters
-
+    const [time, setTime] = useState(0);
     const [gameOver, setGameOver] = useState(false); // variable to tell what screen to show
     const [key, setKey] = useState(false); // key to tell the page to refresh
+
+    const updateTime = (newTime) => setTime(newTime);
 
     const scrambleWord = (word) => {
         let scrambledWord = "";
@@ -46,11 +52,28 @@ function Scramble() {
         // console.log(word, scrambledWord);
     }
 
+    const saveScore = async () => {
+        if (userId) { // means the user is logged in
+            // sends request to the server to save the new score
+            const res = await axios.post("/saveScore", { gameName: "Scramble", score: currentGame.getScore(time), userId });
+            console.log(res.success);
+        } else {
+            console.log("User is not logged in, not going to save the score")
+        }
+    }
+
 
     useEffect(() => { // whenever the key changes, it will start a new game
         startNewGame();
     }, [key]);
     
+
+    useEffect(() => { // runs only once after a game is over.
+        if (gameOver) {
+            console.log("Ran save score!")
+            saveScore(); // saves the score if the user is logged in
+        }
+    }, [gameOver]);
 
     useEffect(() => { // whenever letters is changed, it runs this
         if (letters.join("") === currentGame.word) { // checks to see if the letters are in the correct order
@@ -75,13 +98,14 @@ function Scramble() {
                 ))}
             </Reorder.Group>
             <h1>Reorder the scarmbled letters into a word!</h1>
+            <Timer updateTime={updateTime}/>
         </Container>
     ) : (
         <Container className="mt-5 fade-in">
             <h1 style={{textAlign: "center"}}>You win!</h1>
             <h3 style={{textAlign: "center"}}>Word: {currentGame.word}</h3>
             <label className="score-label">Score: 
-                <Number n={currentGame.getScore()}/>
+                <Number n={currentGame.getScore(time)}/>
             </label>
             <Button 
                 style={{display: "block", margin: "auto"}}
