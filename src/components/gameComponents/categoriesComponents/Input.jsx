@@ -5,7 +5,7 @@ function Input(props) {
     const { guessedWords, updateGuessedWords } = props;
     const [guess, setGuess] = useState("");
 
-    const submitGuess = () => {
+    const submitGuess = () => { // appends the input guess to the guessedWords array on the parent component
         updateGuessedWords([...guessedWords, guess]); // when making copy of array, you have to spread it like this,
         setGuess("");                                 // otherwise it just creates a pointer to the orignal array
     }

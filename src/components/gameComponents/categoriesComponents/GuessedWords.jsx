@@ -4,7 +4,7 @@ import c from "../../../classStrings.js";
 const animStr = (i) => `fadeInAnimation ${350}ms ease-out ${0}ms forwards`;
 
 function GuessedWords(props) {
-    const wordCards = props.guessedWords.map((word, i) => {
+    const wordCards = props.guessedWords.map((word, i) => { // creates a card for each of the guessed words
         return (
             <Col xs={3} 
                 key={i}   

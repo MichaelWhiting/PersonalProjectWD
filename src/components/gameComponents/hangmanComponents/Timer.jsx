@@ -4,8 +4,8 @@ function Timer(props) {
     const { getTime, updateTime } = props; 
     const [time, setTime] = useState(0);
 
-    useEffect(() => {
-        updateTime(time);
+    useEffect(() => { // counts up +1 every second.
+        updateTime(time); // updates it on the Hangman parent component
         const interval = setInterval(() => {
             setTime(time + 1)
         }, 1000);

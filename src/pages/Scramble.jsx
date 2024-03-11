@@ -14,11 +14,11 @@ const words = [
 ];
 
 function Scramble() {
-    const [currentGame, setCurrentGame] = useState(new ScrambleGame());
-    const [letters, setLetters] = useState([]);
+    const [currentGame, setCurrentGame] = useState(new ScrambleGame()); // current instance of ScrambleGame()
+    const [letters, setLetters] = useState([]); // current state/order of the letters
 
-    const [gameOver, setGameOver] = useState(false);
-    const [key, setKey] = useState(false)
+    const [gameOver, setGameOver] = useState(false); // variable to tell what screen to show
+    const [key, setKey] = useState(false); // key to tell the page to refresh
 
     const scrambleWord = (word) => {
         let scrambledWord = "";
@@ -37,30 +37,29 @@ function Scramble() {
     }
 
     const startNewGame = () => {
-        const randomNum = Math.floor(Math.random() * words.length);
-        const word = words[randomNum];
-        let scrambledWord = scrambleWord(word);
+        const randomNum = Math.floor(Math.random() * words.length); // gets random #
+        const word = words[randomNum]; // gets random word
+        let scrambledWord = scrambleWord(word); // scrambles that word
 
-        setLetters(scrambledWord.split(""));
-        setCurrentGame(new ScrambleGame(word));
-        console.log(word, scrambledWord);
+        setLetters(scrambledWord.split("")); // updates letters state variable
+        setCurrentGame(new ScrambleGame(word)); // creates new instance of ScrambleGame with the new word.
+        // console.log(word, scrambledWord);
     }
 
 
-    useEffect(() => {
-        console.log("Key use effect ran")
+    useEffect(() => { // whenever the key changes, it will start a new game
         startNewGame();
     }, [key]);
     
 
-    useEffect(() => {
-        if (letters.join("") === currentGame.word) {
+    useEffect(() => { // whenever letters is changed, it runs this
+        if (letters.join("") === currentGame.word) { // checks to see if the letters are in the correct order
             console.log("letters joined:", letters.join(""), "currentWord:", currentGame.word);
-            const interval = setInterval(() => {
-                console.log("1 sec delay use effect ran")
-                setGameOver(true);
+            const interval = setInterval(() => { // if they are in the correct order
+                console.log("1 sec delay use effect ran"); // wait 1 second
+                setGameOver(true); // then change gameOver to true  and go to the GameOver screen.
             }, 1000);
-            return () => clearInterval(interval);
+            return () => clearInterval(interval); // clears the current interval to not create exponential intervals
         }
     }, [letters]);
 

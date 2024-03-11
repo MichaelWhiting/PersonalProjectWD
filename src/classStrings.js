@@ -1,3 +1,6 @@
+// these are just some strings that are really long, so I put them into an object to tidy up some of the className's for
+// some components
+
 const c = {
     roundedBorder: "rounded border border-success offwhite", // gives the item a rounded border that is the color of success
     containerColCenter: "d-flex flex-column justify-content-center align-items-center mt-5 fade-in", // aligns everything middle using a flex
@@ -7,5 +10,4 @@ const c = {
     error: "error mt-5 fade-in-slow",
     podium: "rise-up border border-dark"
 }
-
 export default c;

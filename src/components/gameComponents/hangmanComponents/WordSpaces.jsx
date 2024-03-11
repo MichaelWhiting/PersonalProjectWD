@@ -3,7 +3,7 @@ const animStr = (i) => `fadeInAnimation ${300}ms ease-out ${50 * (i + 1)}ms forw
 function WordSpaces(props) {
     const { wordStatus } = props;
     
-    const wordSpaces = wordStatus.split("").map((letter, i) => {
+    const wordSpaces = wordStatus.split("").map((letter, i) => { // displays the current status of wordStatus
         return <label key={i} style={{margin: 20, fontSize: 100, fontWeight: 100, animation: animStr(i)}}>{letter}</label>;
     });
 

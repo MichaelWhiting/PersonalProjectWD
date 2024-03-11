@@ -12,12 +12,13 @@ const API_KEY = "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";
 function GameOver(props) {
     const { startNewGame, guessedWords, currentGame } = props;
     const [category, setCategory] = useState("");
-    const wordSet = new Set(guessedWords);
+    const wordSet = new Set(guessedWords); // removes repeats and gets each of the unique answers
     const [loading, setLoading] = useState(false);
 
-    const wordCards = [...wordSet].map((word, i) => {
-        const isCorrect = currentGame.checkGuess(word);
+    const wordCards = [...wordSet].map((word, i) => { // after the game finishes, this creates a card for each guess
+        const isCorrect = currentGame.checkGuess(word);  // checks if the guess is correct
 
+        // the isCorrect colors the background for each card based on whether or not the guess was correct
         return (
             <Col 
                 xs={3}
@@ -32,14 +33,15 @@ function GameOver(props) {
     });
 
     const createGameInfo = async () => {
-        if (category === "") {
+        if (category === "") { // makes sure that the category input field was not blank
             console.log("input is blank");
             return;
         };
 
-        setLoading(true);
-        const openai = new OpenAI({ apiKey: API_KEY, dangerouslyAllowBrowser: true });
+        setLoading(true); // starts a loading animation to tell the user that ChatGPT is making the array for that category
+        const openai = new OpenAI({ apiKey: API_KEY, dangerouslyAllowBrowser: true }); // creates an instance of the openai API
 
+        // this is the prompt that we pass to the GPT API that tells it the format and what to respond with
         const question = `
         Create a list of the top 75 most popular ${category}. Make all of the strings lowercase and remove any - and replace it with a space. 
         Keep spaces if they are already there. Make 100% sure that every string item in the array is fully lowercased. 
@@ -52,16 +54,17 @@ function GameOver(props) {
          The JSON response:
         `
 
-        openai.chat.completions.create({
+
+        openai.chat.completions.create({ // here it sends a request to the API
             model: "gpt-3.5-turbo",
             messages: [{ role: "user", content: question }]
         }).then((res) => {
-            const message = res.choices[0].message.content;
+            const message = res.choices[0].message.content; // this is the response that the API gives back
             console.log(res.choices[0].message);
-            const gameInfo = JSON.parse(message);
-            setLoading(false);
-            startNewGame(gameInfo);
-        })
+            const gameInfo = JSON.parse(message); // parses response into a javascript object
+            setLoading(false); // turns off the loading animation
+            startNewGame(gameInfo); // starts a new game and passes in the newly created category object
+        });
     }
 
     return (

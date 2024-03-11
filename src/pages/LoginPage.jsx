@@ -15,26 +15,26 @@ function LoginPage() {
     const dispatch = useDispatch();
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault(); // prevents refresh from form
 
-        const res = await axios.post("/login", { username, password });
+        const res = await axios.post("/login", { username, password }); // attempts to login the user
 
-        if (res.data.success) {
-            setShowError(false);
-            dispatch({
+        if (res.data.success) { // if user is logged in,
+            setShowError(false); // clears the error
+            dispatch({ // sets the redux userId variable
                 type: "USER_AUTH",
                 payload: res.data.userId
             });
 
-            setUsername("");
-            setPassword("");
+            setUsername(""); // clears username input
+            setPassword(""); // clears password input
         
             navigate("/leaderboards");
         } else { // if did not login, change set
-            setShowError(true);
-            setErrorMsg(res.data.message);
-            setInterval(() => {
-                setShowError(false);
+            setShowError(true); // shows the error
+            setErrorMsg(res.data.message); // shows what error
+            setInterval(() => { // error dissappears after 10 seconds
+                setShowError(false); // clears the error
             }, 10000);
         }
     }
