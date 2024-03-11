@@ -1,6 +1,6 @@
 import { Button, Container, Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, Navigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
@@ -73,9 +73,13 @@ function LoginPage() {
                     <h5 className={c.error}>{errorMsg}</h5>
                 }
             </Form>
-            <Link className="nav-link" to="/authentication/createAccount">
-                <Button variant="outline-success" className="my-3">Create Account Here</Button>
-            </Link>
+            <Button 
+                variant="outline-success" 
+                className="my-3" 
+                onClick={() => navigate("/authentication/createAccount")}
+            >
+                Create Account Here
+            </Button>
         </Container>
     )
 }

@@ -24,3 +24,7 @@ const game2 = await Game.create({ gameName: "Categories", scoreIds: [3]})
 
 await db.close()
 console.log("Finished seeding the database!")
+
+// INSERT INTO games (game_name, score_ids) VALUES ('Scramble', ARRAY[4,5]); SQL for adding game
+// INSERT INTO games (game_name, score_ids) VALUES ('Game4', ARRAY[6,7]);
+// DELETE FROM games WHERE game_name = 'Game4';

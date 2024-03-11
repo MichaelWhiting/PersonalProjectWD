@@ -21,31 +21,30 @@ const words = [
 ];
 
 function Hangman() {
-    const userId = useSelector(state => state.userId);
+    const userId = useSelector(state => state.userId); // userId from redux store
     const [currentGame, setCurrentGame] = useState(new HangmanGame("_"));
     const [wordStatus, setWordStatus] = useState("_");
     const [gameOver, setGameOver] = useState(false);
     const [key, setKey] = useState(false)
     const [time, setTime] = useState(0);
 
-    const updateWordStatus = (newStatus) => setWordStatus(newStatus);
-    const updateTime = (newTime) => setTime(newTime);
+    const updateWordStatus = (newStatus) => setWordStatus(newStatus); // prop to send to the keyboard component
+    const updateTime = (newTime) => setTime(newTime); // prop to send to the timer component
 
-    useEffect(() => {
-        const randomNum = Math.floor(Math.random() * words.length);
-        const word = words[randomNum];
-        const initialStatus = word.split("").map((_) => "_").join("");
+    useEffect(() => { // whenever the key state variable changes, run this code(restarts and starts a new game):
+        const randomNum = Math.floor(Math.random() * words.length); // random index #
+        const word = words[randomNum]; // gets a random word from words array
+        const initialStatus = word.split("").map((_) => "_").join(""); // gets a string of "_" with same length as word
 
-        setWordStatus(initialStatus);
-        setCurrentGame(new HangmanGame(word));
-        console.log(word);
+        setWordStatus(initialStatus); // updates the wordStatus with the "_" string
+        setCurrentGame(new HangmanGame(word)); // creates new instance of the game with the new word and updates state var
+        console.log(word); // this is used for testing to see what the word is in the DOM
     }, [key]);
 
     const saveScore = async () => {
         if (userId) { // makes sure there is a user to save it to before continuing.
-            console.log("The time passed up is :", time);
-            const scoreObj = { gameName: "Hangman", score: currentGame.getScore(time), userId };
-            const res = await axios.post("/saveScore", scoreObj);
+            const scoreObj = { gameName: "Hangman", score: currentGame.getScore(time), userId }; // makes a new score obj
+            const res = await axios.post("/saveScore", scoreObj); // sends request to server to save that object as a score
 
             if (res.data.success) {
                 console.log("Saved the score!");
@@ -53,10 +52,10 @@ function Hangman() {
         }
     }
 
-    useEffect(() => { // whenever the wordStatus changes, it checks to see if the player has guessed the word and see 
-        if (!wordStatus.includes("_")) {                                                        // if to end the game
-            setGameOver(true);
-            saveScore();
+    useEffect(() => { // whenever the wordStatus changes
+        if (!wordStatus.includes("_")) { // checks to see if the user has fully guessed the word                                             
+            setGameOver(true); // if so, sets gameOver to true
+            saveScore(); // attempts to save the score
         }
     }, [wordStatus])
 

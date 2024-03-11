@@ -5,27 +5,27 @@ import { Link } from "react-router-dom";
 import c from "../classStrings.js";
 import axios from "axios";
 
-const animStr = (i) => `fadeInAnimation ${750}ms ease-out ${90 * (i + 2)}ms forwards`;
+const animStr = (i) => `fadeInAnimation ${750}ms ease-out ${90 * (i + 2)}ms forwards`; // animation used for fading in.
 
 function LeaderboardCard(props) {
     const [scoresAndUsers, setScoresAndUsers] = useState([]);
     const { gameName } = props.game;
     
-    const getScoresAndUsers = async () => { // optimize this function later if have time
-        const scoresObjArr = [];
-        const { data } = await axios.get(`/leaderboard/${gameName}`);
-        const scoresArr = data.scores.sort((a, b) => b.score - a.score);
+    const getScoresAndUsers = async () => {
+        const scoresObjArr = []; // creates a temporary array to store the response.
+        const { data } = await axios.get(`/leaderboard/${gameName}`); // gets all of the scores for specific game
+        const scoresArr = data.scores.sort((a, b) => b.score - a.score); // sorts them highest to low
 
-        for (const score of scoresArr) {
-            const res = await axios.get(`/score/${score.userId}`);
+        for (const score of scoresArr) { // iterates through each of the scores
+            const res = await axios.get(`/score/${score.userId}`); // gets the user for each score
             const user = res.data.user;
-            scoresObjArr.push({ score, user });
-        }
+            scoresObjArr.push({ score, user }); // pushes it to the temporary array, got user so we can put the username on
+        }                                       // each score
 
-        setScoresAndUsers(scoresObjArr);
+        setScoresAndUsers(scoresObjArr); // now that the array has both the scores AND users, sets it to the state var
     }
 
-    const scoreLabels = scoresAndUsers.slice(3).map((item, i) => {
+    const scoreLabels = scoresAndUsers.slice(3).map((item, i) => { // this is creating labels for all of the scores besides the top 3
         return (
             <div 
                 key={i} 
@@ -39,38 +39,38 @@ function LeaderboardCard(props) {
         )
     });
 
-    const podium = [...scoresAndUsers].splice(0,3).map((item, i) => {
-        if (i === 0) {
+    const podium = [...scoresAndUsers].splice(0,3).map((item, i) => { // this gets the top 3 scores from the scoresAndUsers array
+        if (i === 0) { // this is 1st place, but we want it to be in the middle so it gives it the pos # of 2
             return (
                 <div key={i} pos={2} className={`${c.podium} mx-1 w30`} style={{background: "gold", height: 100}}>
                     <label className="center my-1">{item.user.username}</label>
                     <label className="center">{item.score.score}</label>
                 </div>
             )
-        } else if (i === 1) {
+        } else if (i === 1) { // this is 2nd place, but we want it to be on the left so it gives it the pos # of 1
             return (
                 <div key={i} pos={1} className={`${c.podium} w30`} style={{background: "silver", height: 75}}>
                     <label className="center my-1">{item.user.username}</label>
                     <label className="center">{item.score.score}</label>
                 </div>
             )
-        } else {
-            return (
+        } else { // this is 3rd place, but we want it to be on the right so it gives it the pos # of 3
+            return ( 
                 <div key={i} pos={3} className={`${c.podium} w30`} style={{background: "burlywood", height: 50}}>
                     <label className="center">{item.user.username}</label>
                     <label className="center">{item.score.score}</label>
                 </div>
             )
         }
-    }).sort((a, b) => {
+    }).sort((a, b) => { // this sorts the podium divs by their pos property. This gets them in the order we want.
         return a.props.pos - b.props.pos;
     });
     
-    useEffect(() => {
-        getScoresAndUsers();
+    useEffect(() => { // when the page originally loads, this is getting all of the scores for each game, and the
+        getScoresAndUsers();  // users tied to each score.
     }, []);
 
-    return (
+    return ( // Creating a Card, populating it with the scores for that specific game.
         <Card className="card border border-success mx-5 my-4 fade-in-slow">
             <Card.Header>
                 <Card.Title>

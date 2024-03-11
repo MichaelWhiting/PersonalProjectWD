@@ -18,17 +18,18 @@ class CategoriesGame {
   }
 
   checkGuess(input) {
-    const formattedInput = input.toLowerCase().split("").join(""); // filter((letter) => letter !== "")d
-    return this.gameInfo[Object.keys(this.gameInfo)[0]].includes(formattedInput);
+    const formattedInput = input.toLowerCase(); // formats the word to lowercase and 
+    return this.gameInfo[Object.keys(this.gameInfo)[0]].includes(formattedInput); // returns true if the guess is correct
   }
+
   getScore(guessedWords) {
-    const set = new Set(guessedWords);
+    const set = new Set(guessedWords); // gets all of the unique guessedWords
     let score = 0;
     
-    set.forEach((word) => {
-      const formattedWord = word.toLowerCase();
-      if (this.gameInfo[Object.keys(this.gameInfo)[0]].includes(formattedWord)) {
-        score += (word.length * 10) + 100;
+    set.forEach((word) => { // loops through each unique word
+      const formattedWord = word.toLowerCase(); // formats the word to be all lowercase
+      if (this.gameInfo[Object.keys(this.gameInfo)[0]].includes(formattedWord)) { // checks if the guess is correct
+        score += (word.length * 10) + 100; // each correct guess is +100 plus 10 for each letter of the word
       }
     });
 

@@ -1,9 +1,9 @@
 import { Button, Container, Form } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import c from "../classStrings.js";
 import { useState } from "react";
 import axios from "axios";
 
-import c from "../classStrings.js";
 
 function CreateAccountPage() {
     const [showError, setShowError] = useState(false);
@@ -14,15 +14,15 @@ function CreateAccountPage() {
     
 
     const createAccount = async (e) => {
-        e.preventDefault();
-        const res = await axios.post("/createUser", { username, password });
+        e.preventDefault(); // prevents the form from refreshing page
+        const res = await axios.post("/createUser", { username, password }); // sends request to the server to create a user
 
-        if (res.data.success) {
-            setShowError(false);
-            navigate("/authentication/login");
-        } else {
-            setShowError(true);
-            setErrorMsg(res.data.message);
+        if (res.data.success) { // if it successfully created a user
+            setShowError(false); // gets rid of the error
+            navigate("/authentication/login"); // and navigates to the login page so they can login to their newly created account
+        } else { // means there was an error when trying to create the user
+            setShowError(true); // makes it show it shows an error message to the user saying what the issue is
+            setErrorMsg(res.data.message); // shows the specific message of the error
         }
     };
 
@@ -54,9 +54,13 @@ function CreateAccountPage() {
                     <h5 className={c.error}>{errorMsg}</h5>
                 }
             </Form>
-            <Link className="nav-link" to="/authentication/login">
-                <Button variant="outline-success" className="my-3">Login Here</Button>
-            </Link>
+            <Button 
+                variant="outline-success" 
+                className="my-3"
+                onClick={() => navigate("/authentication/login")}
+            >
+                Login Here
+            </Button>
         </Container>
     )
 }

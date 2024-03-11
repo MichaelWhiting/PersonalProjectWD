@@ -12,38 +12,35 @@ import Timer from "../components/gameComponents/categoriesComponents/Timer.jsx";
 import GameOver from "../components/gameComponents/categoriesComponents/GameOver.jsx";
 
 function Categories() {
-    const [currentGame, setCurrentGame] = useState(new CategoriesGame());
-    const [guessedWords, setGuessedWords] = useState([]);
-    const [gameOver, setGameOver] = useState(true);
+    const [currentGame, setCurrentGame] = useState(new CategoriesGame()); // the current game that is being played
+    const [guessedWords, setGuessedWords] = useState([]); // all of the words that the player has guessed
+    const [gameOver, setGameOver] = useState(true); // used to tell whether to show the GameOver screen or the game itself
 
-    const userId = useSelector(state => state.userId);
+    const userId = useSelector(state => state.userId); // the value of userId in the redux store
 
     const saveScore = async () => {
-        if (userId) { // if someone is logged in, then save the score under their username
-            const score = currentGame.getScore(guessedWords);
-            if (score !== 0) {
-                const res = await axios.post("/saveScore", { score, userId, gameName: "Categories" });
-                console.log("Saved score: ", res.data.success);
+        if (userId) { // if user is logged in
+            const score = currentGame.getScore(guessedWords); // gets the score from the game they just finished
+            if (score !== 0) { // makes sure that it isn't === 0
+                const res = await axios.post("/saveScore", { score, userId, gameName: "Categories" }); // saves score to the DB
             }
-        } else {
+        } else { // means the user isn't logged in
             console.log("user not logged in so not going to save");
         }
     }
 
-    const updateGuessedWords = (newArr) => setGuessedWords(newArr);
+    const updateGuessedWords = (newArr) => setGuessedWords(newArr); // used to send down as a prop to send to the input component
 
     const updateGameOver = (val) => {
-        saveScore();
-        setGameOver(val)
+        saveScore(); // saves the score
+        setGameOver(val) // changes the gameOver state variable to tell React to change the screen to GameOver
     };
 
 
-    const startNewGame = (gameInfo) => {
-        console.log("staring game", gameInfo)
-        setCurrentGame(new CategoriesGame(gameInfo));
-        console.log("after:", currentGame.gameInfo)
-        setGuessedWords([]);
-        setGameOver(false);
+    const startNewGame = (gameInfo) => { // means the user started a new game from the GameOver component
+        setCurrentGame(new CategoriesGame(gameInfo)); // creates a new game object, with the category the user chose
+        setGuessedWords([]); // resets the guessed words
+        setGameOver(false); // changes the gameOver state var which takes the user to the component to play the game
     }
 
     return (

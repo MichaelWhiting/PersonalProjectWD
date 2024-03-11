@@ -90,6 +90,13 @@
     background: #FAF9F6;
 }
 
+.letter {
+    width: 100px;
+    height: 100px;
+    font-size: 55px;
+    text-align: center;
+    background-color: #FFFFFF;
+}
 
 
 /* Animations */

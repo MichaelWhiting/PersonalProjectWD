@@ -5,7 +5,7 @@ class ScrambleGame {
         this.word = word;
     }
 
-    getScore() {
+    getScore() { // finish scoring logic later
         return 100;
     }
 }

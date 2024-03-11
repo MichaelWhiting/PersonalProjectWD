@@ -1,42 +1,38 @@
 import { Button, Container, Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import axios from "axios";
 
 function AccountSettingsCell() {
-    const userId = useSelector(state => state.userId);
+    const userId = useSelector(state => state.userId); // the userId stored in the redux store, used to make sure logged in
     const [username, setUsername] = useState("");
     const [showSure, setShowSure] = useState(false);
-    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const changeUsername = async (e) => {
-        e.preventDefault();
-        const { data } = await axios.put("/updateUsername", { username });
+        e.preventDefault(); // prevents the form from refreshing page
+        const { data } = await axios.put("/updateUsername", { username }); // sends request to server to update username
 
-        console.log(data.message);
-
-        if (data.success) {
-            setUsername("");
+        if (data.success) { // if it succeeds in changing the username
+            setUsername(""); // sets the state variable back to blank
         }
     }
 
     const deleteAccount = async (e) => {
-        e.preventDefault();
-
+        e.preventDefault(); // prevents form from refreshing page
+ 
         if (userId) { // means someone is logged in
-            const res = await axios.delete(`/deleteUser/${userId}`);
+            const res = await axios.delete(`/deleteUser/${userId}`); // sends request to server to delete the user object
             console.log(res.message);
 
             dispatch({ // this should change userId to null and take them back to login screen
-                type: "LOGOUT"
+                type: "LOGOUT" // this here is telling the redux store to run the LOGOUT action which sets userId to null
             });
         }
     }
 
     return (
-        <Container style={{ height: "90%", width: "", background: "#FFFFFF" }}>
+        <Container style={{ height: "90%", background: "#FFFFFF" }}>
             <hr/>
             <Form className="d-flex align-items-center" onSubmit={changeUsername}>
                 <label className="subtitle-left" style={{width: "50%"}}>Edit Username</label>

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import axios from "axios";
-import c from "../classStrings.js";
 
 // Components
 import LeaderboardCard from "../components/LeaderboardCard";
@@ -12,15 +11,15 @@ function Leaderboards() {
     const [games, setGames] = useState([]);
 
     const getGames = async () => {
-        const { data } = await axios.get("/leaderboards/games");
-        setGames(data.games);
+        const { data } = await axios.get("/leaderboards/games"); // gets all of the game objects from the DB
+        setGames(data.games); // updates the games state variable
     }
 
-    useEffect(() => {
+    useEffect(() => { // on initial render, get all of the games from the DB
         getGames();
     }, []);
 
-    const leaderboardCards = games.map((game, i) => {
+    const leaderboardCards = games.map((game, i) => { // creates a LeaderboardCard component for each game
         return <LeaderboardCard key={game.gameName} game={game} style={{animation: animStr(i)}}/>
     });
     

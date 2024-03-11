@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 
 function AuthenticationPage() {
-    return (
+    return ( // holds the outlet that decides whether to show the LoginPage or the CreateAccountPage
         <Outlet/>
     )
 }

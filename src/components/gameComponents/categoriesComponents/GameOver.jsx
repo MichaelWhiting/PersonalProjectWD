@@ -7,7 +7,7 @@ import c from "../../../classStrings.js";
 import Number from "../../Number.jsx";
 
 const animStr = (i) => `fadeInAnimation ${350}ms ease-out ${75 * (i + 1)}ms forwards`;
-const API_KEY = "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";
+const API_KEY = "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";
 
 function GameOver(props) {
     const { startNewGame, guessedWords, currentGame } = props;
@@ -100,7 +100,7 @@ function GameOver(props) {
                     <Spinner animation='border' role='status' />
                 }
                 {!loading &&
-                    <h5>New Game</h5>
+                    <>New Game</>
                 }
             </Button>
         </Container>

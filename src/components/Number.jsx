@@ -1,6 +1,6 @@
 import { useSpring, animated } from "react-spring";
 
-function Number({ n }) {
+function Number({ n }) { // this is used to animated the score going up from 0
     const { number } = useSpring({
         from: { number: 0 },
         number: n,

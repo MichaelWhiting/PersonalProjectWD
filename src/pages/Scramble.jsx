@@ -68,7 +68,7 @@ function Scramble() {
         <Container className={`${c.containerColCenter} fade-in`} style={{width: "100%"}}>
             <Reorder.Group as="div" axis="x" values={letters} onReorder={setLetters} className={`${c.roundedBorder} ${c.containerCenter} my-3 fade-in`}>
                 {letters.map((letter, i) => (
-                <Reorder.Item as="label" key={letter} value={letter} className="mx-3 align-items-center" style={{width: 100, height: 100, fontSize: 55, textAlign: "center", background: "#"}}>
+                <Reorder.Item as="label" key={letter} value={letter} className="letter mx-3 align-items-center">
                     <Container className="rounded border border-success">
                     {letter}
                     </Container>
@@ -94,7 +94,8 @@ function Scramble() {
                 >
                 Restart Game
             </Button>
-        </Container>    )
+        </Container>
+    )
 }
 
 export default Scramble;
