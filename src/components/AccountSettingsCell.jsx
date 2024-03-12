@@ -1,4 +1,4 @@
-import { Button, Container, Form } from "react-bootstrap";
+import { Button, Container, Form, Collapse } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import axios from "axios";
@@ -32,7 +32,7 @@ function AccountSettingsCell() {
     }
 
     return (
-        <Container style={{ height: "90%", background: "#FFFFFF" }}>
+        <Container style={{ height: "90%" }}>
             <hr/>
             <Form className="d-flex align-items-center" onSubmit={changeUsername}>
                 <label className="subtitle-left" style={{width: "50%"}}>Edit Username</label>
@@ -47,17 +47,18 @@ function AccountSettingsCell() {
                 <Button
                     variant={showSure ? "warning" : "danger"}
                     onClick={() => setShowSure(!showSure)}
-                    style={{marginTop: 10, marginBottom: 10, width: "22%"}}
+                    style={{marginTop: 10, marginBottom: 10, width: "22%"}}        
                 >
                     {showSure ? "Cancel" : "Delete Account"}
                 </Button>
-                {showSure &&
-                    <div className="d-flex flex-column justify-content-center align-items-center fade-in">
-                        <h6 style={{ textAlign: "right" }}>Are you sure you want to delete your account?</h6>
-                        <span style={{ width: "85%" }}></span>
-                        <Button variant="danger" type="submit">I'm Sure</Button>
+                <Collapse in={showSure}>
+                    <div>
+                        <div className="d-flex flex-column justify-content-center align-items-center">
+                            <h6 style={{ textAlign: "right" }}>Are you sure you want to delete your account?</h6>
+                            <Button variant="danger" type="submit">I'm Sure</Button>
+                        </div>
                     </div>
-                }
+                </Collapse>
             </Form>
             <hr/>
         </Container>

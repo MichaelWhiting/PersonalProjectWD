@@ -7,7 +7,7 @@ import c from "../../../classStrings.js";
 import Number from "../../Number.jsx";
 
 const animStr = (i) => `fadeInAnimation ${350}ms ease-out ${75 * (i + 1)}ms forwards`;
-const API_KEY = "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";
+const API_KEY = "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";
 
 function GameOver(props) {
     const { startNewGame, guessedWords, currentGame } = props;

@@ -34,7 +34,7 @@ function LeaderboardCard(props) {
             >
                 <label style={{width: "15%%", padding: 10}}>{i + 4}.</label>
                 <label style={{width: "70%", padding: 10}}>{item.user.username}</label>
-                <label style={{ width: "15%", textAlign: "right"}}>{item.score.score}</label>
+                <label style={{ width: "14%", textAlign: "right"}}>{item.score.score}</label>
             </div>
         )
     });

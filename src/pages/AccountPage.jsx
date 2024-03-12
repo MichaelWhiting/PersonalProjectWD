@@ -1,9 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Container, Row, Button } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import axios from "axios";
-
 import c from "../classStrings.js";
+import axios from "axios";
 
 // Components
 import AccountSettingsCell from "../components/AccountSettingsCell.jsx";
@@ -40,20 +39,17 @@ function AccountPage() {
     }
 
     return (
-        <Container className={`${c.containerColCenter} p-5`} style={{width: 800}}>
-            <Container>
-                <label className={`title-left`}>Account Info:
-                <hr/>
-                </label>
-                <label className="subtitle-left" style={{width: "85%"}}>
-                    {user.username}
-                </label>
+        <Container className={`${c.containerColCenter}`} style={{width: 800}}>
+            <label className="title-left">Account Info:<hr/></label>
+            <Container fluid>
+                <label className="subtitle-left" style={{width: "85%"}}>{user.username}</label>
                 <Button variant="success" style={{width: "15%"}} onClick={logout}>Logout</Button>
             </Container>
-            <Container className={""}>
-                <AccountSettingsCell/>
-                <AccountScoresCell username={user.username}/>
-            </Container>
+            <AccountSettingsCell/>
+            <br/>
+            <label className="title-left">Scores:<hr/></label>
+            <AccountScoresCell username={user.username}/>
+            <div className="my-5"></div>
         </Container>
     )
 }
