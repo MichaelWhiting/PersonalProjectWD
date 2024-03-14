@@ -1,5 +1,6 @@
 import { Sequelize } from "sequelize";
 import { User, Score, Game } from "../database/model.js";
+import OpenAI from "openai";
 
 const infoHandler = {
     // User Handler Functions
@@ -232,6 +233,39 @@ const infoHandler = {
             message: "Retrieved scores from userId",
             success: true,
             scores
+        });
+    },
+
+    askGPT: async (req, res) => {
+        const { category } = req.params;
+        const API_KEY = "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";
+        const openai = new OpenAI({ apiKey: API_KEY }); // creates an instance of the openai API
+
+        // this is the prompt that we pass to the GPT API that tells it the format and what to respond with
+        const question = `
+        Create a list of the top 75 most popular ${category}. Make all of the strings lowercase and remove any - and replace it with a space. 
+        Keep spaces if they are already there. Make 100% sure that every string item in the array is fully lowercased. 
+        Make sure that everything in the array is NOT plural, make them singular. Make sure that everything in the array is NOT plural, make them singular. 
+        Do not repeat things in the array.
+        Do not include any explanations or backticks around the response, only provide a RFC8259 compliant JSON response following this format without deviation.
+        {
+            'CategoryName': ['item1', 'item2', item3']
+        }
+         The JSON response:
+        `
+
+        openai.chat.completions.create({ // here it sends a request to the API
+            model: "gpt-3.5-turbo",
+            messages: [{ role: "user", content: question }]
+        }).then((response) => {
+            const message = response.choices[0].message.content; // this is the response that the API gives back
+            console.log(response.choices[0].message);
+            const gameInfo = JSON.parse(message); // parses response into a javascript object
+
+            res.send({
+                message: "Got GPT answer",
+                parsedRes: gameInfo
+            })
         });
     }
 }

@@ -5,9 +5,9 @@ import c from "../../../classStrings.js";
 
 // Components
 import Number from "../../Number.jsx";
+import axios from "axios";
 
 const animStr = (i) => `fadeInAnimation ${350}ms ease-out ${75 * (i + 1)}ms forwards`;
-const API_KEY = "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";
 
 function GameOver(props) {
     const { startNewGame, guessedWords, currentGame } = props;
@@ -37,34 +37,10 @@ function GameOver(props) {
             console.log("input is blank");
             return;
         };
-
         setLoading(true); // starts a loading animation to tell the user that ChatGPT is making the array for that category
-        const openai = new OpenAI({ apiKey: API_KEY }); // creates an instance of the openai API
-
-        // this is the prompt that we pass to the GPT API that tells it the format and what to respond with
-        const question = `
-        Create a list of the top 75 most popular ${category}. Make all of the strings lowercase and remove any - and replace it with a space. 
-        Keep spaces if they are already there. Make 100% sure that every string item in the array is fully lowercased. 
-        Make sure that everything in the array is NOT plural, make them singular. Make sure that everything in the array is NOT plural, make them singular. 
-        Do not repeat things in the array.
-        Do not include any explanations or backticks around the response, only provide a RFC8259 compliant JSON response following this format without deviation.
-        {
-            'CategoryName': ['item1', 'item2', item3']
-        }
-         The JSON response:
-        `
-
-
-        openai.chat.completions.create({ // here it sends a request to the API
-            model: "gpt-3.5-turbo",
-            messages: [{ role: "user", content: question }]
-        }).then((res) => {
-            const message = res.choices[0].message.content; // this is the response that the API gives back
-            console.log(res.choices[0].message);
-            const gameInfo = JSON.parse(message); // parses response into a javascript object
-            setLoading(false); // turns off the loading animation
-            startNewGame(gameInfo); // starts a new game and passes in the newly created category object
-        });
+        const res = await axios.get(`/askGPT/${category}`)
+        setLoading(false); // turns off the loading animation
+        startNewGame(res.data.parsedRes); // starts a new game and passes in the newly created category object
     }
 
     return (

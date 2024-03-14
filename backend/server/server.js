@@ -30,6 +30,7 @@ app.get("/scores/:userId", infoHandler.getScoresFromUser);
 app.get("/getUser/:userId", infoHandler.getUserFromId);
 app.get("/session-check", infoHandler.sessionCheck);
 app.get("/logout", infoHandler.logoutUser);
+app.get("/askGPT/:category", infoHandler.askGPT)
 
 // POST
 // Info POSTS
