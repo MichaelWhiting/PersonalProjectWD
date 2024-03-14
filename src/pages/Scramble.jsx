@@ -89,7 +89,7 @@ function Scramble() {
 
     return !gameOver ? (
         <Container className={`${c.containerColCenter} fade-in`} style={{width: "100%"}}>
-            <h1>Reorder the scarmbled letters into a word!</h1>
+            <h1>Reorder the scrambled letters into the word!</h1>
             <Reorder.Group as="div" axis="x" values={letters} onReorder={setLetters} className={`${c.roundedBorder} ${c.containerCenter} my-3 fade-in`}>
                 {letters.map((letter, i) => (
                     <Reorder.Item as="label" key={letter} value={letter} className="letter mx-3 d-flex justify-content-center align-items-center">

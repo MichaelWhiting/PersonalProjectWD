@@ -7,7 +7,7 @@ import c from "../../../classStrings.js";
 import Number from "../../Number.jsx";
 
 const animStr = (i) => `fadeInAnimation ${350}ms ease-out ${75 * (i + 1)}ms forwards`;
-const API_KEY = "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";
+const API_KEY = "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";
 
 function GameOver(props) {
     const { startNewGame, guessedWords, currentGame } = props;
@@ -39,7 +39,7 @@ function GameOver(props) {
         };
 
         setLoading(true); // starts a loading animation to tell the user that ChatGPT is making the array for that category
-        const openai = new OpenAI({ apiKey: API_KEY, dangerouslyAllowBrowser: true }); // creates an instance of the openai API
+        const openai = new OpenAI({ apiKey: API_KEY }); // creates an instance of the openai API
 
         // this is the prompt that we pass to the GPT API that tells it the format and what to respond with
         const question = `
